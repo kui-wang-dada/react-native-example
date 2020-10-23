@@ -8,7 +8,7 @@ import {
   requestFailFunc,
   responseSuccessFunc,
   responseFailFunc
-} from '@/config/interceptor/axios';
+} from '@/config/axios';
 
 let axiosInstance = {};
 axiosInstance = axios.create(AXIOS_DEFAULT_CONFIG);

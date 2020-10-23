@@ -1,5 +1,5 @@
 /** @format */
-
+console.log(123)
 import axios from './axios'
 import Qs from 'qs'
 import _pick from 'lodash/pick'

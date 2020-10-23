@@ -1,11 +1,13 @@
-import React, { Component } from "react";
+
+import React,{ useState, useEffect } from "react";
+
 import { combineReducers, createStore, applyMiddleware } from "redux";
 import { Provider } from "react-redux";
 import { persistStore, persistReducer } from "redux-persist";
 import thunk from "redux-thunk";
 import { createLogger } from "redux-logger";
-import storage from "redux-persist/lib/storage";
 
+import AsyncStorage from '@react-native-community/async-storage';
 
 import home from "./reducers/home";
 
@@ -18,30 +20,33 @@ const logger = createLogger();
 
 const persistConfig = {
   key: "root",
-  storage: storage,
+  storage: AsyncStorage,
+  timeout: null,
   whitelist: ["search"]
 };
 
-const reducers = combineReducers({  home, my,  common });
+const reducers = combineReducers({  home, my,  common ,search});
 
 const persistedReducer = persistReducer(persistConfig, reducers);
 
 const store = createStore(persistedReducer, applyMiddleware(thunk, logger));
 
-export class StoreProvider extends Component {
-  constructor(props) {
-    super(props);
-  }
-  state = { persistIsFinish: false };
-  componentWillMount() {
+export function StoreProvider(props){
+  
+  const [persistIsFinish, setPersistIsFinish] = useState(true);
+
+  useEffect(() => {
+    // Update the document title using the browser API
+    console.log(5)
     persistStore(store, {}, () => {
-      this.setState({ persistIsFinish: true });
+      setPersistIsFinish(true );
     });
-  }
-  render() {
-    if (!this.state.persistIsFinish) return null;
-    return <Provider store={store}>{this.props.children}</Provider>;
-  }
+  },[])
+
+
+    if (!persistIsFinish) return null;
+    return <Provider store={store}>{props.children}</Provider>;
+  
 }
 
 export default store;
