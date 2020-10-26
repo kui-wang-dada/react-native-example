@@ -1,24 +1,24 @@
 /** @format */
-console.log(123)
-import axios from './axios'
-import Qs from 'qs'
-import _pick from 'lodash/pick'
-import _assign from 'lodash/assign'
-import _merge from 'lodash/merge'
-import _isEmpty from 'lodash/isEmpty'
-import _isArray from 'lodash/isArray'
 
-import { assert } from '@/utils'
-import { API_DEFAULT_CONFIG, AXIOS_DEFAULT_CONFIG } from '@/config'
-import API_CONFIG from '@/api'
+import axios from './axios';
+import Qs from 'qs';
+import _pick from 'lodash/pick';
+import _assign from 'lodash/assign';
+import _merge from 'lodash/merge';
+import _isEmpty from 'lodash/isEmpty';
+import _isArray from 'lodash/isArray';
+
+import {assert} from '@/utils';
+import {API_DEFAULT_CONFIG, ApiConfig} from '@/config';
+import API_CONFIG from '@/api';
 
 /**
  * 生成api接口类
  */
 class Api {
   constructor(options) {
-    this.api = {}
-    this.apiBuilder(options)
+    this.api = {};
+    this.apiBuilder(options);
   }
 
   /**
@@ -44,8 +44,8 @@ class Api {
         sep,
         debug,
         config: config[namespace],
-      })
-    })
+      });
+    });
   }
 
   /**
@@ -65,14 +65,14 @@ class Api {
     mockBaseURL = '',
   }) {
     config.forEach((api) => {
-      const { name, desc, params, method, path, cache = true, headers } = api
-      let apiname = `${namespace}${sep}${name}` // 接口调用名称 this.$api['apiname']()
-      let url = path // 接口地址
-      const baseURL = mock ? mockBaseURL : AXIOS_DEFAULT_CONFIG.baseURL // 接口base地址
+      const {name, desc, params, method, path, cache = true, headers} = api;
+      let apiname = `${namespace}${sep}${name}`; // 接口调用名称 this.$api['apiname']()
+      let url = path; // 接口地址
+      const baseURL = mock ? mockBaseURL : ApiConfig.baseURL; // 接口base地址
 
-      debug && assert(name, `${url} :接口name属性不能为空`)
+      debug && assert(name, `${url} :接口name属性不能为空`);
       debug &&
-        assert(url.indexOf('/') === 0, `${url} :接口路径path，首字符应为/`)
+        assert(url.indexOf('/') === 0, `${url} :接口路径path，首字符应为/`);
 
       Object.defineProperty(this.api, `${apiname}`, {
         value(outerParams, outerOptions) {
@@ -80,7 +80,7 @@ class Api {
           let _data =
             _isArray(outerParams) || outerParams instanceof FormData
               ? outerParams
-              : _merge({}, params, outerParams)
+              : _merge({}, params, outerParams);
 
           /*特殊页面，需要对数据做处理*/
           if (
@@ -88,7 +88,7 @@ class Api {
               method.toUpperCase() === 'PUT') &&
             (!headers || !headers.hasOwnProperty('Content-Type'))
           ) {
-            _data = Qs.stringify(_data)
+            _data = Qs.stringify(_data);
           }
 
           return axios(
@@ -100,17 +100,17 @@ class Api {
                   desc,
                   baseURL,
                   method,
-                  headers: headers || null,
+                  headers: headers || ApiConfig.headers,
                   cache,
                 },
-                outerOptions
+                outerOptions,
               ),
-              _data
-            )
-          )
+              _data,
+            ),
+          );
         },
-      })
-    })
+      });
+    });
   }
 }
 
@@ -126,7 +126,7 @@ function _normoalize(options, data) {
   if (!options.cache) {
     options.url = `${options.url}${
       options.url.includes('?') ? '&' : '?'
-    }_=${new Date().getTime()}`
+    }_=${new Date().getTime()}`;
   }
 
   if (
@@ -134,11 +134,11 @@ function _normoalize(options, data) {
     options.method === 'PUT' ||
     options.method === 'DELETE'
   ) {
-    options.data = data
+    options.data = data;
   } else if (options.method === 'GET') {
-    options.params = data
+    options.params = data;
   }
-  return options
+  return options;
 }
 
 /**
@@ -147,4 +147,4 @@ function _normoalize(options, data) {
 export default new Api({
   config: API_CONFIG,
   ...API_DEFAULT_CONFIG,
-})['api']
+}).api;

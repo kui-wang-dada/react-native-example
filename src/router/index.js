@@ -49,6 +49,7 @@ function NavigationLifeCycle() {
                 <HomeStack.Screen
                   name={home.home.name}
                   component={home.home.screen}
+                  options={home.home.options}
                 />
               </HomeStack.Navigator>
             )}

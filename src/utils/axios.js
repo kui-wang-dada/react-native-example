@@ -2,16 +2,16 @@
 
 import axios from 'axios';
 
-import { AXIOS_DEFAULT_CONFIG } from '@/config';
+import {ApiConfig} from '@/config';
 import {
   requestSuccessFunc,
   requestFailFunc,
   responseSuccessFunc,
-  responseFailFunc
+  responseFailFunc,
 } from '@/config/axios';
 
 let axiosInstance = {};
-axiosInstance = axios.create(AXIOS_DEFAULT_CONFIG);
+axiosInstance = axios.create(ApiConfig);
 
 // 注入请求拦截
 axiosInstance.interceptors.request.use(requestSuccessFunc, requestFailFunc);

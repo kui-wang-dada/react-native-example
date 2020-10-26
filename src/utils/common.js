@@ -26,3 +26,10 @@ export function transformSize(designSize) {
   }
   return int + remainder;
 }
+
+export function checkStaticImg(dataStr) {
+  if (!dataStr) {
+    return '';
+  }
+  return 'https://ministatic.wholeren.com/usmentor/mini-student/' + dataStr;
+}

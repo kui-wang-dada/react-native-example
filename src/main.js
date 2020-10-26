@@ -17,7 +17,7 @@ export default class Main extends Component {
         {/* <WModal ref={(ref) => modal.setInstance(ref)} />
         <YModal ref={(ref) => ymodal.setInstance(ref)}></YModal> */}
 
-        <Root></Root>
+        <Root />
       </StoreProvider>
     );
   }

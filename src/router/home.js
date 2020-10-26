@@ -11,6 +11,7 @@ const HomeRoute = {
   home: {
     screen: Home,
     name: '首页',
+    options: {headerShown: false},
   },
   // newList: {
   //   name: '新闻列表',
