@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {View, Text, StyleSheet} from 'react-native';
-import {transformSize, commonStyle} from '@/utils';
+import {size, commonStyle} from '@/utils';
 import {Touchable, Icon} from 'ui';
 export default class Main extends Component {
   constructor(props) {

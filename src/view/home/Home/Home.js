@@ -3,13 +3,16 @@ import {View, Text, StyleSheet, Image} from 'react-native';
 import {useTheme} from '@react-navigation/native';
 import {useDispatch, useSelector} from 'react-redux';
 import {getUserInfo, getHomeSp, getHomeTp, getHomeCount} from '@/store/actions';
+import {TutorItem, ServiceItem, TopHeader} from 'common';
 import Avatar from './item/Avatar';
-import {transformSize, commonStyle, checkStaticImg} from '@/utils';
+import {size, commonStyle, checkStaticImg} from '@/utils';
 import {Touchable, Icon} from 'ui';
 
 export default () => {
   const {colors} = useTheme();
   const dispatch = useDispatch();
+  const homeTp = useSelector((state) => state.home.homeTp);
+  const homeSp = useSelector((state) => state.home.homeSp);
   useEffect(() => {
     // Update the document title using the browser API
 
@@ -21,10 +24,13 @@ export default () => {
       limit_start: 0,
       limit_page_length: 10,
     };
+
+    dispatch(getHomeCount());
     dispatch(getHomeSp(params));
     dispatch(getHomeTp(paramsTp));
   }, [dispatch]);
 
+  const goToProject = () => {};
   const renderGrid = () => {
     let data = [
       {
@@ -47,7 +53,7 @@ export default () => {
       <View style={style.gridList}>
         {data.map((item, index) => {
           return (
-            <Touchable style={style.gridItem}>
+            <Touchable style={style.gridItem} key={index}>
               <Image source={{uri: item.image}} style={style.gridImage} />
               <Text style={[style.gridText, {color: colors.text}]}>
                 {item.value}
@@ -58,11 +64,31 @@ export default () => {
       </View>
     );
   };
-
+  let tpData = homeTp[0];
+  let services = Array.isArray(homeSp) && homeSp.slice(0, 3);
   return (
     <View style={[style.wrap, {backgroundColor: colors.card}]}>
       <Avatar />
       <View style={style.gridWrap}>{renderGrid()}</View>
+      {tpData ? (
+        <View style={style.tpWrap}>
+          <TutorItem item={tpData} />
+        </View>
+      ) : null}
+      {services.length ? (
+        <View style={style.serviceWrap}>
+          <TopHeader title="服务项目" hasRight handleRight={goToProject} />
+          <View style={style.serviceList}>
+            {services.map((item, index) => {
+              return (
+                <View key={index} style={style.serviceItem}>
+                  <ServiceItem item={item} />
+                </View>
+              );
+            })}
+          </View>
+        </View>
+      ) : null}
     </View>
   );
 };
@@ -71,9 +97,9 @@ const style = StyleSheet.create({
   gridWrap: {
     backgroundColor: '#fff',
     position: 'relative',
-    bottom: transformSize(80),
-    borderRadius: transformSize(20),
-    marginHorizontal: transformSize(32),
+    bottom: size(80),
+    borderRadius: size(20),
+    marginHorizontal: size(32),
   },
   gridList: {
     flexDirection: 'row',
@@ -83,14 +109,32 @@ const style = StyleSheet.create({
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
-    height: transformSize(200),
+    height: size(200),
   },
   gridImage: {
-    width: transformSize(80),
-    height: transformSize(80),
-    marginBottom: transformSize(22),
+    width: size(80),
+    height: size(80),
+    marginBottom: size(22),
   },
   gridText: {
-    fontSize: transformSize(28),
+    fontSize: size(28),
+  },
+  tpWrap: {
+    paddingHorizontal: size(32),
+    position: 'relative',
+    bottom: size(30),
+    marginBottom: size(40),
+  },
+  serviceWrap: {
+    paddingHorizontal: size(32),
+    position: 'relative',
+    bottom: size(40),
+    minHeight: size(800),
+  },
+  serviceList: {
+    marginTop: size(20),
+  },
+  serviceItem: {
+    marginBottom: size(30),
   },
 });

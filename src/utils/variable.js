@@ -1,6 +1,6 @@
-import {transformSize} from '@/utils';
+import {size} from '@/utils';
 import {Dimensions, Platform, PixelRatio, StyleSheet} from 'react-native';
-// import {initialMode} from 'react-native-dark-mode';
+import {initialMode} from 'react-native-dark-mode';
 
 export const lightColorTheme = {
   dark: false,
@@ -39,8 +39,8 @@ export const darkColorTheme = {
   },
 };
 
-// export let colorTheme =
-//   initialMode === 'dark' ? darkColorTheme : lightColorTheme;
+export let colorTheme =
+  initialMode === 'dark' ? darkColorTheme : lightColorTheme;
 
 // export function changeTheme(type) {
 //   if (type === 'dark') {
@@ -64,35 +64,35 @@ export const ellipsis = {
 };
 
 export const h_1 = {
-  fontSize: transformSize(32),
+  fontSize: size(32),
   fontWeight: 'bold',
   color: '#333',
 };
 
 export const h_2 = {
-  fontSize: transformSize(28),
+  fontSize: size(28),
   fontWeight: 'bold',
   color: '#333',
 };
 export const p_1 = {
-  fontSize: transformSize(28),
+  fontSize: size(28),
   color: '#333',
 };
 export const p_2 = {
-  fontSize: transformSize(24),
+  fontSize: size(24),
   color: '#333',
 };
 export const tag_1 = {
-  fontSize: transformSize(24),
+  fontSize: size(24),
   color: '#666',
 };
 export const separation = {
-  width: transformSize(750),
-  height: transformSize(20),
+  width: size(750),
+  height: size(20),
   backgroundColor: '#f1f1f1',
 };
 
 export const borderBottom = {
   borderBottomColor: '#f1f1f1',
-  borderBottomWidth: transformSize(1),
+  borderBottomWidth: size(1),
 };

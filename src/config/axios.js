@@ -31,10 +31,8 @@ export async function requestSuccessFunc(req) {
     session_id = res;
   }
   console.log(req, 'headers');
-  req.headers['X-APIS-SID'] = '1234';
-  req.headers['X-APIS-Version'] = 'v3';
-  // req.headers.common['Authorization'] = 'dal: _XzEIE7lSKGCbycUwefB3g'
-  req.headers['X-APIS-Application'] = 'usercenter';
+  req.headers['X-APIS-Sid'] = 'oOZse5B5-Ecj_12lvDCNEWGZDBFc';
+
   //取消重复请求
 
   if (CancelPromise[req.url]) {

@@ -4,11 +4,12 @@ import {useTheme} from '@react-navigation/native';
 import {useDispatch, useSelector} from 'react-redux';
 
 import LinearGradient from 'react-native-linear-gradient';
-import {transformSize, commonStyle, checkStaticImg} from '@/utils';
+import {size, commonStyle, checkStaticImg} from '@/utils';
 import {Touchable, Icon, Button} from 'ui';
 
 export default () => {
   const {colors} = useTheme();
+
   const userInfo = useSelector((state) => state.my.userInfo);
   const barHeight = useSelector((state) => state.common.barHeight);
   const homeCount = useSelector((state) => state.home.homeCount);
@@ -39,7 +40,7 @@ export default () => {
         <View style={style.stuNameWrap} onClick={goToAccount}>
           <View style={style.stuId}>
             <Text style={style.stuIdText}>{userInfo.students_id}</Text>
-            <Icon value="chevron-right" size={16}></Icon>
+            <Icon value="chevron-right" size={16} />
           </View>
           <Text style={style.stuName}>{userInfo.students_name}</Text>
         </View>
@@ -76,7 +77,7 @@ export default () => {
         </View>
         <View style={style.noLoginBtnWrap}>
           <Text style={style.noLoginText}>点击登录</Text>
-          <Icon value="chevron-right" size={16}></Icon>
+          <Icon value="chevron-right" size={16} />
         </View>
       </View>
     );
@@ -96,34 +97,34 @@ export default () => {
 
 const style = StyleSheet.create({
   linearGradient: {
-    borderBottomLeftRadius: transformSize(30),
-    borderBottomRightRadius: transformSize(30),
+    borderBottomLeftRadius: size(30),
+    borderBottomRightRadius: size(30),
   },
   loginWrap: {
-    paddingHorizontal: transformSize(32),
-    paddingBottom: transformSize(120),
+    paddingHorizontal: size(32),
+    paddingBottom: size(120),
     flexDirection: 'column',
   },
   stuNameWrap: {
     flexDirection: 'column',
-    marginBottom: transformSize(30),
+    marginBottom: size(30),
   },
   stuId: {
     alignSelf: 'flex-start',
-    marginTop: transformSize(20),
+    marginTop: size(20),
 
-    marginBottom: transformSize(20),
-    height: transformSize(60),
-    lineHeight: transformSize(60),
+    marginBottom: size(20),
+    height: size(60),
+    lineHeight: size(60),
     fontWeight: 'bold',
-    borderRadius: transformSize(30),
+    borderRadius: size(30),
   },
   stuIdText: {
-    fontSize: transformSize(28),
+    fontSize: size(28),
     color: '#f3dbb4',
   },
   stuName: {
-    fontSize: transformSize(36),
+    fontSize: size(36),
     fontWeight: 'bold',
     color: '#fff',
   },
@@ -135,36 +136,38 @@ const style = StyleSheet.create({
     flexDirection: 'column',
     alignItems: 'center',
     flex: 1,
-    borderRadius: transformSize(10),
+    borderRadius: size(10),
   },
   stuLabel: {
-    fontSize: transformSize(24),
+    fontSize: size(24),
     color: 'rgba(255, 255, 255, .7)',
   },
   stuValue: {
     flexDirection: 'row',
     alignItems: 'flex-end',
+    marginTop: size(10),
   },
   stuValueText: {
-    fontSize: transformSize(50),
+    fontSize: size(50),
     fontWeight: 'bold',
     color: '#fff',
   },
   stuUnit: {
-    fontSize: transformSize(24),
+    fontSize: size(24),
     color: 'rgba(255, 255, 255, 0.7)',
-    marginLeft: transformSize(10),
+    marginLeft: size(10),
+    marginBottom: size(10),
   },
 
   noLoginWrap: {
-    paddingHorizontal: transformSize(32),
-    paddingBottom: transformSize(60),
+    paddingHorizontal: size(32),
+    paddingBottom: size(60),
 
     flexDirection: 'column',
   },
   noLoginTitle: {
     color: '#fff',
-    fontSize: transformSize(40),
+    fontSize: size(40),
     textAlign: 'center',
     justifyContent: 'center',
     alignItems: 'center',
@@ -172,18 +175,18 @@ const style = StyleSheet.create({
   noLoginCon: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginTop: transformSize(60),
-    marginBottom: transformSize(30),
+    marginTop: size(60),
+    marginBottom: size(30),
   },
   noLoginImg: {
-    width: transformSize(100),
-    height: transformSize(100),
-    borderRadius: transformSize(50),
-    marginRight: transformSize(20),
+    width: size(100),
+    height: size(100),
+    borderRadius: size(50),
+    marginRight: size(20),
   },
   noLoginLabel: {
     flex: 1,
-    fontSize: transformSize(28),
+    fontSize: size(28),
     color: '#fff',
   },
   noLoginBtnWrap: {
@@ -191,18 +194,18 @@ const style = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     textAlign: 'center',
-    marginBottom: transformSize(40),
+    marginBottom: size(40),
     alignSelf: 'flex-end',
-    height: transformSize(60),
-    lineHeight: transformSize(60),
-    paddingHorizontal: transformSize(22),
-    borderRadius: transformSize(30),
+    height: size(60),
+    lineHeight: size(60),
+    paddingHorizontal: size(22),
+    borderRadius: size(30),
     backgroundColor: '#fff',
   },
   noLoginText: {
-    height: transformSize(60),
-    lineHeight: transformSize(60),
-    fontSize: transformSize(28),
+    height: size(60),
+    lineHeight: size(60),
+    fontSize: size(28),
     color: '#E6A53D',
   },
 });

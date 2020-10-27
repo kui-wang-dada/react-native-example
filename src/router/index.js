@@ -8,7 +8,7 @@ import {AppearanceProvider, useColorScheme} from 'react-native-appearance';
 import {Icon, Touchable, Button} from 'ui';
 import {StyleSheet, Platform, View} from 'react-native';
 
-import {transformSize, commonStyle} from '@/utils';
+import {size, commonStyle} from '@/utils';
 import lang from '@/assets/lang';
 import home from './home';
 
@@ -20,6 +20,7 @@ const HomeStack = createStackNavigator();
 
 function NavigationLifeCycle() {
   const scheme = useColorScheme();
+
   return (
     <AppearanceProvider>
       <NavigationContainer
@@ -29,6 +30,7 @@ function NavigationLifeCycle() {
             : commonStyle.lightColorTheme
         }>
         <Tab.Navigator
+          tabBarOptions={{style: {backgroundColor: '#fff'}}}
           screenOptions={({route}) => ({
             tabBarIcon: ({focused, color, size}) => {
               let iconName;
@@ -46,11 +48,16 @@ function NavigationLifeCycle() {
           <Tab.Screen name="首页">
             {() => (
               <HomeStack.Navigator>
-                <HomeStack.Screen
-                  name={home.home.name}
-                  component={home.home.screen}
-                  options={home.home.options}
-                />
+                {Object.keys(home).map((item, index) => {
+                  return (
+                    <HomeStack.Screen
+                      key={index}
+                      name={home[item].name}
+                      component={home[item].screen}
+                      options={home[item].options}
+                    />
+                  );
+                })}
               </HomeStack.Navigator>
             )}
           </Tab.Screen>

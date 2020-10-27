@@ -6,6 +6,10 @@ export const ApiConfig = {
   maxContentLength: 2000,
   headers: {
     'Content-Type': 'application/x-www-form-urlencoded',
+    'X-APIS-Application': 'ucmp',
+    'X-APIS-Version': 'v1',
+    'X-MP-Platform': 'WeChat',
+    'X-MP-Appname': 'ucmp',
     // 'Content-Type': 'application/json'
   },
   // baseURL: "https://baobao.cctar.us/apis"

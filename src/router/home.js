@@ -1,6 +1,6 @@
-import Home from '@/view/home';
-// import NewList from '@/view/home/NewList';
-// import Product from '@/view/home/Product';
+import Home from '@/view/home/Home/Home';
+import Tutor from '@/view/home/Tutor/Tutor';
+import Service from '@/view/home/Service';
 // import NewDetail from '@/view/home/NewDetail';
 // import ArticleList from '@/view/home/ArticleList';
 // import ActivityList from '@/view/home/ActivityList';
@@ -10,8 +10,19 @@ import Home from '@/view/home';
 const HomeRoute = {
   home: {
     screen: Home,
-    name: '首页',
-    options: {headerShown: false},
+    name: 'home',
+
+    options: {headerShown: false, title: '首页'},
+  },
+  tutor: {
+    screen: Tutor,
+    name: 'tutor',
+    options: {headerShown: true, title: '辅导详情'},
+  },
+  service: {
+    screen: Service,
+    name: 'service',
+    options: {headerShown: true, title: '项目详情'},
   },
   // newList: {
   //   name: '新闻列表',

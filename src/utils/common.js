@@ -10,7 +10,7 @@ import {
 const DESIGN_WIDTH = 750;
 export const SCREEN_WIDTH = Dimensions.get('window').width;
 export const SCREEN_HEIGHT = Dimensions.get('window').height;
-export function transformSize(designSize) {
+export function size(designSize) {
   const number = (designSize / DESIGN_WIDTH) * SCREEN_WIDTH;
 
   let remainder = number % 1;

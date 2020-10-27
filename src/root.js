@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import {View, Text, StyleSheet, NativeModules} from 'react-native';
 import {useDispatch} from 'react-redux';
 import {commitBarHeight} from '@/store/actions/common';
-// import {transformSize, commonStyle} from '@/utils';
+// import {size, commonStyle} from '@/utils';
 import {Touchable, Icon} from 'ui';
 import MyRouter from '@/router';
 
