@@ -2,7 +2,7 @@ import React, {useState, useEffect, useCallback} from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 import {useTheme} from '@react-navigation/native';
 import {useDispatch, useSelector} from 'react-redux';
-import {getTpDocReport} from '@/store/actions';
+import {getSpReport} from '@/store/actions';
 import {ReportItem} from 'common';
 import {size, commonStyle} from '@/utils';
 import {Touchable, Icon, Button, FlowList} from 'ui';
@@ -14,7 +14,7 @@ export default (props) => {
 
   let params = {
     name: name,
-    doctype: 'Tutoring Plan',
+    doctype: 'Service Project',
   };
 
   return (
@@ -22,7 +22,7 @@ export default (props) => {
       <FlowList
         style={style.flatlistWrap}
         contentContainerStyle={style.flatlist}
-        request={getTpDocReport}
+        request={getSpReport}
         params={params}
         renderItem={({item}) => (
           <View style={style.recordItem}>

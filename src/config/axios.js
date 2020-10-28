@@ -104,33 +104,20 @@ export function responseFailFunc(resError) {
   console.log('fail', resError, resError.response);
 
   // if (resError.response.status === 500 || resError.response.status === 417) {
-  if (resError.response.status === 500) {
-    modal.showToast(lang.t('common.message.interface'));
-    return Promise.reject(resError);
-  }
-
-  let res = resError.response.data.app_response;
-  // if (res && res.auth === 1) {
-  //   modal.showToast('登录失效，请重新登录', () => {
-  //     store.dispatch(commitLoginEmail(''))
-  //     store.dispatch(commitSessionId(''))
-
-  //     store.dispatch({ type: 'USER_INFO', payload: { userInfo: {} } })
-  //     // Navigation.goBack();
-  //     return Promise.reject(resError)
-  //   })
-  // } else {
-  //   modal.showToast(resError.message)
-  //   return Promise.reject(resError)
+  // if (resError.response.status === 500) {
+  //   modal.showToast(lang.t('common.message.interface'));
+  //   return Promise.reject(resError);
   // }
+
   return Promise.reject(resError);
 }
 
 function getNet(resError) {
-  let timeout = resError.message.includes('timeout');
+  console.log(resError.message, 'resError');
+  // let timeout = resError.message.includes('timeout');
   NetInfo.fetch().then((state) => {
     let {isConnected} = state;
-    if (!isConnected || timeout) {
+    if (!isConnected) {
       Alert.alert('您的网络状况不佳，请检查网络');
     }
   });

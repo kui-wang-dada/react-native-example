@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {View, FlatList, RefreshControl, Animated, Text} from 'react-native';
-
+import store from '@/store/store';
 import Message from './Message';
 import EndTip from './EndTip';
 import {isObjEqual} from '@/utils';
@@ -82,7 +82,7 @@ class FlowList extends Component {
     } else {
       data = [...data, ...results];
     }
-    limit_start += 1;
+    limit_start += limit_page_length;
     let noMoreData = disabledPage || results.length < limit_page_length;
     this.isLoading = false;
     this._isMounted &&
@@ -114,10 +114,19 @@ class FlowList extends Component {
     }
 
     if (typeof request === 'function') {
-      let res = await request({limit_start, limit_page_length, ...params});
-
-      console.log(res, 'resres');
-      this._afterFetchData(res);
+      try {
+        let res = await store.dispatch(
+          request({
+            limit_start,
+            limit_page_length,
+            ...params,
+          }),
+        );
+        console.log(res, 'resres');
+        this._afterFetchData(res);
+      } catch (e) {
+        console.log('fetch', e);
+      }
 
       return;
     }

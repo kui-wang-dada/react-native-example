@@ -17,11 +17,17 @@ export default (props) => {
               <Text
                 style={[
                   style.tabText,
-                  props.activeTab === i ? style.activeText : null,
+                  props.activeTab === i
+                    ? {...style.activeText, ...{color: colors.color_blue}}
+                    : null,
                 ]}>
                 {tab}
               </Text>
-              {props.activeTab === i ? <View style={style.active} /> : null}
+              {props.activeTab === i ? (
+                <View
+                  style={[style.active, {backgroundColor: colors.color_blue}]}
+                />
+              ) : null}
             </View>
           </Touchable>
         );
@@ -35,7 +41,7 @@ const style = StyleSheet.create({
     justifyContent: 'space-around',
     alignItems: 'center',
     width: '100%',
-    height: size(80),
+    height: size(100),
 
     backgroundColor: '#fff',
   },
@@ -60,12 +66,11 @@ const style = StyleSheet.create({
     left: '50%',
     transform: [
       {
-        translateX: -size(19),
+        translateX: -size(36),
       },
     ],
-    bottom: -size(12),
-    width: size(38),
+    bottom: -size(24),
+    width: size(76),
     height: size(6),
-    backgroundColor: '#DA1B2A',
   },
 });

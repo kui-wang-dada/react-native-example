@@ -7,8 +7,8 @@ export const lightColorTheme = {
   colors: {
     primary: '#4bc694',
     color_yellow: '#fdc940',
-    color_blue: '#d10101',
-    color_red: 'red',
+    color_blue: '#4169e2',
+    color_red: '#d10101',
     background: '#ffffff',
     card: '#f1f1f1',
     text: '#333333',
@@ -25,8 +25,8 @@ export const darkColorTheme = {
   colors: {
     primary: '#4bc694',
     color_yellow: '#fdc940',
-    color_blue: '#d10101',
-    color_red: 'red',
+    color_blue: '#4169e2',
+    color_red: '#d10101',
     background: '#000023',
     card: '#000028',
     text: '#ffffff',

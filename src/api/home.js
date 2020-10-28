@@ -26,7 +26,7 @@ export default [
     path: '/apis/method/frappe.apis.apps.services.opportunity',
   },
   {
-    name: 'serviceDetail',
+    name: 'spDetail',
     method: 'GET',
     desc: '服务详情',
     path: '/apis/method/frappe.apis.apps.services.service_project_detail',

@@ -17,15 +17,6 @@ export default (props) => {
 
   let iconName =
     item.tutoring_class_name && item.tutoring_class_name.split('')[0];
-  let attendance = {
-    Late: ['迟到', '#F8BC5A'],
-    Present: ['正常', '#4bc694'],
-    Absent: ['缺勤', '#EE806B'],
-  };
-  let [statusLabel, statusColor] = attendance[item.student_attendance] || [
-    '',
-    '',
-  ];
   return (
     <Touchable
       style={[style.recordItem, {backgroundColor: colors.background}]}
@@ -37,6 +28,7 @@ export default (props) => {
               {iconName}
             </Text>
           </View>
+
           <Text style={[style.topName, {color: colors.text}]}>
             {item.tutoring_class_name}
           </Text>
@@ -49,21 +41,6 @@ export default (props) => {
         <Text style={[style.centerText, {color: colors.text_p}]}>
           {item.content}
         </Text>
-      </View>
-
-      <View style={style.bottom}>
-        <Text style={[style.time, {color: colors.text_p}]}>
-          {item.used_hours}小时
-        </Text>
-        {statusLabel ? (
-          <Text
-            style={[
-              style.project,
-              {color: statusColor, backgroundColor: colors.card},
-            ]}>
-            {statusLabel}
-          </Text>
-        ) : null}
       </View>
     </Touchable>
   );
@@ -107,19 +84,5 @@ const style = StyleSheet.create({
   centerText: {
     fontSize: size(28),
     lineHeight: size(40),
-  },
-  bottom: {
-    marginTop: size(20),
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-  },
-  time: {
-    fontSize: size(24),
-  },
-  project: {
-    fontSize: size(24),
-    paddingHorizontal: size(20),
-    paddingVertical: size(4),
-    borderRadius: size(40),
   },
 });

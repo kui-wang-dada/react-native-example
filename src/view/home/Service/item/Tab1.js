@@ -2,8 +2,8 @@ import React, {useState, useEffect, useCallback} from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 import {useTheme} from '@react-navigation/native';
 import {useDispatch, useSelector} from 'react-redux';
-import {getTpDocReport} from '@/store/actions';
-import {ReportItem} from 'common';
+import {getSpMessage} from '@/store/actions';
+import {MessageItem} from 'common';
 import {size, commonStyle} from '@/utils';
 import {Touchable, Icon, Button, FlowList} from 'ui';
 export default (props) => {
@@ -13,8 +13,8 @@ export default (props) => {
   let name = props.name;
 
   let params = {
+    doctype: 'Service Project',
     name: name,
-    doctype: 'Tutoring Plan',
   };
 
   return (
@@ -22,11 +22,11 @@ export default (props) => {
       <FlowList
         style={style.flatlistWrap}
         contentContainerStyle={style.flatlist}
-        request={getTpDocReport}
+        request={getSpMessage}
         params={params}
         renderItem={({item}) => (
-          <View style={style.recordItem}>
-            <ReportItem item={item} />
+          <View style={style.messageItem}>
+            <MessageItem item={item} />
           </View>
         )}
         keyExtractor={(item, index) => index.toString()}
@@ -44,7 +44,7 @@ const style = StyleSheet.create({
     paddingTop: size(32),
     paddingBottom: size(200),
   },
-  recordItem: {
-    marginBottom: size(30),
+  messageItem: {
+    marginVertical: size(20),
   },
 });

@@ -8,27 +8,22 @@ import {size, commonStyle} from '@/utils';
 import {Touchable, Icon, Button, FlowList} from 'ui';
 export default (props) => {
   const {colors} = useTheme();
-  const dispatch = useDispatch();
-  const tpDetail = useSelector((state) => state.home.tpDetail);
-  console.log('props', props);
+
   let name = props.name;
 
   let params = {
     tutoring_plan: name,
   };
-  const getData = async (myParams) => {
-    return await dispatch(getTpRecord(myParams));
-  };
-  getData();
+
   return (
     <View style={[style.wrap, {backgroundColor: colors.card}]}>
       <FlowList
         style={style.flatlistWrap}
         contentContainerStyle={style.flatlist}
-        request={getData}
+        request={getTpRecord}
         params={params}
         renderItem={({item}) => (
-          <View>
+          <View style={style.recordItem}>
             <RecordItem item={item} />
           </View>
         )}
@@ -40,5 +35,13 @@ export default (props) => {
 const style = StyleSheet.create({
   wrap: {
     flex: 1,
+  },
+  flatlistWrap: {
+    flex: 1,
+    paddingTop: size(32),
+    paddingBottom: size(200),
+  },
+  recordItem: {
+    marginBottom: size(20),
   },
 });
