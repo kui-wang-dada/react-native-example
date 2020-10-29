@@ -75,10 +75,19 @@ class FlowList extends Component {
   _afterFetchData = (res) => {
     let results = this._parseRes(res);
     let {data} = this.state;
-    let {limit_page_length, disabledPage, onFetchedData} = this.props;
+    let {
+      limit_page_length,
+      disabledPage,
+      onFetchedData,
+      frontData,
+    } = this.props;
     let {limit_start} = this.state;
     if (limit_start === 1) {
-      data = results;
+      if (frontData) {
+        data = [].concat(frontData, results);
+      } else {
+        data = results;
+      }
     } else {
       data = [...data, ...results];
     }
@@ -211,9 +220,10 @@ class FlowList extends Component {
       useAnimated,
       request,
       onEndReachedThreshold,
-
+      frontData,
       ...otherProps
     } = this.props;
+
     if (!request && this.props.data) {
       data = this.props.data;
     }

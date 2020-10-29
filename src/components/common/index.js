@@ -6,6 +6,8 @@ import WeekReportItem from './WeekReportItem';
 import ReportItem from './ReportItem';
 import CourseItem from './CourseItem';
 import MessageItem from './MessageItem';
+import AuthorItem from './AuthorItem';
+import SchoolItem from './SchoolItem';
 
 export {
   TutorItem,
@@ -16,4 +18,6 @@ export {
   ReportItem,
   CourseItem,
   MessageItem,
+  AuthorItem,
+  SchoolItem,
 };

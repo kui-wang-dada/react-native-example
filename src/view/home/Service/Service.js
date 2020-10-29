@@ -46,7 +46,7 @@ export default ({route, navigation}) => {
         }}
         renderTabBar={() => <TabBar style={style.tabBar} />}>
         <Tab1 tabLabel="沟通记录" name={name} />
-        <Tab2 tabLabel="服务流程" name={name} />
+        <Tab2 tabLabel="服务流程" name={name} list={spDetail.tasks} />
         <Tab3 tabLabel="选校单" name={name} />
         <Tab4
           tabLabel="文档报告"

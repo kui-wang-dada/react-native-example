@@ -138,6 +138,7 @@ function _normoalize(options, data) {
   } else if (options.method === 'GET') {
     options.params = data;
   }
+  console.log(options, 'options');
   return options;
 }
 

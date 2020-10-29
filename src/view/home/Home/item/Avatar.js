@@ -1,14 +1,14 @@
-import React, {useState, useEffect} from 'react';
-import {View, Text, StyleSheet, Image} from 'react-native';
-import {useTheme} from '@react-navigation/native';
-import {useDispatch, useSelector} from 'react-redux';
+import React, { useState, useEffect } from 'react';
+import { View, Text, StyleSheet, Image } from 'react-native';
+import { useTheme } from '@react-navigation/native';
+import { useDispatch, useSelector } from 'react-redux';
 
 import LinearGradient from 'react-native-linear-gradient';
-import {size, commonStyle, checkStaticImg} from '@/utils';
-import {Touchable, Icon, Button} from 'ui';
+import { size, commonStyle, checkStaticImg } from '@/utils';
+import { Touchable, Icon, Button } from 'ui';
 
 export default () => {
-  const {colors} = useTheme();
+  const { colors } = useTheme();
 
   const userInfo = useSelector((state) => state.my.userInfo);
   const barHeight = useSelector((state) => state.common.barHeight);
@@ -67,13 +67,8 @@ export default () => {
       <View style={style.noLoginWrap} onClick={goToLogin}>
         <Text style={style.noLoginTitle}>厚仁学生中心</Text>
         <View style={style.noLoginCon}>
-          <Image
-            source={{uri: checkStaticImg('xueshu.png')}}
-            style={style.noLoginImg}
-          />
-          <Text style={style.noLoginLabel}>
-            您好！「厚仁学生中心」小程序仅对厚仁教育用户开放，请您进行微信授权并绑定厚仁学生账号。
-          </Text>
+          <Image source={{ uri: checkStaticImg('xueshu.png') }} style={style.noLoginImg} />
+          <Text style={style.noLoginLabel}>您好！「厚仁学生中心」小程序仅对厚仁教育用户开放，请您进行微信授权并绑定厚仁学生账号。</Text>
         </View>
         <View style={style.noLoginBtnWrap}>
           <Text style={style.noLoginText}>点击登录</Text>
@@ -83,14 +78,8 @@ export default () => {
     );
   };
   return (
-    <LinearGradient
-      start={{x: 0, y: 0}}
-      end={{x: 1, y: 0}}
-      colors={['#44a8d1', '#48e1b7']}
-      style={[style.linearGradient, {paddingTop: barHeight}]}>
-      <View className="avatar-wrap">
-        {userInfo.students_id ? renderLogin() : renderNoLogin()}
-      </View>
+    <LinearGradient start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }} colors={['#44a8d1', '#48e1b7']} style={[style.linearGradient, { paddingTop: barHeight }]}>
+      <View className="avatar-wrap">{userInfo.students_id ? renderLogin() : renderNoLogin()}</View>
     </LinearGradient>
   );
 };

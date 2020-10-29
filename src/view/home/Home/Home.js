@@ -1,15 +1,15 @@
-import React, {useEffect} from 'react';
-import {View, Text, StyleSheet, Image} from 'react-native';
-import {useTheme} from '@react-navigation/native';
-import {useDispatch, useSelector} from 'react-redux';
-import {getUserInfo, getHomeSp, getHomeTp, getHomeCount} from '@/store/actions';
-import {TutorItem, ServiceItem, TopHeader} from 'common';
+import React, { useEffect } from 'react';
+import { View, Text, StyleSheet, Image } from 'react-native';
+import { useTheme } from '@react-navigation/native';
+import { useDispatch, useSelector } from 'react-redux';
+import { getUserInfo, getHomeSp, getHomeTp, getHomeCount } from '@/store/actions';
+import { TutorItem, ServiceItem, TopHeader } from 'common';
 import Avatar from './item/Avatar';
-import {size, commonStyle, checkStaticImg} from '@/utils';
-import {Touchable, Icon} from 'ui';
+import { size, commonStyle, checkStaticImg } from '@/utils';
+import { Touchable, Icon } from 'ui';
 
-export default () => {
-  const {colors} = useTheme();
+export default ({ route, navigation }) => {
+  const { colors } = useTheme();
   const dispatch = useDispatch();
   const homeTp = useSelector((state) => state.home.homeTp);
   const homeSp = useSelector((state) => state.home.homeSp);
@@ -31,6 +31,9 @@ export default () => {
   }, [dispatch]);
 
   const goToProject = () => {};
+  const goToGridItem = (item) => {
+    navigation.navigate(item.route);
+  };
   const renderGrid = () => {
     let data = [
       {
@@ -53,11 +56,9 @@ export default () => {
       <View style={style.gridList}>
         {data.map((item, index) => {
           return (
-            <Touchable style={style.gridItem} key={index}>
-              <Image source={{uri: item.image}} style={style.gridImage} />
-              <Text style={[style.gridText, {color: colors.text}]}>
-                {item.value}
-              </Text>
+            <Touchable style={style.gridItem} key={index} onPress={() => goToGridItem(item)}>
+              <Image source={{ uri: item.image }} style={style.gridImage} />
+              <Text style={[style.gridText, { color: colors.text }]}>{item.value}</Text>
             </Touchable>
           );
         })}
@@ -67,7 +68,7 @@ export default () => {
   let tpData = homeTp[0];
   let services = Array.isArray(homeSp) && homeSp.slice(0, 3);
   return (
-    <View style={[style.wrap, {backgroundColor: colors.card}]}>
+    <View style={[style.wrap, { backgroundColor: colors.card }]}>
       <Avatar />
       <View style={style.gridWrap}>{renderGrid()}</View>
       {tpData ? (
