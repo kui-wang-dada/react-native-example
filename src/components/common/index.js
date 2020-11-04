@@ -9,15 +9,4 @@ import MessageItem from './MessageItem';
 import AuthorItem from './AuthorItem';
 import SchoolItem from './SchoolItem';
 
-export {
-  TutorItem,
-  ServiceItem,
-  TopHeader,
-  RecordItem,
-  WeekReportItem,
-  ReportItem,
-  CourseItem,
-  MessageItem,
-  AuthorItem,
-  SchoolItem,
-};
+export { TutorItem, ServiceItem, TopHeader, RecordItem, WeekReportItem, ReportItem, CourseItem, MessageItem, AuthorItem, SchoolItem };

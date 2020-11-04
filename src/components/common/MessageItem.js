@@ -1,13 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, Image } from 'react-native';
-import { useTheme } from '@react-navigation/native';
+import { useTheme, useNavigation } from '@react-navigation/native';
 import { size, commonStyle, checkImg, checkStaticImg, messageTime } from '@/utils';
 import { Touchable, Icon, Button } from 'ui';
 export default (props) => {
   const { colors } = useTheme();
+  const navigation = useNavigation();
 
-  const goToDetail = () => {};
   let { item } = props;
+
+  const goToDetail = () => {
+    navigation.navigate('messageDetail', { name: item.name });
+  };
 
   let imgUrl = checkImg(item.contact_by_img, '180');
   imgUrl = imgUrl ? imgUrl : checkStaticImg('female.png');
