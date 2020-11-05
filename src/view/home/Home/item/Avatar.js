@@ -40,7 +40,7 @@ export default () => {
         <View style={style.stuNameWrap} onClick={goToAccount}>
           <View style={style.stuId}>
             <Text style={style.stuIdText}>{userInfo.students_id}</Text>
-            <Icon value="chevron-right" size={16} />
+            <Icon name="right" size={14} color="#f3dbb4" />
           </View>
           <Text style={style.stuName}>{userInfo.students_name}</Text>
         </View>
@@ -72,7 +72,7 @@ export default () => {
         </View>
         <View style={style.noLoginBtnWrap}>
           <Text style={style.noLoginText}>点击登录</Text>
-          <Icon value="chevron-right" size={16} />
+          <Icon name="right" size={16} color={'#E6A53D'} />
         </View>
       </View>
     );
@@ -99,7 +99,9 @@ const style = StyleSheet.create({
     marginBottom: size(30),
   },
   stuId: {
+    flexDirection: 'row',
     alignSelf: 'flex-start',
+    alignItems: 'center',
     marginTop: size(20),
 
     marginBottom: size(20),

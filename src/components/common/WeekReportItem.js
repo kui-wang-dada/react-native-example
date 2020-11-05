@@ -1,10 +1,10 @@
-import React, {useState, useEffect} from 'react';
-import {View, Text, StyleSheet} from 'react-native';
-import {useTheme} from '@react-navigation/native';
-import {size, commonStyle, messageTime} from '@/utils';
-import {Touchable, Icon, Button} from 'ui';
+import React, { useState, useEffect } from 'react';
+import { View, Text, StyleSheet } from 'react-native';
+import { useTheme } from '@react-navigation/native';
+import { size, commonStyle, messageTime } from '@/utils';
+import { Touchable, Icon, Button } from 'ui';
 export default (props) => {
-  const {colors} = useTheme();
+  const { colors } = useTheme();
 
   const goToDetail = () => {
     // let { item } = this.props;
@@ -13,32 +13,23 @@ export default (props) => {
     // });
   };
 
-  let {item} = props;
+  let { item } = props;
 
-  let iconName =
-    item.tutoring_class_name && item.tutoring_class_name.split('')[0];
+  let iconName = item.tutoring_class_name && item.tutoring_class_name.split('')[0];
   return (
-    <Touchable
-      style={[style.recordItem, {backgroundColor: colors.background}]}
-      onPress={goToDetail}>
+    <Touchable style={[style.recordItem, { backgroundColor: colors.background }]} onPress={goToDetail}>
       <View style={style.topWrap}>
         <View style={style.topLeft}>
-          <View style={[style.topIconWrap, {backgroundColor: colors.primary}]}>
-            <Text style={[style.topIcon, {color: colors.background}]}>
-              {iconName}
-            </Text>
+          <View style={[style.topIconWrap, { backgroundColor: colors.primary }]}>
+            <Text style={[style.topIcon, { color: colors.background }]}>{iconName}</Text>
           </View>
 
-          <Text style={[style.topName, {color: colors.text}]}>
-            {item.tutoring_class_name}
-          </Text>
+          <Text style={[style.topName, { color: colors.text }]}>{item.tutoring_class_name}</Text>
         </View>
-        <Text style={[style.topRight, {color: colors.text_p}]}>
-          {messageTime(item.start_on)}
-        </Text>
+        <Text style={[style.topRight, { color: colors.text_p }]}>{messageTime(item.start_on)}</Text>
       </View>
       <View style={[style.center]}>
-        <Text style={[style.centerText, {color: colors.text_p}]}>
+        <Text numberOfLines={3} style={[style.centerText, { color: colors.text_p }]}>
           {item.content}
         </Text>
       </View>

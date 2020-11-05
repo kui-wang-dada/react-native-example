@@ -5,6 +5,8 @@ import Message from '@/view/home/message';
 import Report from '@/view/home/report';
 import Author from '@/view/home/author';
 import MessageDetail from '@/view/home/message/Detail';
+import RecordDetail from '@/view/home/record';
+import CourseDetail from '@/view/home/course';
 
 const HomeRoute = {
   home: {
@@ -45,6 +47,16 @@ const HomeRoute = {
     screen: MessageDetail,
     name: 'messageDetail',
     options: { headerShown: true, title: '沟通记录详情' },
+  },
+  recordDetail: {
+    screen: RecordDetail,
+    name: 'recordDetail',
+    options: { headerShown: true, title: '辅导记录详情' },
+  },
+  courseDetail: {
+    screen: CourseDetail,
+    name: 'courseDetail',
+    options: { headerShown: true, title: '课程详情' },
   },
 };
 export default HomeRoute;

@@ -98,7 +98,7 @@ export default (props) => {
               <View style={style.timeItem}>
                 <View style={style.tail} />
                 <View style={style.icon}>
-                  <Icon value={item.icon} size={16} color={item.color} />
+                  <Icon name={item.icon} size={16} color={item.color} />
                 </View>
                 <View
                   style={style.content}
@@ -108,9 +108,7 @@ export default (props) => {
                   <View style={[style.titleWrap, showCon ? style.active : null]}>
                     <View style={style.title}>
                       <Text style={style.titleText}>{item.title}</Text>
-                      <View style={style.iconRight}>
-                        {showCon ? <Icon value="chevron-down" size={20} color={'#4bc694'} /> : <Icon value="chevron-up" size={20} color={'#666'} />}
-                      </View>
+                      <View style={style.iconRight}>{showCon ? <Icon name="down" size={16} color={'#4bc694'} /> : <Icon name="up" size={16} color={'#666'} />}</View>
                     </View>
                     {item.showDate ? (
                       <Text style={style.date}>
@@ -152,6 +150,7 @@ const styleHtml = StyleSheet.create({
 const style = StyleSheet.create({
   tab2Wrap: {
     position: 'relative',
+    flex: 1,
   },
   mainWrap: {
     paddingVertical: size(40),
@@ -213,11 +212,11 @@ const style = StyleSheet.create({
     alignItems: 'center',
     right: size(40),
     top: '50%',
-    // transform: [
-    //   {
-    //     translateY: -'50%',
-    //   },
-    // ],
+    transform: [
+      {
+        translateY: -size(40),
+      },
+    ],
   },
   date: {
     fontSize: size(24),

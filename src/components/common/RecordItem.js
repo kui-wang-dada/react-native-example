@@ -1,69 +1,45 @@
-import React, {useState, useEffect} from 'react';
-import {View, Text, StyleSheet} from 'react-native';
-import {useTheme} from '@react-navigation/native';
-import {size, commonStyle, messageTime} from '@/utils';
-import {Touchable, Icon, Button} from 'ui';
+import React, { useState, useEffect } from 'react';
+import { View, Text, StyleSheet } from 'react-native';
+import { useTheme, useNavigation } from '@react-navigation/native';
+import { size, commonStyle, messageTime } from '@/utils';
+import { Touchable, Icon, Button } from 'ui';
 export default (props) => {
-  const {colors} = useTheme();
-
+  const { colors } = useTheme();
+  const navigation = useNavigation();
   const goToDetail = () => {
-    // let { item } = this.props;
-    // Taro.navigateTo({
-    //   url: "/pageSub/record/index?name=" + item.name,
-    // });
+    let { item } = props;
+    navigation.navigate('recordDetail', { name: item.name });
   };
 
-  let {item} = props;
+  let { item } = props;
 
-  let iconName =
-    item.tutoring_class_name && item.tutoring_class_name.split('')[0];
+  let iconName = item.tutoring_class_name && item.tutoring_class_name.split('')[0];
   let attendance = {
     Late: ['迟到', '#F8BC5A'],
     Present: ['正常', '#4bc694'],
     Absent: ['缺勤', '#EE806B'],
   };
-  let [statusLabel, statusColor] = attendance[item.student_attendance] || [
-    '',
-    '',
-  ];
+  let [statusLabel, statusColor] = attendance[item.student_attendance] || ['', ''];
   return (
-    <Touchable
-      style={[style.recordItem, {backgroundColor: colors.background}]}
-      onPress={goToDetail}>
+    <Touchable style={[style.recordItem, { backgroundColor: colors.background }]} onPress={goToDetail}>
       <View style={style.topWrap}>
         <View style={style.topLeft}>
-          <View style={[style.topIconWrap, {backgroundColor: colors.primary}]}>
-            <Text style={[style.topIcon, {color: colors.background}]}>
-              {iconName}
-            </Text>
+          <View style={[style.topIconWrap, { backgroundColor: colors.primary }]}>
+            <Text style={[style.topIcon, { color: colors.background }]}>{iconName}</Text>
           </View>
-          <Text style={[style.topName, {color: colors.text}]}>
-            {item.tutoring_class_name}
-          </Text>
+          <Text style={[style.topName, { color: colors.text }]}>{item.tutoring_class_name}</Text>
         </View>
-        <Text style={[style.topRight, {color: colors.text_p}]}>
-          {messageTime(item.start_on)}
-        </Text>
+        <Text style={[style.topRight, { color: colors.text_p }]}>{messageTime(item.start_on)}</Text>
       </View>
       <View style={[style.center]}>
-        <Text style={[style.centerText, {color: colors.text_p}]}>
+        <Text numberOfLines={3} style={[style.centerText, { color: colors.text_p }]}>
           {item.content}
         </Text>
       </View>
 
       <View style={style.bottom}>
-        <Text style={[style.time, {color: colors.text_p}]}>
-          {item.used_hours}小时
-        </Text>
-        {statusLabel ? (
-          <Text
-            style={[
-              style.project,
-              {color: statusColor, backgroundColor: colors.card},
-            ]}>
-            {statusLabel}
-          </Text>
-        ) : null}
+        <Text style={[style.time, { color: colors.text_p }]}>{item.used_hours}小时</Text>
+        {statusLabel ? <Text style={[style.project, { color: statusColor, backgroundColor: colors.card }]}>{statusLabel}</Text> : null}
       </View>
     </Touchable>
   );
