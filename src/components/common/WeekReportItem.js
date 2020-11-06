@@ -1,16 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import { useTheme } from '@react-navigation/native';
+import { useTheme, useNavigation } from '@react-navigation/native';
 import { size, commonStyle, messageTime } from '@/utils';
 import { Touchable, Icon, Button } from 'ui';
 export default (props) => {
   const { colors } = useTheme();
-
+  const navigation = useNavigation();
   const goToDetail = () => {
-    // let { item } = this.props;
-    // Taro.navigateTo({
-    //   url: "/pageSub/record/index?name=" + item.name,
-    // });
+    let { item } = props;
+    navigation.navigate('weekReport', { name: item.name });
   };
 
   let { item } = props;

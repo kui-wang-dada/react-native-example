@@ -39,7 +39,11 @@ export default (props) => {
 
       <View style={style.bottom}>
         <Text style={[style.time, { color: colors.text_p }]}>{item.used_hours}小时</Text>
-        {statusLabel ? <Text style={[style.project, { color: statusColor, backgroundColor: colors.card }]}>{statusLabel}</Text> : null}
+        {statusLabel ? (
+          <View style={[style.projectWrap, { backgroundColor: colors.card }]}>
+            <Text style={[style.project, { color: statusColor }]}>{statusLabel}</Text>
+          </View>
+        ) : null}
       </View>
     </Touchable>
   );
@@ -92,10 +96,12 @@ const style = StyleSheet.create({
   time: {
     fontSize: size(24),
   },
+  projectWrap: {
+    paddingHorizontal: size(20),
+    paddingVertical: size(6),
+    borderRadius: size(40),
+  },
   project: {
     fontSize: size(24),
-    paddingHorizontal: size(20),
-    paddingVertical: size(4),
-    borderRadius: size(40),
   },
 });

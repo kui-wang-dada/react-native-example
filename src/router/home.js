@@ -7,6 +7,7 @@ import Author from '@/view/home/author';
 import MessageDetail from '@/view/home/message/Detail';
 import RecordDetail from '@/view/home/record';
 import CourseDetail from '@/view/home/course';
+import WeekReport from '@/view/home/weekReport';
 
 const HomeRoute = {
   home: {
@@ -57,6 +58,11 @@ const HomeRoute = {
     screen: CourseDetail,
     name: 'courseDetail',
     options: { headerShown: true, title: '课程详情' },
+  },
+  weekReport: {
+    screen: WeekReport,
+    name: 'weekReport',
+    options: { headerShown: true, title: '周报告详情' },
   },
 };
 export default HomeRoute;
