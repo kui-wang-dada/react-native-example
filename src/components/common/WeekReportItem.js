@@ -8,7 +8,13 @@ export default (props) => {
   const navigation = useNavigation();
   const goToDetail = () => {
     let { item } = props;
-    navigation.navigate('weekReport', { name: item.name });
+
+    let stragety = {
+      'TPRT-00001': 'weekReport',
+      'TPRT-00002': 'monthReport',
+      'TPRT-00004': 'termReport',
+    };
+    navigation.navigate(stragety[item.report_type], { name: item.name });
   };
 
   let { item } = props;

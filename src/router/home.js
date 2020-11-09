@@ -8,6 +8,8 @@ import MessageDetail from '@/view/home/message/Detail';
 import RecordDetail from '@/view/home/record';
 import CourseDetail from '@/view/home/course';
 import WeekReport from '@/view/home/weekReport';
+import MonthReport from '@/view/home/weekReport/MonthReport';
+import TermReport from '@/view/home/weekReport/TermReport';
 
 const HomeRoute = {
   home: {
@@ -63,6 +65,16 @@ const HomeRoute = {
     screen: WeekReport,
     name: 'weekReport',
     options: { headerShown: true, title: '周报告详情' },
+  },
+  monthReport: {
+    screen: MonthReport,
+    name: 'monthReport',
+    options: { headerShown: true, title: '月报告详情' },
+  },
+  termReport: {
+    screen: TermReport,
+    name: 'termReport',
+    options: { headerShown: true, title: '学期报告详情' },
   },
 };
 export default HomeRoute;
