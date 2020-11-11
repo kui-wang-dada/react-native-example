@@ -1,11 +1,12 @@
-import {size} from '@/utils';
-import {Dimensions, Platform, PixelRatio, StyleSheet} from 'react-native';
-import {initialMode} from 'react-native-dark-mode';
+import { size } from '@/utils';
+import { Dimensions, Platform, PixelRatio, StyleSheet } from 'react-native';
+import { initialMode } from 'react-native-dark-mode';
 
 export const lightColorTheme = {
   dark: false,
   colors: {
     primary: '#4bc694',
+    assist: '#fc8300',
     color_yellow: '#fdc940',
     color_blue: '#4169e2',
     color_red: '#d10101',
@@ -24,6 +25,7 @@ export const darkColorTheme = {
   dark: true,
   colors: {
     primary: '#4bc694',
+    assist: '#fc8300',
     color_yellow: '#fdc940',
     color_blue: '#4169e2',
     color_red: '#d10101',
@@ -39,8 +41,7 @@ export const darkColorTheme = {
   },
 };
 
-export let colorTheme =
-  initialMode === 'dark' ? darkColorTheme : lightColorTheme;
+export let colorTheme = initialMode === 'dark' ? darkColorTheme : lightColorTheme;
 
 // export function changeTheme(type) {
 //   if (type === 'dark') {

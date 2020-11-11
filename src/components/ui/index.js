@@ -7,5 +7,6 @@ import Message from './Message';
 import TabBar from './TabBar';
 import Button from './Button';
 import ScrollTabBar from './ScrollTabBar/ScrollTabBar';
+import Image from './Image';
 
-export { WModal, Icon, Touchable, EndTip, FlowList, Message, TabBar, Button, ScrollTabBar };
+export { WModal, Icon, Touchable, EndTip, FlowList, Message, TabBar, Button, ScrollTabBar, Image };

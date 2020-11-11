@@ -71,7 +71,7 @@ export default [
     name: 'tpReport',
     method: 'GET',
     desc: '辅导报告',
-    path: '/apis/method/frappe.apis.apps.services.tutoring_week_reports',
+    path: '/apis/method/frappe.apis.apps.services.tutoring_summary_reports',
   },
   {
     name: 'tpReportDetail',

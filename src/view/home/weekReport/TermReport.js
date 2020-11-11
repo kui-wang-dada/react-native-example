@@ -48,12 +48,12 @@ export default ({ route, navigation }) => {
       },
     ];
     return (
-      <View class="list-1">
-        <View class="list-title-wrap">
-          <Text class="list-title">学生在学校的情况反馈</Text>
+      <View style={style.list1}>
+        <View style={[style.listTitleWrap, { backgroundColor: colors.assist, borderBottomColor: colors.color_yellow }]}>
+          <Text style={[style.listTitle, { backgroundColor: colors.assist, color: colors.background }]}>学生在学校的情况反馈</Text>
         </View>
 
-        <View class="list-wrap">
+        <View style={[style.listWrap, { backgroundColor: colors.card }]}>
           {list.map((item) => {
             return <Ask item={item} key={item.name} />;
           })}
@@ -75,11 +75,11 @@ export default ({ route, navigation }) => {
       },
     ];
     return (
-      <View class="list-2">
-        <View class="list-title-wrap">
-          <Text class="list-title">学生的辅导情况反馈</Text>
+      <View style={style.list2}>
+        <View style={[style.listTitleWrap, { backgroundColor: colors.assist, borderBottomColor: colors.color_yellow }]}>
+          <Text style={[style.listTitle, { backgroundColor: colors.assist, color: colors.background }]}>学生的辅导情况反馈</Text>
         </View>
-        <View class="list-wrap">
+        <View style={[style.listWrap, { backgroundColor: colors.card }]}>
           {list.map((item) => {
             return <Ask item={item} key={item.name} />;
           })}
@@ -114,13 +114,13 @@ export default ({ route, navigation }) => {
       },
     ];
     return (
-      <View class="list-3">
-        <View class="list-title-wrap">
-          <Text class="list-title">辅导老师反馈</Text>
+      <View style={style.list3}>
+        <View style={[style.listTitleWrap, { backgroundColor: colors.assist, borderBottomColor: colors.color_yellow }]}>
+          <Text style={[style.listTitle, { backgroundColor: colors.assist, color: colors.background }]}>辅导老师反馈</Text>
         </View>
-        <View class="list-wrap">
-          <ListItem item={list[0]} style={{ height: '50PX', background: '#fff' }} />
-          <ListItem item={list[1]} style={{ height: '50PX', background: '#fff' }} />
+        <View style={[style.listWrap, { backgroundColor: colors.card }]}>
+          <ListItem item={list[0]} style={{ height: size(100), backgroundColor: colors.background }} />
+          <ListItem item={list[1]} style={{ height: size(100), backgroundColor: colors.background }} />
           <Ask item={list[2]} />
         </View>
       </View>
@@ -138,11 +138,11 @@ export default ({ route, navigation }) => {
       },
     ];
     return (
-      <View class="list-4">
-        <View class="list-title-wrap">
-          <Text class="list-title">下学期预选课程</Text>
+      <View style={style.list4}>
+        <View style={[style.listTitleWrap, { backgroundColor: colors.assist, borderBottomColor: colors.color_yellow }]}>
+          <Text style={[style.listTitle, { backgroundColor: colors.assist, color: colors.background }]}>下学期预选课程</Text>
         </View>
-        <View class="list-wrap">
+        <View style={[style.listWrap, { backgroundColor: colors.card }]}>
           <Ask item={list[0]} />
           {detail.next_semester_report ? detail.next_semester_report.length ? <Ask item={list[1]} /> : null : null}
         </View>
@@ -151,19 +151,19 @@ export default ({ route, navigation }) => {
   };
   return (
     <ScrollView>
-      <View class="scroll-wrap">
-        <View className="title-wrap">
-          <Text className="title">{detail.report_title}</Text>
-          <Text className="title-time">{messageTime(detail.modified)}</Text>
+      <View style={style.scrollWrap}>
+        <View style={style.titleWrap}>
+          <Text style={[style.title, { color: colors.primary }]}>{detail.report_title}</Text>
+          <Text style={[style.titleTime, { color: colors.text_tag }]}>{messageTime(detail.modified)}</Text>
         </View>
         {renderList1()}
         {renderList2()}
         {renderList3()}
         {renderList4()}
 
-        <View className="bottom-list-wrap">
+        <View style={style.bottomListWrap}>
           {listData.map((item, index) => {
-            return <ListItem item={item} key={index} style={{ height: '50PX' }} />;
+            return <ListItem item={item} key={index} style={{ height: size(100) }} />;
           })}
         </View>
       </View>
@@ -171,5 +171,42 @@ export default ({ route, navigation }) => {
   );
 };
 const style = StyleSheet.create({
-  wrap: {},
+  scrollWrap: {
+    paddingBottom: size(60),
+  },
+  titleWrap: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    padding: size(32),
+  },
+  title: {
+    fontSize: size(48),
+  },
+  titleTime: {
+    fontSize: size(24),
+  },
+  bottomListWrap: {
+    paddingHorizontal: size(32),
+  },
+  list1: {},
+  list2: {},
+  list3: {},
+  listTitleWrap: {
+    height: size(120),
+    flexDirection: 'row',
+    alignItems: 'flex-end',
+    paddingHorizontal: size(32),
+    borderBottomWidth: size(2),
+  },
+  listTitle: {
+    height: size(80),
+    lineHeight: size(80),
+    paddingHorizontal: size(20),
+    fontWeight: 'bold',
+    fontSize: size(36),
+  },
+  listWrap: {
+    padding: size(20),
+  },
 });

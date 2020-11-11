@@ -1,10 +1,10 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import {View, FlatList, RefreshControl, Animated, Text} from 'react-native';
+import { View, FlatList, RefreshControl, Animated, Text } from 'react-native';
 import store from '@/store/store';
 import Message from './Message';
 import EndTip from './EndTip';
-import {isObjEqual} from '@/utils';
+import { isObjEqual } from '@/utils';
 
 const AnimatedFlatList = Animated.createAnimatedComponent(FlatList);
 
@@ -14,7 +14,7 @@ class FlowList extends Component {
     this.state = {
       refreshing: false,
       data: null,
-      limit_start: 1,
+      limit_start: 0,
       noMoreData: false,
       hasLoadData: false,
     };
@@ -26,10 +26,9 @@ class FlowList extends Component {
     disabledRefresh: false,
 
     emptyComponent: <Message preset="no-data" />,
-    renderItem: ({item}) => {
+    renderItem: ({ item }) => {
       return (
-        <View
-          style={{height: 50, justifyContent: 'center', alignItems: 'center'}}>
+        <View style={{ height: 50, justifyContent: 'center', alignItems: 'center' }}>
           <Text>没有定义renderItem</Text>
         </View>
       );
@@ -74,15 +73,10 @@ class FlowList extends Component {
 
   _afterFetchData = (res) => {
     let results = this._parseRes(res);
-    let {data} = this.state;
-    let {
-      limit_page_length,
-      disabledPage,
-      onFetchedData,
-      frontData,
-    } = this.props;
-    let {limit_start} = this.state;
-    if (limit_start === 1) {
+    let { data } = this.state;
+    let { limit_page_length, disabledPage, onFetchedData, frontData } = this.props;
+    let { limit_start } = this.state;
+    if (limit_start === 0) {
       if (frontData) {
         data = [].concat(frontData, results);
       } else {
@@ -114,10 +108,10 @@ class FlowList extends Component {
       return;
     }
     this.isLoading = true;
-    let {request, limit_page_length, params} = this.props;
-    let {data, refreshing, limit_start, noMoreData} = this.state;
+    let { request, limit_page_length, params } = this.props;
+    let { data, refreshing, limit_start, noMoreData } = this.state;
     if (!request) {
-      this.setState({refreshing: false});
+      this.setState({ refreshing: false });
       this.isLoading = false;
       return;
     }
@@ -155,7 +149,7 @@ class FlowList extends Component {
     );
   };
   handleOtherData = (data) => {
-    this.setState({data});
+    this.setState({ data });
   };
   handleRefresh = () => {
     if (this.isLoading) {
@@ -163,7 +157,7 @@ class FlowList extends Component {
     }
     let newState = {
       refreshing: true,
-      limit_start: 1,
+      limit_start: 0,
       noMoreData: false,
     };
     this._timetick = new Date();
@@ -198,7 +192,7 @@ class FlowList extends Component {
   };
   // onEndReachedThreshold 没有作用，自行根据可见元素的变化加载更多
   handleViewableItemsChanged = (e) => {
-    let {viewableItems = []} = e;
+    let { viewableItems = [] } = e;
     if (viewableItems.length === 0) {
       return;
     }
@@ -212,17 +206,8 @@ class FlowList extends Component {
   };
 
   render() {
-    let {data, refreshing, extraData} = this.state;
-    let {
-      limit_page_length,
-      disabledRefresh,
-      onRefresh,
-      useAnimated,
-      request,
-      onEndReachedThreshold,
-      frontData,
-      ...otherProps
-    } = this.props;
+    let { data, refreshing, extraData } = this.state;
+    let { limit_page_length, disabledRefresh, onRefresh, useAnimated, request, onEndReachedThreshold, frontData, ...otherProps } = this.props;
 
     if (!request && this.props.data) {
       data = this.props.data;
@@ -259,22 +244,16 @@ class FlowList extends Component {
         title: this.state.data ? '下拉加载更多' : '加载中',
       },
     } = this.props;
-    let {refreshing} = this.state;
+    let { refreshing } = this.state;
 
-    return (
-      <RefreshControl
-        {...refreshControlOptions}
-        refreshing={refreshing}
-        onRefresh={this.handleRefresh}
-      />
-    );
+    return <RefreshControl {...refreshControlOptions} refreshing={refreshing} onRefresh={this.handleRefresh} />;
   };
   renderListFooterComponent = () => {
     if (this.props.horizontal) {
       return <View />;
     }
-    let {noMoreData, hasLoadData, data} = this.state;
-    let {request, emptyComponent} = this.props;
+    let { noMoreData, hasLoadData, data } = this.state;
+    let { request, emptyComponent } = this.props;
     if (!request || !hasLoadData) {
       return null;
     }

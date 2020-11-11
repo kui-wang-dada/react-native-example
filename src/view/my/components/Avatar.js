@@ -9,35 +9,35 @@ export default () => {
   const dispatch = useDispatch();
   const userInfo = useSelector((state) => state.my.userInfo);
   return (
-    <View className="my-wrap">
+    <View style={style.myWrap}>
       {userInfo.username ? (
-        <View class="top-wrap">
-          <View class="top-wrap-con" onClick={this.goToMySet}>
-            <Image class="logo" src={userInfo.avatar} />
-            <View class="top-con">
-              <View class="top-name">
-                <Text class="title">{userInfo.username}</Text>
+        <View style={style.topWrap}>
+          <View style={style.topWrapCon} onClick={this.goToMySet}>
+            <Image style={style.logo} src={userInfo.avatar} />
+            <View style={style.topCon}>
+              <View style={style.topName}>
+                <Text style={style.title}>{userInfo.username}</Text>
 
-                {/* {userInfo.phone_number ? <Text class="phone">{userInfo.phone_number}</Text> : null} */}
+                {/* {userInfo.phone_number ? <Text style={style.phone">{userInfo.phone_number}</Text> : null} */}
               </View>
 
-              {userInfo.students_id ? <Text class="student">绑定学号：{userInfo.students_id}</Text> : null}
+              {userInfo.students_id ? <Text style={style.student}>绑定学号：{userInfo.students_id}</Text> : null}
             </View>
             <Icon value="edit-outline" size="16" color="#999" />
           </View>
           {userInfo.students_id ? null : (
-            <View onClick={this.goToLogin} className="login-btn">
+            <View onClick={this.goToLogin} style={style.loginBtn}>
               绑定厚仁账号
             </View>
           )}
         </View>
       ) : (
         <View>
-          <View class="no-login-wrap">
-            <Button open-type="getUserInfo" onGetUserInfo={this.getUserInfo} class="no-login">
-              <Image class="img" src={checkStaticImg('login1.png')} />
-              <View class="login-label">
-                <Text class="login-label-title">登录并绑定后即可实时跟踪服务过程</Text>
+          <View style={style.noLoginWrap}>
+            <Button open-type="getUserInfo" onGetUserInfo={this.getUserInfo} style={style.noLogin}>
+              <Image style={style.img} src={checkStaticImg('login1.png')} />
+              <View style={style.loginLabel}>
+                <Text style={style.loginLabelTitle}>登录并绑定后即可实时跟踪服务过程</Text>
                 <View>点击登录</View>
               </View>
             </Button>
@@ -47,7 +47,7 @@ export default () => {
       {/* <Button open-type="getPhoneNumber" onGetPhoneNumber={this.getPhoneNumber}>
         获取手机号码
       </Button> */}
-      <View class="sep" />
+      <View style={style.sep} />
     </View>
   );
 };

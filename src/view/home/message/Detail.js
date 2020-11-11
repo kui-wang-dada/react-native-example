@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getMessageDetail } from '@/store/actions';
 import { size, commonStyle, checkImg, messageTime, checkStaticImg } from '@/utils';
 import { Touchable, Icon, Button } from 'ui';
+import { Comment } from 'common';
 export default ({ route, navigation }) => {
   const { colors } = useTheme();
   const dispatch = useDispatch();
@@ -80,7 +81,7 @@ export default ({ route, navigation }) => {
         </View>
         <View style={[style.sep, { backgroundColor: colors.sep }]} />
       </View>
-      {/* <Comment userInfo={this.props.userInfo} data={this.props.messageDetail} type="Opportunity" afterSubmit={this.afterSubmit}></Comment> */}
+      <Comment userInfo={this.props.userInfo} data={this.props.messageDetail} type="Opportunity" afterSubmit={this.afterSubmit} />
     </View>
   );
 };
