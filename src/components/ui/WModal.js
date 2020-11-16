@@ -1,18 +1,11 @@
 // 可传入业务组件或节点
 // 通过ref的挂载调用show方法，参数为业务组件或节点
 
-import React, {Component} from 'react';
-import {
-  Modal,
-  Text,
-  View,
-  Animated,
-  StyleSheet,
-  Dimensions,
-} from 'react-native';
+import React, { Component } from 'react';
+import { Modal, Text, View, Animated, StyleSheet, Dimensions } from 'react-native';
 
-const {height} = Dimensions.get('window');
-import {commonStyle} from '@/utils';
+const { height } = Dimensions.get('window');
+import { commonStyle } from '@/utils';
 export default class WModal extends Component {
   constructor(props) {
     super(props);
@@ -63,38 +56,20 @@ export default class WModal extends Component {
     });
   };
   render() {
-    let {modalVisible, component, type, ...props} = this.state;
+    let { modalVisible, component, type, ...props } = this.state;
     let centerTop = (height - this.state.panelHeight) / this.state.num;
-    const maskStyle = [
-      style.mask,
-      commonStyle.colorTheme.dark
-        ? {backgroundColor: 'rgba(100, 100, 100, 0.7)'}
-        : {backgroundColor: 'rgba(0, 0, 0, 0.5)'},
-    ];
+    const maskStyle = [style.mask, commonStyle.colorTheme.dark ? { backgroundColor: 'rgba(100, 100, 100, 0.7)' } : { backgroundColor: 'rgba(0, 0, 0, 0.5)' }];
     let strategy = {
       center: 'panel_center',
       centerNo: 'panel_center',
       toast: 'panel_Toast',
       loading: 'panel_Toast',
     };
-    const panelStyle = [
-      style[strategy[type]],
-
-      type === 'center' || type === 'centerNo' ? {top: centerTop} : null,
-    ];
+    const panelStyle = [style[strategy[type]], type === 'center' || type === 'centerNo' ? { top: centerTop } : null];
     return (
-      <Modal
-        transparent={true}
-        animationType={'fade'}
-        visible={this.state.modalVisible}
-        onRequestClose={this.close}
-        {...props}>
+      <Modal transparent={true} animationType={'fade'} visible={this.state.modalVisible} onRequestClose={this.close} {...props}>
         <Text
-          style={
-            this.state.type === 'center' || this.state.type === 'centerNo'
-              ? maskStyle
-              : {flex: 1}
-          }
+          style={this.state.type === 'center' || this.state.type === 'centerNo' ? maskStyle : { flex: 1 }}
           onPress={() => {
             if (this.state.type === 'centerNo') {
               return;
@@ -111,7 +86,7 @@ export default class WModal extends Component {
                 backgroundColor: 'rgba(0, 0, 0, 0.7)',
                 borderRadius: 10,
               }}>
-              <Text style={{color: '#fff'}}>{component}</Text>
+              <Text style={{ color: '#fff' }}>{component}</Text>
             </View>
           ) : (
             component

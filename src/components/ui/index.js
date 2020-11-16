@@ -1,4 +1,5 @@
 import WModal from './WModal';
+import YModal from './YModal';
 import Icon from './Icon';
 import Touchable from './Touchable';
 import EndTip from './EndTip';
@@ -9,4 +10,4 @@ import Button from './Button';
 import ScrollTabBar from './ScrollTabBar/ScrollTabBar';
 import Image from './Image';
 
-export { WModal, Icon, Touchable, EndTip, FlowList, Message, TabBar, Button, ScrollTabBar, Image };
+export { WModal, YModal, Icon, Touchable, EndTip, FlowList, Message, TabBar, Button, ScrollTabBar, Image };

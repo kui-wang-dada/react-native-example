@@ -9,5 +9,7 @@ import MessageItem from './MessageItem';
 import AuthorItem from './AuthorItem';
 import SchoolItem from './SchoolItem';
 import ListItem from './ListItem';
+import SubmitButton from './SubmitButton';
+import Comment from './Comment';
 
-export { TutorItem, ServiceItem, TopHeader, RecordItem, WeekReportItem, ReportItem, CourseItem, MessageItem, AuthorItem, SchoolItem, ListItem };
+export { TutorItem, ServiceItem, TopHeader, RecordItem, WeekReportItem, ReportItem, CourseItem, MessageItem, AuthorItem, SchoolItem, ListItem, SubmitButton, Comment };

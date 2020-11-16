@@ -24,11 +24,11 @@ export default ({ route, navigation }) => {
       limit_start: 0,
       limit_page_length: 10,
     };
-
+    dispatch(getUserInfo());
     dispatch(getHomeCount());
     dispatch(getHomeSp(params));
     dispatch(getHomeTp(paramsTp));
-  }, [dispatch]);
+  }, []);
 
   const goToProject = () => {};
   const goToGridItem = (item) => {

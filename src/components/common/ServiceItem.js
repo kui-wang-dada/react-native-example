@@ -60,6 +60,7 @@ const style = StyleSheet.create({
     alignItems: 'center',
   },
   topName: {
+    flex: 1,
     fontSize: size(32),
     fontWeight: 'bold',
   },
@@ -76,7 +77,7 @@ const style = StyleSheet.create({
     fontSize: size(28),
   },
   percentWrap: {
-    marginTop: size(20),
+    marginTop: size(30),
   },
   serviceTitle: {
     fontSize: size(28),

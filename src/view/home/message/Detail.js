@@ -11,15 +11,21 @@ export default ({ route, navigation }) => {
   const dispatch = useDispatch();
   const messageDetail = useSelector((state) => state.home.messageDetail);
   console.log(messageDetail, 'params');
+
+  const { name } = route.params;
+  const params = {
+    name: name,
+  };
   useEffect(() => {
     // Update the document title using the browser API
-    const { name } = route.params;
-    let params = {
-      name: name,
-    };
-    console.log(params, 'params');
+
+    console.log(this.params, 'params');
     dispatch(getMessageDetail(params));
   }, []);
+
+  const afterSubmit = async () => {
+    await dispatch(getMessageDetail(params));
+  };
 
   const renderHeader = () => {
     let data = messageDetail;
@@ -81,16 +87,16 @@ export default ({ route, navigation }) => {
         </View>
         <View style={[style.sep, { backgroundColor: colors.sep }]} />
       </View>
-      <Comment userInfo={this.props.userInfo} data={this.props.messageDetail} type="Opportunity" afterSubmit={this.afterSubmit} />
+      <Comment data={messageDetail} type="Opportunity" afterSubmit={afterSubmit} />
     </View>
   );
 };
 
 const style = StyleSheet.create({
-  messageDetailWrap: {},
-  messageDetail: {
+  messageDetailWrap: {
     paddingBottom: size(160),
   },
+  messageDetail: {},
   messageMain: {
     minHeight: size(440),
     paddingHorizontal: size(32),

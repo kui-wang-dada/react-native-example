@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, Image } from 'react-native';
+import { View, Text, StyleSheet, Image, Alert } from 'react-native';
 import { useTheme } from '@react-navigation/native';
-import { size, commonStyle, checkStaticImg, moment } from '@/utils';
+import { size, commonStyle, checkStaticImg, moment, $api } from '@/utils';
 import { Touchable, Icon, Button } from 'ui';
+
 export default (props) => {
   const { colors } = useTheme();
 
@@ -28,11 +29,39 @@ export default (props) => {
   };
 
   const handleDeleteComment = () => {
-    this.content = '删除该条留言？';
+    Alert.alert(
+      '删除该条留言？',
 
-    this.setState({
-      isOpened: true,
-    });
+      [
+        {
+          text: '取消',
+          onPress: () => console.log('Ask me later pressed'),
+        },
+        {
+          text: '确定',
+          onPress: () => {
+            deleteComment();
+          },
+          style: 'cancel',
+        },
+      ],
+      { cancelable: false },
+    );
+  };
+  const deleteComment = async () => {
+    let { to_full_name } = props.data;
+    let apiUrl = 'home/delComment';
+    if (to_full_name) {
+      apiUrl = 'home/delReply';
+    }
+    let params = {
+      name: props.data.name,
+    };
+
+    let res = await $api[apiUrl](params);
+    if (res.status.code === 200) {
+      await props.afterDeleteComment();
+    }
   };
 
   let { from_full_name, to_full_name, from_user_image, content, comment_on } = props.data;
