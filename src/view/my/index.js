@@ -15,26 +15,23 @@ export default ({ route, navigation }) => {
 
   const listData = [
     {
-      title: '',
+      title: '联系客服',
+      icon: 'back',
+      route: 'webView',
+      params: { url: 'https://lc.chat/now/9055235/1' },
     },
   ];
   return (
-    <View className="my-wrap">
-      <Avatar
-        colorTheme={this.props.colorTheme}
-        user={this.props.userInfo}
-        loginEmail={this.props.loginEmail}
-        // navigation={this.props.navigation}
-        invitation={this.props.invitation}
-      />
+    <View style={style.myWrap}>
+      <Avatar />
       {/* <Button open-type="getPhoneNumber" onGetPhoneNumber={this.getPhoneNumber}>
           获取手机号码
         </Button> */}
-      <View class="sep" />
-      <ScrollView style={{ flex: 1 }}>
+      <View style={[style.sep, { backgroundColor: colors.sep }]} />
+      <ScrollView>
         <View style={style.myList}>
           {listData.map((item, index) => {
-            return <ListItem colorTheme={this.props.colorTheme} key={index} data={item} loginEmail={this.props.loginEmail} navigation={this.props.navigation} />;
+            return <ListItem key={index} data={item} />;
           })}
         </View>
       </ScrollView>
@@ -42,5 +39,12 @@ export default ({ route, navigation }) => {
   );
 };
 const style = StyleSheet.create({
-  wrap: {},
+  myWrap: {},
+  sep: {
+    width: '100%',
+    height: size(20),
+  },
+  myList: {
+    flex: 1,
+  },
 });

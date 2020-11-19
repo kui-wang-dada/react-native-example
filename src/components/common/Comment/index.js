@@ -13,8 +13,7 @@ export default (props) => {
   const userInfo = useSelector((state) => state.my.userInfo);
 
   let type, replyData;
-  const [inputPlaceholder, setInputPlaceholder] = useState('添加留言');
-
+  let inputPlaceholder = '添加留言';
   const getInput = (item, index) => {
     console.log(item, 'item');
 
@@ -24,14 +23,18 @@ export default (props) => {
         name: item.nameId,
         to: item.from,
       };
-      setInputPlaceholder(`回复 ${item.fromName}`);
+      inputPlaceholder = `回复 ${item.fromName}`;
     } else {
       type = 'comment';
       replyData = {};
+      inputPlaceholder = '添加留言';
     }
-    ymodal.show(<CommentInput inputPlaceholder={inputPlaceholder} replyData={replyData} type={type} />);
+    ymodal.show(<CommentInput from={props.type} inputPlaceholder={inputPlaceholder} replyData={replyData} type={type} afterSubmit={afterSubmit} data={props.data} />);
   };
 
+  const afterSubmit = async () => {
+    props.afterSubmit && (await props.afterSubmit());
+  };
   const afterDeleteComment = async () => {
     props.afterSubmit && (await props.afterSubmit());
 
@@ -46,7 +49,7 @@ export default (props) => {
           <Text style={[style.title, { color: colors.text }]}>留言板</Text>
           {data.feedbacks && data.feedbacks.length ? (
             <View style={style.titleIcon}>
-              <Icon value="feedback" size="14" color={'#fff'} style={[style.iconfont]} />
+              <Icon value="feedback" size={14} color={'#fff'} style={[style.iconfont]} />
             </View>
           ) : null}
         </View>
@@ -83,8 +86,8 @@ export default (props) => {
   };
   const renderInput = () => {
     return (
-      <View style={[style.inputComment, { backgroundColor: colors.background }]}>
-        <View style={style.inputWrap}>
+      <View style={[style.inputComment, { backgroundColor: colors.background, borderTopColor: colors.border }]}>
+        <View style={[style.inputWrap, { backgroundColor: colors.card }]}>
           <Icon value="edit" size={20} color="#666" />
           <Touchable style={style.inputPlaceholder} onPress={() => getInput()}>
             <Text style={[style.inputText, { color: colors.text_tag }]}>添加留言</Text>
@@ -101,7 +104,9 @@ export default (props) => {
   );
 };
 const style = StyleSheet.create({
-  myCommentWrap: {},
+  myCommentWrap: {
+    flex: 1,
+  },
   commentAllWrap: {
     paddingTop: size(32),
   },
@@ -138,7 +143,8 @@ const style = StyleSheet.create({
     right: 0,
     bottom: 0,
     borderTopWidth: size(1),
-    paddingVertical: size(40),
+    paddingTop: size(20),
+    paddingBottom: size(40),
     paddingHorizontal: size(32),
     flexDirection: 'column',
   },

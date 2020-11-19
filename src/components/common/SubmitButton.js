@@ -3,13 +3,13 @@ import { View, Text, StyleSheet, ActivityIndicator } from 'react-native';
 import { useTheme } from '@react-navigation/native';
 import { size, commonStyle, modal } from '@/utils';
 import { Touchable, Icon, Button } from 'ui';
-export default () => {
+export default (props) => {
   const { colors } = useTheme();
   const [loading, setLoading] = useState(false);
 
   const submit = async () => {
-    this.setState({ loading: true });
-    let res = await this.props.submit();
+    setLoading(true);
+    let res = await props.submit();
     setLoading(false);
     if (res) {
       modal.showToast(res.status.message);

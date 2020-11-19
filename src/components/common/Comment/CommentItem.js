@@ -1,29 +1,29 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, Image, Alert } from 'react-native';
 import { useTheme } from '@react-navigation/native';
-import { size, commonStyle, checkStaticImg, moment, $api } from '@/utils';
+import { size, commonStyle, checkStaticImg, formatTime, $api } from '@/utils';
 import { Touchable, Icon, Button } from 'ui';
 
 export default (props) => {
   const { colors } = useTheme();
 
   const handleLongComment = () => {
-    let name = this.props.userInfo.user;
-    let from = this.props.data.from;
+    let name = props.userInfo.user;
+    let from = props.data.from;
     if (name === from) {
       handleDeleteComment();
       return;
     }
   };
   const handleComment = () => {
-    let name = this.props.userInfo.user;
-    let from = this.props.data.from;
-    let fromName = this.props.data.from_full_name;
-    let nameId = this.props.data.name;
+    let name = props.userInfo.user;
+    let from = props.data.from;
+    let fromName = props.data.from_full_name;
+    let nameId = props.data.name;
 
     console.log('sender', from, name);
     if (name !== from) {
-      this.props.getInput({ from, fromName, nameId });
+      props.getInput({ from, fromName, nameId });
       return;
     }
   };
@@ -71,8 +71,8 @@ export default (props) => {
     <Touchable
       style={[style.commentItem, { borderBottomColor: colors.border }]}
       hoverClass="active"
-      onLongPress={() => this.handleLongComment()}
-      onClick={() => this.handleComment()}>
+      onLongPress={() => handleLongComment()}
+      onPress={() => handleComment()}>
       <View style={style.topWrap}>
         <View style={style.topLeft}>
           <Image style={style.avatar} source={{ uri: source }} />
@@ -87,7 +87,7 @@ export default (props) => {
             ) : null}
           </View>
         </View>
-        <Text style={[style.topRight, { color: colors.text_tag }]}>{comment_on && moment(comment_on).format('YYYY-MM-DD HH:mm')}</Text>
+        <Text style={[style.topRight, { color: colors.text_tag }]}>{comment_on && formatTime(comment_on, 'YYYY-MM-DD HH:mm')}</Text>
       </View>
       <View style={style.conWrap}>
         <Text style={[style.conText, { color: colors.text }]}>{content}</Text>
@@ -97,7 +97,7 @@ export default (props) => {
 };
 const style = StyleSheet.create({
   commentItem: {
-    paddingHorizontal: size(20),
+    paddingVertical: size(20),
     borderBottomWidth: size(1),
   },
   topWrap: {
@@ -123,13 +123,15 @@ const style = StyleSheet.create({
     fontSize: size(24),
   },
   nameToWrap: {
-    marginLeft: size(10),
+    flexDirection: 'row',
+    alignItems: 'center',
   },
   labelText: {
     marginLeft: size(10),
     fontSize: size(24),
   },
   nameToText: {
+    marginLeft: size(10),
     fontSize: size(24),
   },
   topRight: {

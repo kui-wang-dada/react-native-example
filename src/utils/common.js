@@ -1,12 +1,5 @@
 import React from 'react';
-import {
-  Dimensions,
-  View,
-  Platform,
-  PixelRatio,
-  StyleSheet,
-  ActivityIndicator,
-} from 'react-native';
+import { Dimensions, View, Platform, PixelRatio, StyleSheet, ActivityIndicator } from 'react-native';
 
 import moment from 'moment-timezone';
 import 'moment/locale/zh-cn';
@@ -26,13 +19,9 @@ export function size(designSize) {
   let remainder = number % 1;
   const int = number - remainder;
   // 防止非标准Android屏，不做处理
-  if (
-    Platform.OS === 'android' &&
-    parseInt(PixelRatio.get()) !== PixelRatio.get()
-  ) {
+  if (Platform.OS === 'android' && parseInt(PixelRatio.get()) !== PixelRatio.get()) {
   } else {
-    remainder =
-      remainder >= 0.25 && remainder < 0.75 ? 0.5 : Math.round(remainder);
+    remainder = remainder >= 0.25 && remainder < 0.75 ? 0.5 : Math.round(remainder);
   }
   return int + remainder;
 }
@@ -56,26 +45,20 @@ export function messageTime(dataStr) {
   }
 }
 
-export function reportTime(v) {
-  return moment(v).format('YYYY/MM/DD');
+export function formatTime(v, type = 'YYYY/MM/DD') {
+  return moment(v).format(type);
 }
 
 export function openReport(url, navigation) {
   if (url.includes('https://erp-cdn.wholeren.cn')) {
-    url = url.replace(
-      '/privatehttps://erp-cdn.wholeren.cn',
-      'https://erpapi.wholeren.cn/private',
-    );
-    url = url.replace(
-      'https://erp-cdn.wholeren.cn',
-      'https://erpapi.wholeren.cn',
-    );
+    url = url.replace('/privatehttps://erp-cdn.wholeren.cn', 'https://erpapi.wholeren.cn/private');
+    url = url.replace('https://erp-cdn.wholeren.cn', 'https://erpapi.wholeren.cn');
     console.log(url, 'url');
   }
   let isPdf = /(.*)\.(pdf|doc|docx|xls|xlsx|ppt|pptx)$/.test(url);
   let isImage = /(.*)\.(jpg|bmp|gif|ico|pcx|jpeg|tif|png|raw|tga)$/.test(url);
   if (isPdf) {
-    navigation.navigate('webview', {url: url});
+    navigation.navigate('webview', { url: url });
   } else if (isImage) {
     let imgUrl = [
       {
@@ -84,15 +67,13 @@ export function openReport(url, navigation) {
     ];
 
     let Components = (
-      <View style={{width: SCREEN_WIDTH, height: SCREEN_HEIGHT}}>
+      <View style={{ width: SCREEN_WIDTH, height: SCREEN_HEIGHT }}>
         <ImageViewer
           imageUrls={imgUrl}
           enableImageZoom
           saveToLocalByLongPress={false}
           onClick={() => modal.close()}
-          loadingRender={() => (
-            <ActivityIndicator animating={true} size="large" color="#fff" />
-          )}
+          loadingRender={() => <ActivityIndicator animating={true} size="large" color="#fff" />}
         />
       </View>
     );
@@ -119,24 +100,15 @@ export function checkImg(item, size) {
   prefix = arr[arr.length - 1];
 
   if (remoteUrl.includes('https://erp-cdn.wholeren.cn')) {
-    remoteUrl = remoteUrl.replace(
-      '/privatehttps://erp-cdn.wholeren.cn',
-      'https://erpapi.wholeren.cn/private',
-    );
-    remoteUrl = remoteUrl.replace(
-      'https://erp-cdn.wholeren.cn',
-      'https://erpapi.wholeren.cn',
-    );
+    remoteUrl = remoteUrl.replace('/privatehttps://erp-cdn.wholeren.cn', 'https://erpapi.wholeren.cn/private');
+    remoteUrl = remoteUrl.replace('https://erp-cdn.wholeren.cn', 'https://erpapi.wholeren.cn');
   }
 
   if (!remoteUrl.includes('http')) {
     remoteUrl = `https://erpapi.wholeren.cn${remoteUrl}`;
   }
 
-  if (
-    remoteUrl.includes('wr-cdn.wholeren.cn') ||
-    remoteUrl.includes('res.accspeed.com')
-  ) {
+  if (remoteUrl.includes('wr-cdn.wholeren.cn') || remoteUrl.includes('res.accspeed.com')) {
     return remoteUrl;
   }
   if (size) {

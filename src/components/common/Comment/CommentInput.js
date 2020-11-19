@@ -15,10 +15,10 @@ export default (props) => {
 
     let params, url;
 
-    if (this.type === 'comment') {
+    if (props.type === 'comment') {
       url = 'home/comment';
       params = {
-        reference_doctype: props.type,
+        reference_doctype: props.from,
         reference_name: props.data.name,
         detail: inputValue,
       };
@@ -36,9 +36,8 @@ export default (props) => {
 
       ymodal.close();
       if (res.status.code === 200) {
-        this.props.afterSubmit && (await this.props.afterSubmit());
-
-        return res;
+        props.afterSubmit && (await props.afterSubmit());
+        modal.showToast(res.status.message);
       } else {
         modal.showToast(res.status.message);
       }

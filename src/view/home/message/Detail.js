@@ -19,7 +19,6 @@ export default ({ route, navigation }) => {
   useEffect(() => {
     // Update the document title using the browser API
 
-    console.log(this.params, 'params');
     dispatch(getMessageDetail(params));
   }, []);
 
@@ -94,7 +93,8 @@ export default ({ route, navigation }) => {
 
 const style = StyleSheet.create({
   messageDetailWrap: {
-    paddingBottom: size(160),
+    flex: 1,
+    position: 'relative',
   },
   messageDetail: {},
   messageMain: {
