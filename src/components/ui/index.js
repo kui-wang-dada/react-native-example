@@ -9,5 +9,6 @@ import TabBar from './TabBar';
 import Button from './Button';
 import ScrollTabBar from './ScrollTabBar/ScrollTabBar';
 import Image from './Image';
+import Cell from './Cell';
 
-export { WModal, YModal, Icon, Touchable, EndTip, FlowList, Message, TabBar, Button, ScrollTabBar, Image };
+export { WModal, YModal, Icon, Touchable, EndTip, FlowList, Message, TabBar, Button, ScrollTabBar, Image, Cell };

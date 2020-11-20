@@ -18,6 +18,7 @@ export const lightColorTheme = {
     sep: '#f0f0f0',
     bg: '#1cad7',
     border: '#ededed',
+    border_2: '#ccc',
     notification: '#4bc694',
   },
 };
@@ -37,6 +38,7 @@ export const darkColorTheme = {
     sep: '#f0f0f0',
     bg: '#1cad7',
     border: '#000028',
+    border_2: '#ccc',
     notification: '#4bc694',
   },
 };
