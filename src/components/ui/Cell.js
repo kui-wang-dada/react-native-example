@@ -23,7 +23,7 @@ export default (props) => {
     return (
       <View style={style.right}>
         <Text style={[style.title, { color: colors.text }, titleStyle]}>{title}</Text>
-        {islink ? <Icon name="mo" size={15} color={colors.text_tag} style={{ marginLeft: size(10) }} /> : null}
+        {islink ? <Icon name="right" size={15} color={colors.text_tag} style={{ marginLeft: size(10) }} /> : null}
       </View>
     );
   };

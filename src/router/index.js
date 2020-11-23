@@ -33,9 +33,12 @@ function HomeTabs({ navigation, route }) {
     let options = getTabOptions(route);
     navigation.setOptions(options);
   }, [navigation, route]);
+
+  const scheme = useColorScheme();
+  let colorTheme = scheme === 'dark' ? commonStyle.darkColorTheme : commonStyle.lightColorTheme;
   return (
     <Tab.Navigator
-      tabBarOptions={{ style: { backgroundColor: '#fff' } }}
+      tabBarOptions={{ style: { backgroundColor: colorTheme.colors.background } }}
       screenOptions={({ route }) => ({
         tabBarIcon: ({ focused, color, size }) => {
           let iconName;

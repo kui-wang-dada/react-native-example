@@ -16,7 +16,7 @@ export default ({ route, navigation }) => {
   const listData = [
     {
       title: '联系客服',
-      icon: 'back',
+      icon: 'kefu',
       route: 'webView',
       params: { url: 'https://lc.chat/now/9055235/1' },
     },

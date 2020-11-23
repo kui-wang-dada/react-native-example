@@ -31,7 +31,7 @@ export default () => {
 
               {userInfo.students_id ? <Text style={[style.student, { color: colors.text_p }]}>绑定学号：{userInfo.students_id}</Text> : null}
             </View>
-            <Icon name="back" size={16} color="#999" />
+            <Icon name="edit" size={16} color="#999" />
           </Touchable>
           {userInfo.students_id ? null : (
             <Touchable onPress={goToLogin} style={[style.loginBtn, { backgroundColor: colors.primary }]}>

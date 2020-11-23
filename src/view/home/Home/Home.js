@@ -53,7 +53,7 @@ export default ({ route, navigation }) => {
       },
     ];
     return (
-      <View style={style.gridList}>
+      <View style={[style.gridList, { backgroundColor: colors.background }]}>
         {data.map((item, index) => {
           return (
             <Touchable style={style.gridItem} key={index} onPress={() => goToGridItem(item)}>
@@ -104,6 +104,7 @@ const style = StyleSheet.create({
   },
   gridList: {
     flexDirection: 'row',
+    borderRadius: size(6),
   },
   gridItem: {
     flex: 1,

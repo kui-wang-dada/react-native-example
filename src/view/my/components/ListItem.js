@@ -30,7 +30,7 @@ export default (props) => {
           <Icon name={icon} size={30} color={colors.primary} />
           <Text style={[style.label, { color: colors.text }]}>{title}</Text>
         </View>
-        <Icon name="back" size={18} color={colors.text_p} />
+        <Icon name="right" size={18} color={colors.text_p} />
       </View>
     </Touchable>
   );

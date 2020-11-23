@@ -1,13 +1,13 @@
-import React, {useState, useEffect, useCallback} from 'react';
-import {View, Text, StyleSheet} from 'react-native';
-import {useTheme} from '@react-navigation/native';
-import {useDispatch, useSelector} from 'react-redux';
-import {getSpMessage} from '@/store/actions';
-import {MessageItem} from 'common';
-import {size, commonStyle} from '@/utils';
-import {Touchable, Icon, Button, FlowList} from 'ui';
+import React, { useState, useEffect, useCallback } from 'react';
+import { View, Text, StyleSheet } from 'react-native';
+import { useTheme } from '@react-navigation/native';
+import { useDispatch, useSelector } from 'react-redux';
+import { getSpMessage } from '@/store/actions';
+import { MessageItem } from 'common';
+import { size, commonStyle } from '@/utils';
+import { Touchable, Icon, Button, FlowList } from 'ui';
 export default (props) => {
-  const {colors} = useTheme();
+  const { colors } = useTheme();
 
   console.log('props', props);
   let name = props.name;
@@ -18,13 +18,13 @@ export default (props) => {
   };
 
   return (
-    <View style={[style.wrap, {backgroundColor: colors.card}]}>
+    <View style={[style.wrap, { backgroundColor: colors.card }]}>
       <FlowList
         style={style.flatlistWrap}
         contentContainerStyle={style.flatlist}
         request={getSpMessage}
         params={params}
-        renderItem={({item}) => (
+        renderItem={({ item }) => (
           <View style={style.messageItem}>
             <MessageItem item={item} />
           </View>
