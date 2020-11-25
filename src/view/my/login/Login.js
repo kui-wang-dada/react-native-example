@@ -11,7 +11,7 @@ export default () => {
   return (
     <View style={style.wrap}>
       <ScrollableTabView
-        renderTabBar={() => <TabBar style={[style.tabBar, { borderBottomColor: colors.border }]} />}
+        renderTabBar={() => <TabBar activeTheme={colors.primary} style={[style.tabBar, { borderBottomColor: colors.border }]} />}
         contentProps={{
           keyboardShouldPersistTaps: 'always',
         }}>

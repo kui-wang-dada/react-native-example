@@ -1,33 +1,21 @@
-import React, {useState, useEffect} from 'react';
-import {View, Text, StyleSheet} from 'react-native';
-import {useTheme} from '@react-navigation/native';
-import {size, commonStyle} from '@/utils';
-import {Touchable, Icon, Button} from 'ui';
+import React, { useState, useEffect } from 'react';
+import { View, Text, StyleSheet } from 'react-native';
+import { useTheme } from '@react-navigation/native';
+import { size, commonStyle } from '@/utils';
+import { Touchable, Icon, Button } from 'ui';
 export default (props) => {
-  const {colors} = useTheme();
+  const { colors } = useTheme();
+  let activeTheme = props.activeTheme;
   return (
     <View style={[style.tabs, props.style]}>
       {props.tabs.map((tab, i) => {
         return (
-          <Touchable
-            key={tab}
-            onPress={() => props.goToPage(i)}
-            style={style.tab}>
+          <Touchable key={tab} onPress={() => props.goToPage(i)} style={style.tab}>
             <View style={style.tabWrap}>
-              <Text
-                style={[
-                  style.tabText,
-                  props.activeTab === i
-                    ? {...style.activeText, ...{color: colors.color_blue}}
-                    : null,
-                ]}>
+              <Text style={[style.tabText, props.activeTab === i ? { ...style.activeText, ...{ color: activeTheme ? activeTheme : colors.color_blue } } : null]}>
                 {tab}
               </Text>
-              {props.activeTab === i ? (
-                <View
-                  style={[style.active, {backgroundColor: colors.color_blue}]}
-                />
-              ) : null}
+              {props.activeTab === i ? <View style={[style.active, { backgroundColor: activeTheme ? activeTheme : colors.color_blue }]} /> : null}
             </View>
           </Touchable>
         );

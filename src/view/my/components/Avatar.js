@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, Image } from 'react-native';
+import { View, Text, StyleSheet, Image, Alert } from 'react-native';
 import { useTheme, useNavigation } from '@react-navigation/native';
 import { useDispatch, useSelector } from 'react-redux';
+import * as WeChat from 'react-native-wechat-lib';
 import { size, commonStyle, checkStaticImg } from '@/utils';
 import { Touchable, Icon, Button } from 'ui';
 export default () => {
@@ -10,12 +11,39 @@ export default () => {
   const dispatch = useDispatch();
   const userInfo = useSelector((state) => state.my.userInfo);
 
+  const getWechat = () => {
+    //微信登录示例
+
+    let scope = 'snsapi_userinfo';
+    let state = 'wechat_sdk_demo';
+    //判断微信是否安装
+    WeChat.isWXAppInstalled().then((isInstalled) => {
+      if (isInstalled) {
+        //发送授权请求
+        WeChat.sendAuthRequest(scope, state)
+          .then((responseCode) => {
+            //返回code码，通过code获取access_token
+            console.log('responseCode,', responseCode);
+            console.log(43);
+            // this.getAccessToken(responseCode.code);
+          })
+          .catch((err) => {
+            console.log(43);
+            Alert.alert('登录授权发生错误：', err.message, [{ text: '确定' }]);
+          });
+        console.log(123);
+      } else {
+        console.log('nowechat');
+      }
+    });
+  };
   const goToMySet = () => {
     navigation.navigate('mySet');
   };
   const goToLogin = () => {
     navigation.navigate('mySet');
   };
+
   return (
     <View style={style.myWrap}>
       {userInfo.username ? (
@@ -38,6 +66,12 @@ export default () => {
               <Text style={[style.loginBtnText, { color: colors.background }]}>绑定厚仁账号</Text>
             </Touchable>
           )}
+          <Button
+            title="点击登录"
+            style={[style.noLoginBtn, { backgroundColor: colors.primary }]}
+            textStyle={[style.noLoginBtnText, { color: colors.background }]}
+            onPress={getWechat}
+          />
         </View>
       ) : (
         <View>
@@ -50,6 +84,7 @@ export default () => {
                   title="点击登录"
                   style={[style.noLoginBtn, { backgroundColor: colors.primary }]}
                   textStyle={[style.noLoginBtnText, { color: colors.background }]}
+                  onPress={getWechat}
                 />
               </View>
             </View>

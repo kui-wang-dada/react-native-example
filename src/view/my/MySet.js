@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { useTheme, useNavigation } from '@react-navigation/native';
 import { useDispatch, useSelector } from 'react-redux';
+import { commitUserInfo } from '@/store/actions';
 import { size, commonStyle } from '@/utils';
 import { Touchable, Icon, Button, Cell } from 'ui';
 export default () => {
@@ -10,7 +11,12 @@ export default () => {
   const dispatch = useDispatch();
   const userInfo = useSelector((state) => state.my.userInfo);
 
-  const logout = () => {};
+  const logout = () => {
+    // Taro.setStorageSync('deviceId', '');
+    // Taro.setStorageSync('studentId', '');
+    dispatch(commitUserInfo({}));
+    // Taro.navigateBack();
+  };
   const goToAccount = () => {
     navigation.navigate('account');
   };

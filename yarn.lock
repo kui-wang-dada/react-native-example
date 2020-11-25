@@ -1049,6 +1049,11 @@
   dependencies:
     deep-assign "^3.0.0"
 
+"@react-native-community/checkbox@^0.5.6":
+  version "0.5.6"
+  resolved "https://registry.yarnpkg.com/@react-native-community/checkbox/-/checkbox-0.5.6.tgz#0be83148e9836e164d5105bb314cae286bd64061"
+  integrity sha512-mya9hPo82M2iT30jou9FDLSafS4W2E79+0XbjbDFs3pxy3Lm1DnH0cCjzFFp7AaSBK/ShRD1ubqu6905TPaU4A==
+
 "@react-native-community/cli-debugger-ui@^4.9.0":
   version "4.9.0"
   resolved "https://registry.yarnpkg.com/@react-native-community/cli-debugger-ui/-/cli-debugger-ui-4.9.0.tgz#4177764ba69243c97aa26829d59d9501acb2bd71"
@@ -2981,6 +2986,11 @@ eventemitter3@^3.0.0:
   version "3.1.2"
   resolved "https://registry.yarnpkg.com/eventemitter3/-/eventemitter3-3.1.2.tgz#2d3d48f9c346698fce83a85d7d664e98535df6e7"
   integrity sha512-tvtQIeLVHjDkJYnzf2dgVMxfuSGJeM/7UCG17TT4EumTfNtF+0nebF/4zWOIkCreAbtNqhGEboB6BWrwqNaw4Q==
+
+events@1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/events/-/events-1.0.1.tgz#386f6471cbb609e7925e7bfe7468634b9e069ac2"
+  integrity sha1-OG9kccu2CeeSXnv+dGhjS54GmsI=
 
 events@^3.0.0:
   version "3.2.0"
@@ -6115,6 +6125,13 @@ react-native-webview@^10.10.0:
   dependencies:
     escape-string-regexp "2.0.0"
     invariant "2.2.4"
+
+react-native-wechat-lib@^1.1.23:
+  version "1.1.23"
+  resolved "https://registry.yarnpkg.com/react-native-wechat-lib/-/react-native-wechat-lib-1.1.23.tgz#a4fd8df8e9f679cde026eba38ced17b8fc5058de"
+  integrity sha512-5kGk5tdXisT9lopXT8wcS4gtOzC1IrjrexeRzRbyX1o4fo+pGhDZ5ToPKGvV+OzwfSz3gQj8vTAFFkCECHuhqA==
+  dependencies:
+    events "1.0.1"
 
 react-native@0.63.3:
   version "0.63.3"

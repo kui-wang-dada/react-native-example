@@ -56,6 +56,7 @@ export default () => {
           textStyle={[style.bottomBtn, { color: colors.primary }]}
           title="添加学生"
           icon="add"
+          iconColor={colors.primary}
         />
       </View>
     </View>
