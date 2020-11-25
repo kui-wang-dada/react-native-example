@@ -55,7 +55,6 @@ export default () => {
         textStyle={[style.btnLoginText, { color: colors.background }]}
         title={'提交'}
       />
-      <Button style={[style.btnReset, { borderColor: colors.primary }]} onPress={reset} textStyle={[style.btnResetText, { color: colors.primary }]} title={'重置'} />
     </View>
   );
 };
@@ -65,7 +64,7 @@ const style = StyleSheet.create({
     paddingHorizontal: size(32),
   },
   fieldWrap: {
-    marginTop: size(100),
+    marginTop: size(40),
   },
   input: {
     marginBottom: size(20),

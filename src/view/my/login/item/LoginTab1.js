@@ -59,14 +59,12 @@ export default () => {
           <Text style={style.studentText}>学生</Text>
         </View>
       </View>
-      <Text className="tips">为保护学员的信息，「厚仁留学」小程序仅对服务内用户开放。您可以询问服务老师或 在线客服 获取厚仁学号和邀请码</Text>
       <Button
         style={[style.btnLogin, { backgroundColor: colors.primary }]}
         onPress={login}
         textStyle={[style.btnLoginText, { color: colors.background }]}
         title={'提交'}
       />
-      <Button style={[style.btnReset, { borderColor: colors.primary }]} onPress={reset} textStyle={[style.btnResetText, { color: colors.primary }]} title={'重置'} />
     </View>
   );
 };
@@ -76,7 +74,7 @@ const style = StyleSheet.create({
     paddingHorizontal: size(32),
   },
   fieldWrap: {
-    marginTop: size(100),
+    marginTop: size(40),
   },
   input: {
     marginBottom: size(20),
@@ -114,17 +112,6 @@ const style = StyleSheet.create({
     width: '100%',
   },
   btnLoginText: {
-    fontSize: size(28),
-    fontWeight: 'bold',
-  },
-  btnReset: {
-    marginTop: size(30),
-    height: size(80),
-    borderRadius: size(4),
-    width: '100%',
-    borderWidth: size(1),
-  },
-  btnResetText: {
     fontSize: size(28),
     fontWeight: 'bold',
   },

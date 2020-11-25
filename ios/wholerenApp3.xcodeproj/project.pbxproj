@@ -73,6 +73,7 @@
 		38198578256CA2C000EFEE70 /* libz.1.1.3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.1.1.3.tbd; path = usr/lib/libz.1.1.3.tbd; sourceTree = SDKROOT; };
 		3852308B25428BEF00F90B99 /* iconfont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = iconfont.ttf; path = ../src/assets/font/iconfont.ttf; sourceTree = "<group>"; };
 		385230A925428DDE00F90B99 /* iconfont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = iconfont.ttf; path = ../src/assets/font/iconfont.ttf; sourceTree = "<group>"; };
+		38F2A7EA256DE184007A0732 /* wholerenApp3.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = wholerenApp3.entitlements; path = wholerenApp3/wholerenApp3.entitlements; sourceTree = "<group>"; };
 		5A8E7150BB564E22E5F4CD1F /* Pods-wholerenApp3-tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-wholerenApp3-tvOSTests.debug.xcconfig"; path = "Target Support Files/Pods-wholerenApp3-tvOSTests/Pods-wholerenApp3-tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
 		775919A78910C2E523094F40 /* libPods-wholerenApp3.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-wholerenApp3.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = wholerenApp3/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -148,6 +149,7 @@
 		13B07FAE1A68108700A75B9A /* wholerenApp3 */ = {
 			isa = PBXGroup;
 			children = (
+				38F2A7EA256DE184007A0732 /* wholerenApp3.entitlements */,
 				385230A925428DDE00F90B99 /* iconfont.ttf */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
@@ -752,6 +754,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = wholerenApp3/wholerenApp3.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = VHFWDZ2JVN;
 				ENABLE_BITCODE = NO;
@@ -777,6 +780,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = wholerenApp3/wholerenApp3.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = VHFWDZ2JVN;
 				INFOPLIST_FILE = wholerenApp3/Info.plist;

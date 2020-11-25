@@ -49,7 +49,7 @@ export default (props) => {
           <Text style={[style.title, { color: colors.text }]}>留言板</Text>
           {data.feedbacks && data.feedbacks.length ? (
             <View style={style.titleIcon}>
-              <Icon value="feedback" size={14} color={'#fff'} style={[style.iconfont]} />
+              <Icon name="feedback" size={14} color={'#fff'} style={[style.iconfont]} />
             </View>
           ) : null}
         </View>
@@ -88,7 +88,7 @@ export default (props) => {
     return (
       <View style={[style.inputComment, { backgroundColor: colors.background, borderTopColor: colors.border }]}>
         <View style={[style.inputWrap, { backgroundColor: colors.card }]}>
-          <Icon value="edit" size={20} color="#666" />
+          <Icon name="edit" size={20} color="#666" />
           <Touchable style={style.inputPlaceholder} onPress={() => getInput()}>
             <Text style={[style.inputText, { color: colors.text_tag }]}>添加留言</Text>
           </Touchable>

@@ -1,42 +1,31 @@
-import React, {useState, useEffect} from 'react';
-import {View, Text, StyleSheet, Image} from 'react-native';
-import {useTheme} from '@react-navigation/native';
-import {size, commonStyle, checkStaticImg, checkImg} from '@/utils';
-import {Touchable, Icon, Button} from 'ui';
+import React, { useState, useEffect } from 'react';
+import { View, Text, StyleSheet, Image } from 'react-native';
+import { useTheme } from '@react-navigation/native';
+import { size, commonStyle, checkStaticImg, checkImg } from '@/utils';
+import { Touchable, Icon, Button } from 'ui';
 export default (props) => {
-  const {colors} = useTheme();
+  const { colors } = useTheme();
 
   const goToAuthor = () => {};
 
   console.log(props);
   let author = props.item;
 
-  let {myAvatar} = author;
+  let { myAvatar } = author;
 
   return (
     <Touchable style={[style.authorItem]} onPress={() => goToAuthor()}>
       <View style={style.topWrap}>
         <View style={style.topLeftWrap}>
           {author.avatar ? (
-            <Image
-              source={{uri: checkImg(author.avatar, '180')}}
-              alt
-              style={style.img}
-              lazyLoad={true}
-            />
+            <Image source={{ uri: checkImg(author.avatar, '180') }} alt style={style.img} lazyLoad={true} />
           ) : (
-            <Image
-              source={{uri: myAvatar ? myAvatar : checkStaticImg('female.png')}}
-              alt
-              style={style.img}
-            />
+            <Image source={{ uri: myAvatar ? myAvatar : checkStaticImg('female.png') }} alt style={style.img} />
           )}
 
           <View style={style.textWrap}>
             <View style={style.textTopWrap}>
-              <Text style={[style.textName, {color: colors.primary}]}>
-                {author.pen_name}
-              </Text>
+              <Text style={[style.textName, { color: colors.primary }]}>{author.pen_name}</Text>
             </View>
 
             <View style={style.textBottomWrap}>
@@ -46,9 +35,7 @@ export default (props) => {
         </View>
       </View>
       <View style={style.label}>
-        <Text
-          numberOfLines={2}
-          style={[style.labelText, {color: colors.text_p}]}>
+        <Text numberOfLines={2} style={[style.labelText, { color: colors.text_p }]}>
           {author.description}
         </Text>
       </View>

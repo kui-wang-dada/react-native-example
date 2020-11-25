@@ -12,7 +12,7 @@ export default (props) => {
   return (
     <View style={[style.askWrap, { backgroundColor: colors.background, borderColor: colors.border }]}>
       <View style={[style.askTitleWrap, { borderBottomColor: colors.border }]}>
-        <Icon value="ask" size={25} color={'#fc8300'} />
+        <Icon name="ask" size={25} color={'#fc8300'} />
         <Text style={[style.itemTitle, { color: colors.text }]}>{item.title}</Text>
       </View>
 

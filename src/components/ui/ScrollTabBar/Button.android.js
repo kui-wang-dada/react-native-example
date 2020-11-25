@@ -1,8 +1,8 @@
 const React = require('react');
 const ReactNative = require('react-native');
-const {TouchableNativeFeedback, View} = ReactNative;
+const { TouchableNativeFeedback, View } = ReactNative;
 
-const Button = props => {
+const Button = (props) => {
   return (
     <TouchableNativeFeedback
       delayPressIn={0}

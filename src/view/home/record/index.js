@@ -46,25 +46,25 @@ export default ({ route, navigation }) => {
     {
       label: '学生出勤',
       value: detail.student_attendance,
-      icon: 'biaoxian',
+      icon: 'book',
       type: 'attendance',
     },
     {
       label: '与老师互动',
       value: detail.student_interaction,
-      icon: 'biaoxian',
+      icon: 'book',
       rightStyle: { color: '#4bc694' },
     },
     {
       label: '上课注意力',
       value: detail.student_concentration,
-      icon: 'biaoxian',
+      icon: 'book',
       rightStyle: { color: '#4bc694' },
     },
     {
       label: '作业完成情况',
       value: detail.student_homework,
-      icon: 'biaoxian',
+      icon: 'book',
       rightStyle: { color: '#4bc694' },
     },
   ];

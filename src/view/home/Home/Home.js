@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { View, Text, StyleSheet, Image } from 'react-native';
+import { View, Text, StyleSheet, Image, ScrollView } from 'react-native';
 import { useTheme } from '@react-navigation/native';
 import { useDispatch, useSelector } from 'react-redux';
 import { getUserInfo, getHomeSp, getHomeTp, getHomeCount } from '@/store/actions';
@@ -68,7 +68,7 @@ export default ({ route, navigation }) => {
   let tpData = homeTp[0];
   let services = Array.isArray(homeSp) && homeSp.slice(0, 3);
   return (
-    <View style={[style.wrap, { backgroundColor: colors.card }]}>
+    <ScrollView style={[style.wrap, { backgroundColor: colors.card }]}>
       <Avatar />
       <View style={style.gridWrap}>{renderGrid()}</View>
       {tpData ? (
@@ -90,7 +90,7 @@ export default ({ route, navigation }) => {
           </View>
         </View>
       ) : null}
-    </View>
+    </ScrollView>
   );
 };
 

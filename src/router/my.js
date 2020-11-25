@@ -22,6 +22,6 @@ export default {
   login: {
     screen: Login,
     name: 'login',
-    options: { headerShown: true, title: '登录' },
+    options: { headerShown: false, title: '登录' },
   },
 };

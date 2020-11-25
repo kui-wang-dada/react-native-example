@@ -1,0 +1,11 @@
+{
+    "applinks": {
+        "apps": [],
+        "details": [
+            {
+                "appID": "VHFWDZ2JVN.com.wholerengroup.client.apple",
+                "paths": [ "/app/*" ]
+            }
+        ] 
+    }
+}

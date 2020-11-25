@@ -28,12 +28,12 @@ export default ({ route, navigation }) => {
     {
       label: '报告日期',
       value: messageTime(detail.modified),
-      icon: 'biaoxian',
+      icon: 'fudao',
     },
     {
       label: '辅导老师',
       value: detail.tutor_name || detail.tutoring_teacher,
-      icon: 'biaoxian',
+      icon: 'fudao',
     },
   ];
 

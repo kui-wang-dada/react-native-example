@@ -1,20 +1,10 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import {StyleSheet, View, Text, Image} from 'react-native';
+import { StyleSheet, View, Text, Image } from 'react-native';
 
-import {commonStyle, size} from '@/utils';
-import {useTheme} from '@react-navigation/native';
-import {Button} from 'ui';
-
-import success from '@/assets/images/emptyView/success.png';
-import failed from '@/assets/images/emptyView/failed.png';
-import favoriteEmpty from '@/assets/images/emptyView/emptyFavorite.png';
-import noSearchResult from '@/assets/images/emptyView/searchFailed.png';
-import noNetwork from '@/assets/images/emptyView/noNetwork.png';
-import noData from '@/assets/images/emptyView/noData.png';
-import notFound from '@/assets/images/emptyView/404.png';
-import noMessage from '@/assets/images/emptyView/noMessage.png';
-import wait from '@/assets/images/emptyView/wait.png';
+import { commonStyle, size, checkStaticImg } from '@/utils';
+import { useTheme } from '@react-navigation/native';
+import { Button } from 'ui';
 
 export default class Message extends Component {
   constructor(props) {
@@ -26,36 +16,36 @@ export default class Message extends Component {
 
     let presets = {
       'request-success': {
-        image: success,
+        image: checkStaticImg('emptyView/success'),
         content: '成功！',
       },
       'request-failed': {
-        image: failed,
+        image: checkStaticImg('emptyView/failed'),
         content: '失败！',
       },
       'no-favorite': {
-        image: favoriteEmpty,
+        image: checkStaticImg('emptyView/favoriteEmpty'),
         content: '收藏夹为空！',
       },
       'no-search-result': {
-        image: noSearchResult,
+        image: checkStaticImg('emptyView/noSearchResult'),
         content: '未搜到您想要的内容！',
       },
       'no-network': {
-        image: noNetwork,
+        image: checkStaticImg('emptyView/noNetwork'),
         content: '没网',
         button: '重新加载',
       },
       'no-data': {
-        image: noData,
+        image: checkStaticImg('emptyView/noData'),
         content: this.props.messageTitle || '暂无数据',
       },
       'no-page': {
-        image: notFound,
+        image: checkStaticImg('emptyView/notFound'),
         content: '页面错误！',
       },
       'please-wait': {
-        image: wait,
+        image: checkStaticImg('emptyView/wait'),
         title: '正在搭建，敬请期待！',
         button: '知道了',
       },
@@ -76,28 +66,11 @@ export default class Message extends Component {
       };
     }
 
-    const image = config.image ? (
-      <Image source={config.image} style={s.image} />
-    ) : null;
-    const title = config.title ? (
-      <Text style={[s.title, {color: commonStyle.colorTheme.title}]}>
-        {config.title}
-      </Text>
-    ) : null;
-    const textColor = this.props.textColor
-      ? this.props.textColor
-      : commonStyle.colorTheme.title;
-    const content = config.content ? (
-      <Text style={[s.content, {color: textColor}]}>{config.content}</Text>
-    ) : null;
-    const btn = config.button ? (
-      <Button
-        style={[s.btnWrap]}
-        textStyle={s.btn}
-        title={config.button}
-        onPress={this.props.clickButton}
-      />
-    ) : null;
+    const image = config.image ? <Image source={{ uri: config.image }} style={s.image} /> : null;
+    const title = config.title ? <Text style={[s.title, { color: commonStyle.colorTheme.title }]}>{config.title}</Text> : null;
+    const textColor = this.props.textColor ? this.props.textColor : commonStyle.colorTheme.title;
+    const content = config.content ? <Text style={[s.content, { color: textColor }]}>{config.content}</Text> : null;
+    const btn = config.button ? <Button style={[s.btnWrap]} textStyle={s.btn} title={config.button} onPress={this.props.clickButton} /> : null;
 
     return (
       <View style={[s.main].concat([this.props.style])}>
