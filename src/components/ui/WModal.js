@@ -6,6 +6,7 @@ import { Modal, Text, View, Animated, StyleSheet, Dimensions } from 'react-nativ
 
 const { height } = Dimensions.get('window');
 import { commonStyle } from '@/utils';
+import { Loading } from 'ui';
 export default class WModal extends Component {
   constructor(props) {
     super(props);
@@ -43,6 +44,19 @@ export default class WModal extends Component {
       if (func) {
         func();
       }
+    }, 2000);
+  }
+  showLoading() {
+    this.setState({
+      component: <Loading />,
+      type: 'loading',
+      modalVisible: true,
+    });
+    if (this.timer) {
+      clearTimeout(this.timer);
+    }
+    this.timer = setTimeout(() => {
+      this.close();
     }, 2000);
   }
   close = async () => {

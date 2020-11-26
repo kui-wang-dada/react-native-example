@@ -1,18 +1,65 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 
-import { useTheme } from '@react-navigation/native';
+import { useTheme, useNavigation } from '@react-navigation/native';
+import { useDispatch, useSelector } from 'react-redux';
 import CheckBox from '@react-native-community/checkbox';
-import { size, commonStyle } from '@/utils';
+import { size, $api, modal } from '@/utils';
+import { commitSessionId, getHomeSp, getHomeTp, getHomeCount, getUserInfo } from '@/store/actions';
+
 import { Touchable, Icon, Button, Fumi } from 'ui';
-export default () => {
+export default (props) => {
   const { colors } = useTheme();
+  const navigation = useNavigation();
+  const dispatch = useDispatch();
+
   const [invitation, setInvitation] = useState('');
+  const [std, setStd] = useState('');
+
   const [value1, setValue1] = useState(false);
   const [value2, setValue2] = useState(false);
-  console.log(543);
-  const login = () => {};
-  const reset = () => {};
+
+  const getHomeData = async () => {
+    let params = {
+      limit_start: 0,
+      limit_page_length: 10,
+    };
+    dispatch(getHomeSp(params));
+    dispatch(getHomeTp(params));
+
+    dispatch(getHomeCount());
+    await dispatch(getUserInfo());
+  };
+  const login = async () => {
+    if (!invitation) {
+      modal.showToast('请输入邀请码');
+      return;
+    }
+    let role = value1 ? 'Parent' : value2 ? 'Students' : null;
+    let params = {
+      code: invitation,
+      role: role,
+    };
+    if (props.hasStd) {
+      params.std = std;
+    }
+    try {
+      let res = await $api['my/erpLogin'](params);
+      console.log(res, 'erp');
+
+      if (res.data && res.data.display && res.data.display.students_id) {
+        dispatch(commitSessionId(res.data.display.uid));
+        await getHomeData();
+
+        navigation.navigate('首页');
+      } else {
+        modal.showToast(res.status.message);
+      }
+    } catch (error) {
+      modal.showToast('绑定失败');
+    }
+  };
+
   const handleValue1 = (newV) => {
     if (newV) {
       setValue2(false);
@@ -32,6 +79,24 @@ export default () => {
   return (
     <View style={style.wrap}>
       <View style={style.fieldWrap}>
+        {props.hasStd ? (
+          <Fumi
+            label={'学号'}
+            style={[style.input, { backgroundColor: colors.card }]}
+            value={std}
+            clear={() => setStd('')}
+            onChangeText={(text) => {
+              setStd(text);
+            }}
+            iconClass={Icon}
+            iconName={'pwd'}
+            iconColor={colors.primary}
+            iconSize={25}
+            iconWidth={40}
+            inputPadding={13}
+            returnKeyType="done"
+          />
+        ) : null}
         <Fumi
           label={'邀请码'}
           style={[style.input, { backgroundColor: colors.card }]}
@@ -74,10 +139,13 @@ const style = StyleSheet.create({
     paddingHorizontal: size(32),
   },
   fieldWrap: {
-    marginTop: size(40),
+    marginTop: size(60),
   },
   input: {
-    marginBottom: size(20),
+    marginBottom: size(40),
+    borderRadius: size(70),
+    borderWidth: size(1),
+    borderColor: '#ccc',
   },
   checkBoxWrap: {
     flexDirection: 'row',
@@ -108,11 +176,11 @@ const style = StyleSheet.create({
   btnLogin: {
     marginTop: size(30),
     height: size(80),
-    borderRadius: size(4),
+    borderRadius: size(40),
     width: '100%',
   },
   btnLoginText: {
-    fontSize: size(28),
+    fontSize: size(32),
     fontWeight: 'bold',
   },
 });

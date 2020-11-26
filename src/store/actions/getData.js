@@ -1,24 +1,32 @@
 import $api from '@/utils/api';
 
-export function doAction(
-  params,
-  url,
-  dispatchType,
-  stateData,
-  model,
-  replaceUrl,
-) {
-  console.log('e', params, url, dispatchType, stateData, model, replaceUrl);
+export function doAction(params, url, dispatchType, stateData, other = {}) {
+  console.log('e', params, url, dispatchType, stateData);
   return (dispatch) => {
     return new Promise((resolve, reject) => {
       console.log($api, '$api');
-      $api[url](params, replaceUrl)
+      $api[url](params)
         .then((res) => {
+          if (!res) {
+            return;
+          }
+          let resData = res.data.display;
+
+          if (other.key) {
+            resData = res.data.display[other.key];
+          }
+          if (other.arrayOne) {
+            resData = res.data.display[0];
+          }
           let newRes;
-          if (model) {
-            newRes = model(res.data.display);
+          if (other.model) {
+            newRes = other.model(resData);
           } else {
-            newRes = res.data.display;
+            if (!resData) {
+              newRes = [];
+            } else {
+              newRes = resData;
+            }
           }
           let reducer = {
             type: '',

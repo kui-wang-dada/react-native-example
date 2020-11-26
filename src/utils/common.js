@@ -30,7 +30,7 @@ export function checkStaticImg(dataStr) {
   if (!dataStr) {
     return '';
   }
-  return 'https://staticapp.hourenlx.com/app3/' + dataStr;
+  return 'https://staticapp.hourenlx.com/wholerenApp/v3/' + dataStr;
 }
 
 export function messageTime(dataStr) {

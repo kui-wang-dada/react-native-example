@@ -11,5 +11,6 @@ import ScrollTabBar from './ScrollTabBar/ScrollTabBar';
 import Image from './Image';
 import Cell from './Cell';
 import Fumi from './Fumi';
+import Loading from './Loading';
 
-export { WModal, YModal, Icon, Touchable, EndTip, FlowList, Message, TabBar, Button, ScrollTabBar, Image, Cell, Fumi };
+export { WModal, YModal, Icon, Touchable, EndTip, FlowList, Message, TabBar, Button, ScrollTabBar, Image, Cell, Fumi, Loading };

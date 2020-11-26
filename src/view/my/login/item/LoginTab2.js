@@ -1,15 +1,62 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import { useTheme } from '@react-navigation/native';
-import { size, commonStyle } from '@/utils';
+
+import { useTheme, useNavigation } from '@react-navigation/native';
+import { useDispatch, useSelector } from 'react-redux';
+import CheckBox from '@react-native-community/checkbox';
+import { size, $api, modal } from '@/utils';
+import { commitSessionId, getHomeSp, getHomeTp, getHomeCount, getUserInfo } from '@/store/actions';
+
 import { Touchable, Icon, Button, Fumi } from 'ui';
 export default () => {
   const { colors } = useTheme();
+  const navigation = useNavigation();
+  const dispatch = useDispatch();
+
   const [email, setEmail] = useState('');
   const [pwd, setPwd] = useState('');
 
-  const login = () => {};
-  const reset = () => {};
+  const getHomeData = async () => {
+    let params = {
+      limit_start: 0,
+      limit_page_length: 10,
+    };
+    dispatch(getHomeSp(params));
+    dispatch(getHomeTp(params));
+
+    dispatch(getHomeCount());
+    await dispatch(getUserInfo());
+  };
+  const login = async () => {
+    if (!email) {
+      modal.showToast('请输入账号');
+      return;
+    }
+    if (!pwd) {
+      modal.showToast('请输入密码');
+      return;
+    }
+    let params = {
+      usr: email,
+      pwd: pwd,
+    };
+
+    try {
+      let res = await $api['my/erpLogin'](params);
+      console.log(res, 'erp');
+
+      if (res.data && res.data.display && res.data.display.students_id) {
+        dispatch(commitSessionId(res.data.display.uid));
+        await getHomeData();
+
+        navigation.navigate('首页');
+      } else {
+        modal.showToast(res.status.message);
+      }
+    } catch (error) {
+      modal.showToast('绑定失败');
+    }
+  };
   return (
     <View style={style.wrap}>
       <View style={style.fieldWrap}>
@@ -64,30 +111,22 @@ const style = StyleSheet.create({
     paddingHorizontal: size(32),
   },
   fieldWrap: {
-    marginTop: size(40),
+    marginTop: size(60),
   },
   input: {
-    marginBottom: size(20),
+    marginBottom: size(40),
+    borderRadius: size(70),
+    borderWidth: size(1),
+    borderColor: '#ccc',
   },
   btnLogin: {
     marginTop: size(30),
     height: size(80),
-    borderRadius: size(4),
+    borderRadius: size(40),
     width: '100%',
   },
   btnLoginText: {
-    fontSize: size(28),
-    fontWeight: 'bold',
-  },
-  btnReset: {
-    marginTop: size(30),
-    height: size(80),
-    borderRadius: size(4),
-    width: '100%',
-    borderWidth: size(1),
-  },
-  btnResetText: {
-    fontSize: size(28),
+    fontSize: size(32),
     fontWeight: 'bold',
   },
 });

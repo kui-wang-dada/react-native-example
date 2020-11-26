@@ -12,6 +12,9 @@ export default {
   showToast(component, func) {
     instance.showToast(component, func);
   },
+  showLoading(func) {
+    instance.showLoading(func);
+  },
   setNum(num) {
     instance.setNum(num);
   },

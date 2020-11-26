@@ -1,14 +1,16 @@
 /** @format */
 
 import axios from 'axios';
-import {v4 as uuidv4} from 'uuid';
-import {CONSOLE_REQUEST_ENABLE, CONSOLE_RESPONSE_ENABLE} from './index';
+import { v4 as uuidv4 } from 'uuid';
+import { CONSOLE_REQUEST_ENABLE, CONSOLE_RESPONSE_ENABLE } from './index';
 import store from '@/store/store';
 
 import NetInfo from '@react-native-community/netinfo';
-import {Alert} from 'react-native';
-import {commitSessionId, commitLoginEmail} from '@/store/actions/search';
-import {modal} from '@/utils';
+import { Alert } from 'react-native';
+import { commitSessionId, commitLoginEmail } from '@/store/actions/search';
+import debounce from 'lodash/debounce';
+import { modal } from '@/utils';
+import { Loading } from 'ui';
 // import { Navigation } from "@/router";
 const CancelToken = axios.CancelToken;
 let CancelPromise = {};
@@ -19,6 +21,8 @@ import lang from '@/assets/lang';
  * @returns {*}
  */
 export async function requestSuccessFunc(req) {
+  modal.showLoading();
+
   let session_id;
 
   let res = await store.getState().search.sessionId;
@@ -43,8 +47,7 @@ export async function requestSuccessFunc(req) {
     CancelPromise[req.url] = c;
   });
 
-  CONSOLE_REQUEST_ENABLE &&
-    console.info('requestInterceptorFunc', `url:${req.url}`, req);
+  CONSOLE_REQUEST_ENABLE && console.info('requestInterceptorFunc', `url:${req.url}`, req);
   // 自定义请求拦截逻辑，处理权限，请求发送监控等
   return req;
 }
@@ -67,6 +70,7 @@ export function requestFailFunc(reqError) {
  * @returns {*}
  */
 export function responseSuccessFunc(response) {
+  modal.close();
   // 自定义响应成功逻辑，全局拦截接口，根据不同业务做不同处理，响应成功监控等
   CONSOLE_RESPONSE_ENABLE && console.info('responseInterceptorFunc', response);
   if (response && response.data) {
@@ -84,9 +88,7 @@ export function responseSuccessFunc(response) {
   } else {
     // 异常处理
     console.log('warning', response.data.msg);
-    return Promise.reject(
-      'error：' + (response && response.data && response.data.msg),
-    );
+    return Promise.reject('error：' + (response && response.data && response.data.msg));
   }
 }
 
@@ -96,6 +98,7 @@ export function responseSuccessFunc(response) {
  * @returns {Promise.<*>}
  */
 export function responseFailFunc(resError) {
+  modal.close();
   //如果是取消，返回空，前端不提示消息
   if (resError.toString() == 'Cancel') {
     resError = '';
@@ -116,7 +119,7 @@ function getNet(resError) {
   console.log(resError.message, 'resError');
   // let timeout = resError.message.includes('timeout');
   NetInfo.fetch().then((state) => {
-    let {isConnected} = state;
+    let { isConnected } = state;
     if (!isConnected) {
       Alert.alert('您的网络状况不佳，请检查网络');
     }

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Animated, TextInput, TouchableWithoutFeedback, View, StyleSheet } from 'react-native';
-import { commonStyle } from '@/utils';
+import { commonStyle, size } from '@/utils';
 import { Icon, Touchable } from 'ui';
 import BaseInput from './BaseInput';
 
@@ -45,20 +45,7 @@ export default class Fumi extends BaseInput {
   };
 
   render() {
-    const {
-      iconClass,
-      iconColor,
-      iconSize,
-      passiveIconColor,
-      iconName,
-      label,
-      style: containerStyle,
-      inputStyle,
-      height: inputHeight,
-      inputPadding,
-      iconWidth,
-      labelStyle,
-    } = this.props;
+    const { iconClass, iconColor, iconSize, passiveIconColor, iconName, label, style, inputStyle, height: inputHeight, inputPadding, iconWidth, labelStyle } = this.props;
     const { focusedAnim, value } = this.state;
     const AnimatedIcon = Animated.createAnimatedComponent(iconClass);
     const ANIM_PATH = inputPadding + inputHeight;
@@ -68,7 +55,7 @@ export default class Fumi extends BaseInput {
       <View
         style={[
           styles.container,
-          containerStyle,
+          style,
           {
             height: ANIM_PATH,
           },

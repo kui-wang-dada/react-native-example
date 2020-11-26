@@ -1,10 +1,10 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 
-import {combineReducers, createStore, applyMiddleware} from 'redux';
-import {Provider} from 'react-redux';
-import {persistStore, persistReducer} from 'redux-persist';
+import { combineReducers, createStore, applyMiddleware } from 'redux';
+import { Provider } from 'react-redux';
+import { persistStore, persistReducer } from 'redux-persist';
 import thunk from 'redux-thunk';
-import {createLogger} from 'redux-logger';
+import { createLogger } from 'redux-logger';
 
 import AsyncStorage from '@react-native-community/async-storage';
 
@@ -22,7 +22,7 @@ const persistConfig = {
   whitelist: ['search'],
 };
 
-const reducers = combineReducers({home, my, common, search});
+const reducers = combineReducers({ home, my, common, search });
 
 const persistedReducer = persistReducer(persistConfig, reducers);
 

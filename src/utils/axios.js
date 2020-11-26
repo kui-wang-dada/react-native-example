@@ -2,13 +2,8 @@
 
 import axios from 'axios';
 
-import {ApiConfig} from '@/config';
-import {
-  requestSuccessFunc,
-  requestFailFunc,
-  responseSuccessFunc,
-  responseFailFunc,
-} from '@/config/axios';
+import { ApiConfig } from '@/config';
+import { requestSuccessFunc, requestFailFunc, responseSuccessFunc, responseFailFunc } from '@/config/axios';
 
 let axiosInstance = {};
 axiosInstance = axios.create(ApiConfig);
