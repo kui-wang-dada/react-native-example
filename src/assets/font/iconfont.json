@@ -22,5 +22,8 @@
   "code": 59097,
   "email": 59098,
   "password": 59099,
-  "add": 58910
+  "add": 58910,
+  "finger": 58982,
+
+  "setting": 58995
 }

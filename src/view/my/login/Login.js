@@ -21,6 +21,7 @@ export default () => {
       setHasStd(true);
     }
   };
+
   return (
     <View style={style.wrap}>
       <ImageBackground source={require('@/assets/bg-theme.jpeg')} style={style.topWrap}>
@@ -123,7 +124,6 @@ const style = StyleSheet.create({
     position: 'absolute',
   },
 
-  otherWrap: {},
   otherTitle: {
     marginTop: size(80),
     flexDirection: 'row',

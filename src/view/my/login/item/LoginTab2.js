@@ -57,6 +57,12 @@ export default () => {
       modal.showToast('绑定失败');
     }
   };
+  const goToRegister = () => {
+    navigation.navigate('register');
+  };
+  const goToPassword = () => {
+    navigation.navigate('password');
+  };
   return (
     <View style={style.wrap}>
       <View style={style.fieldWrap}>
@@ -102,6 +108,10 @@ export default () => {
         textStyle={[style.btnLoginText, { color: colors.background }]}
         title={'提交'}
       />
+      <View style={style.tipWrap}>
+        <Button title="忘记密码" style={style.passwordWrap} textStyle={[style.passwordText, { color: colors.text_p }]} onPress={goToPassword} />
+        <Button title="注册" style={style.registerWrap} textStyle={[style.registerText, { color: colors.text_p }]} onPress={goToRegister} />
+      </View>
     </View>
   );
 };
@@ -128,5 +138,18 @@ const style = StyleSheet.create({
   btnLoginText: {
     fontSize: size(32),
     fontWeight: 'bold',
+  },
+  tipWrap: {
+    marginTop: size(40),
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingHorizontal: size(20),
+  },
+  passwordText: {
+    fontSize: size(28),
+  },
+
+  registerText: {
+    fontSize: size(28),
   },
 });

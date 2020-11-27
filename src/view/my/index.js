@@ -20,6 +20,17 @@ export default ({ route, navigation }) => {
       route: 'webView',
       params: { url: 'https://lc.chat/now/9055235/1' },
     },
+    {
+      title: '指纹登录',
+      icon: 'finger',
+      route: 'finger',
+      type: 'finger',
+    },
+    {
+      title: '系统设置',
+      icon: 'setting',
+      route: 'systemSet',
+    },
   ];
   return (
     <View style={style.myWrap}>

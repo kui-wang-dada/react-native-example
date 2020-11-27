@@ -76,6 +76,9 @@ export default (props) => {
       setValue2(false);
     }
   };
+  const goToRegister = () => {
+    navigation.navigate('register');
+  };
   return (
     <View style={style.wrap}>
       <View style={style.fieldWrap}>
@@ -130,6 +133,7 @@ export default (props) => {
         textStyle={[style.btnLoginText, { color: colors.background }]}
         title={'提交'}
       />
+      <Button title="注册" style={style.registerWrap} textStyle={[style.registerText, { color: colors.text_p }]} onPress={goToRegister} />
     </View>
   );
 };
@@ -182,5 +186,14 @@ const style = StyleSheet.create({
   btnLoginText: {
     fontSize: size(32),
     fontWeight: 'bold',
+  },
+  registerWrap: {
+    marginTop: size(40),
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+    paddingHorizontal: size(20),
+  },
+  registerText: {
+    fontSize: size(28),
   },
 });

@@ -13,10 +13,10 @@ export default (props) => {
   const goToPages = () => {
     let { route, params, icon, type } = props.data;
 
-    if (!loginEmail && icon !== 'chat') {
-      navigation.navigate('login');
-      return;
-    }
+    // if (!loginEmail && icon !== 'chat') {
+    //   navigation.navigate('login');
+    //   return;
+    // }
 
     navigation.navigate(route, params);
   };
