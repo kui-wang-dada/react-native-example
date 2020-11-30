@@ -2,8 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { useTheme, useNavigation } from '@react-navigation/native';
 import { useDispatch, useSelector } from 'react-redux';
+
 import { size, commonStyle } from '@/utils';
 import { Touchable, Icon, Button } from 'ui';
+
 export default (props) => {
   const { colors } = useTheme();
   const navigation = useNavigation();

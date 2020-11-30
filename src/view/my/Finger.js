@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { useTheme } from '@react-navigation/native';
 import { useDispatch, useSelector } from 'react-redux';
-import { size, commonStyle, track, modal } from '@/utils';
+import { size, commonStyle, modal } from '@/utils';
 import TouchID from 'react-native-touch-id';
 import { Touchable, Icon, Button, Switch } from 'ui';
 export default (props) => {
@@ -25,12 +25,12 @@ export default (props) => {
     TouchID.authenticate('Set up fingerprint login', optionalConfigObject)
       .then((success) => {
         if (!finger) {
-          track.logEvent('openFinger');
+          // track.logEvent('openFinger');
           callback(true);
           this.props.commitFinger(true);
           modal.showToast('成功开启指纹登录');
         } else {
-          track.logEvent('closeFinger');
+          // track.logEvent('closeFinger');
           callback(false);
           this.props.commitFinger(false);
           modal.showToast('成功关闭指纹登录');
