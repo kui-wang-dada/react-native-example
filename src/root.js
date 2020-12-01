@@ -14,7 +14,7 @@ export default () => {
     // Update the document title using the browser API
     console.log(5);
 
-    WeChat.registerApp('wx421629ee316a49b1', 'https://www.wholeren.com/app');
+    WeChat.registerApp('wx55b14f887a79758c', 'https://staticapp.hourenlx.com/');
     const { StatusBarManager } = NativeModules;
 
     // iOS Only

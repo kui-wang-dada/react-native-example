@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, Image } from 'react-native';
-import { useTheme } from '@react-navigation/native';
+import { useTheme, useNavigation } from '@react-navigation/native';
 import { useDispatch, useSelector } from 'react-redux';
 
 import LinearGradient from 'react-native-linear-gradient';
@@ -9,13 +9,16 @@ import { Touchable, Icon, Button } from 'ui';
 
 export default () => {
   const { colors } = useTheme();
+  const navigation = useNavigation();
 
   const userInfo = useSelector((state) => state.my.userInfo);
   const barHeight = useSelector((state) => state.common.barHeight);
   const homeCount = useSelector((state) => state.home.homeCount);
 
   const goToLogin = () => {};
-  const goToAccount = () => {};
+  const goToAccount = () => {
+    navigation.navigate('account');
+  };
   const renderLogin = () => {
     console.log(homeCount, 'homeCount');
     let conData = [
@@ -37,13 +40,13 @@ export default () => {
     ];
     return (
       <View style={style.loginWrap}>
-        <View style={style.stuNameWrap} onClick={goToAccount}>
+        <Touchable style={style.stuNameWrap} onPress={goToAccount}>
           <View style={style.stuId}>
             <Text style={style.stuIdText}>{userInfo.students_id}</Text>
             <Icon name="right" size={14} color="#f3dbb4" />
           </View>
           <Text style={style.stuName}>{userInfo.students_name}</Text>
-        </View>
+        </Touchable>
 
         <View style={style.stuCon}>
           {conData.map((item, index) => {
@@ -78,7 +81,7 @@ export default () => {
     );
   };
   return (
-    <LinearGradient start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }} colors={['#44a8d1', '#48e1b7']} style={[style.linearGradient, { paddingTop: barHeight }]}>
+    <LinearGradient start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }} colors={colors.gradient} style={[style.linearGradient, { paddingTop: barHeight }]}>
       <View className="avatar-wrap">{userInfo.students_id ? renderLogin() : renderNoLogin()}</View>
     </LinearGradient>
   );

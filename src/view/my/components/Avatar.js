@@ -3,7 +3,8 @@ import { View, Text, StyleSheet, Image, Alert } from 'react-native';
 import { useTheme, useNavigation } from '@react-navigation/native';
 import { useDispatch, useSelector } from 'react-redux';
 import * as WeChat from 'react-native-wechat-lib';
-import { size, commonStyle, checkStaticImg } from '@/utils';
+import useWechatLogin from '../hooks/wechatLogin';
+import { size, $api, checkStaticImg } from '@/utils';
 import { Touchable, Icon, Button } from 'ui';
 export default () => {
   const { colors } = useTheme();
@@ -11,32 +12,31 @@ export default () => {
   const dispatch = useDispatch();
   const userInfo = useSelector((state) => state.my.userInfo);
 
-  const getWechat = () => {
-    //微信登录示例
+  const getWechat = useWechatLogin();
 
-    let scope = 'snsapi_userinfo';
-    let state = 'wechat_sdk_demo';
-    //判断微信是否安装
-    WeChat.isWXAppInstalled().then((isInstalled) => {
-      if (isInstalled) {
-        //发送授权请求
-        WeChat.sendAuthRequest(scope, state)
-          .then((responseCode) => {
-            //返回code码，通过code获取access_token
-            console.log('responseCode,', responseCode);
-            console.log(43);
-            // this.getAccessToken(responseCode.code);
-          })
-          .catch((err) => {
-            console.log(43);
-            Alert.alert('登录授权发生错误：', err.message, [{ text: '确定' }]);
-          });
-        console.log(123);
-      } else {
-        console.log('nowechat');
-      }
-    });
-  };
+  // const getAccessToken = async (code) => {
+  //   let url =
+  //     'https://api.weixin.qq.com/sns/oauth2/access_token?appid=' +
+  //     'wx55b14f887a79758c' +
+  //     '&secret=' +
+  //     '8ed5b4fc35a605858bb62ea4fc0a3f5d' +
+  //     '&code=' +
+  //     code +
+  //     '&grant_type=authorization_code';
+  //   let res = await $api[''](null, { url });
+  //   getRefreshToken(res.refresh_token);
+  // };
+  // const getRefreshToken = async (token) => {
+  //   let url = 'https://api.weixin.qq.com/sns/oauth2/refresh_token?appid=' + 'wx55b14f887a79758c' + '&grant_type=refresh_token&refresh_token=' + token;
+  //   let res = await $api[''](null, { url });
+  //   getUserInfo(res);
+  // };
+  // const getUserInfo = async (res) => {
+  //   let url = 'https://api.weixin.qq.com/sns/userinfo?    access_token=' + res.access_token + '&openid=' + res.openid;
+  //   let res = await $api[''](null, { url });
+  //   console.log(res);
+  // };
+
   const goToMySet = () => {
     navigation.navigate('mySet');
   };

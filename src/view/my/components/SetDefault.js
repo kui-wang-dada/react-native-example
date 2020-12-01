@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import { useTheme } from '@react-navigation/native';
+import { useTheme, useNavigation } from '@react-navigation/native';
 import { useDispatch, useSelector } from 'react-redux';
 import SetDialog from './SetDialog';
 
@@ -10,12 +10,14 @@ import { Icon, Touchable, Loading } from 'ui';
 
 export default (props) => {
   const { colors } = useTheme();
+  const navigation = useNavigation();
   const dispatch = useDispatch();
   const userInfo = useSelector((state) => state.my.userInfo);
+
   const clickItem = () => {
-    let { type, route, params, label, key } = this.props.data;
+    let { type, route, params, label, key } = props.data;
     if (type === 'to' || type === 'to_profile') {
-      this.props.navigation.navigate(route, params);
+      navigation.navigate(route, params);
       return;
     }
 
@@ -64,8 +66,8 @@ export default (props) => {
         onPress={() => {
           clickItem();
         }}>
-        <Text style={[style.label, { color: colors.title }]}>{data.label}</Text>
-        <Text style={[style.value, { color: colors.title }]}>{userInfo[data.key]}</Text>
+        <Text style={[style.label, { color: colors.text }]}>{data.label}</Text>
+        <Text style={[style.value, { color: colors.text }]}>{userInfo[data.key]}</Text>
         {data.type !== 'nothing' && <Icon name="right" size={size(30)} color={colors.primary} style={style.icon} />}
       </Touchable>
 

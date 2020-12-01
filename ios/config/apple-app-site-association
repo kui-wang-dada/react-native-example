@@ -4,7 +4,7 @@
         "details": [
             {
                 "appID": "VHFWDZ2JVN.com.wholerengroup.client.apple",
-                "paths": [ "/app3/cert/*" ]
+                "paths": [ "/*" ]
             }
         ] 
     }

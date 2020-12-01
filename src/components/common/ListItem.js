@@ -28,7 +28,7 @@ export default (props) => {
         </View>
       ) : (
         <View style={style.itemRight}>
-          <Text style={[style.itemValue, rightStyle]}>{value}</Text>
+          <Text style={[style.itemValue, { color: colors.text_p }, rightStyle]}>{value}</Text>
           {valueTip ? <Text style={[style.itemValueTip, { color: colors.text_tag }]}>{valueTip}</Text> : null}
         </View>
       )}

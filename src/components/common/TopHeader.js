@@ -21,8 +21,8 @@ export default (props) => {
       </View>
       {hasRight ? (
         <View style={style.right} click="handleRight">
-          <Text style={style.rightAll}>全部</Text>
-          <Icon name="right" size={20} color="#666" />
+          <Text style={[style.rightAll, { color: colors.text }]}>全部</Text>
+          <Icon name="right" size={20} color={colors.text_p} />
         </View>
       ) : null}
     </View>

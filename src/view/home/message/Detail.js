@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, Image } from 'react-native';
+import React, { useState, useEffect, useRef } from 'react';
+import { View, Text, StyleSheet, Image, ScrollView } from 'react-native';
 import { useTheme } from '@react-navigation/native';
 import { useDispatch, useSelector } from 'react-redux';
 import { getMessageDetail } from '@/store/actions';
@@ -10,6 +10,7 @@ export default ({ route, navigation }) => {
   const { colors } = useTheme();
   const dispatch = useDispatch();
   const messageDetail = useSelector((state) => state.home.messageDetail);
+  const commentRef = useRef();
   console.log(messageDetail, 'params');
 
   const { name } = route.params;
@@ -20,10 +21,15 @@ export default ({ route, navigation }) => {
     // Update the document title using the browser API
 
     dispatch(getMessageDetail(params));
+    console.log(commentRef, 'commentRef');
   }, []);
 
   const afterSubmit = async () => {
     await dispatch(getMessageDetail(params));
+  };
+  const getInput = () => {
+    console.log(commentRef, 'commentRef');
+    commentRef.current.getInput();
   };
 
   const renderHeader = () => {
@@ -69,6 +75,18 @@ export default ({ route, navigation }) => {
       </View>
     );
   };
+  const renderInput = () => {
+    return (
+      <View style={[style.inputComment, { backgroundColor: colors.background, borderTopColor: colors.border }]}>
+        <View style={[style.inputWrap, { backgroundColor: colors.card }]}>
+          <Icon name="edit" size={20} color="#666" />
+          <Touchable style={style.inputPlaceholder} onPress={() => getInput()}>
+            <Text style={[style.inputText, { color: colors.text_tag }]}>添加留言</Text>
+          </Touchable>
+        </View>
+      </View>
+    );
+  };
   let data = messageDetail;
   let title = data.service_project_title;
   title = title && title.includes('TP-') ? '学术辅导' : title;
@@ -76,17 +94,20 @@ export default ({ route, navigation }) => {
   title = title || '学术辅导';
   return (
     <View style={style.messageDetailWrap}>
-      <View style={style.messageDetail}>
-        <View style={style.messageMain}>
-          {renderHeader()}
-          {renderDes()}
-          <View style={[style.desTask, { backgroundColor: colors.border }]}>
-            <Text style={[style.desTaskText, { color: colors.text_p }]}>{title}</Text>
+      <ScrollView style={style.scrollView}>
+        <View style={style.messageDetail}>
+          <View style={style.messageMain}>
+            {renderHeader()}
+            {renderDes()}
+            <View style={[style.desTask, { backgroundColor: colors.border }]}>
+              <Text style={[style.desTaskText, { color: colors.text_p }]}>{title}</Text>
+            </View>
           </View>
+          <View style={[style.sep, { backgroundColor: colors.sep }]} />
+          <Comment data={messageDetail} ref={commentRef} type="Opportunity" afterSubmit={afterSubmit} />
         </View>
-        <View style={[style.sep, { backgroundColor: colors.sep }]} />
-      </View>
-      <Comment data={messageDetail} type="Opportunity" afterSubmit={afterSubmit} />
+      </ScrollView>
+      {renderInput()}
     </View>
   );
 };
@@ -96,7 +117,10 @@ const style = StyleSheet.create({
     flex: 1,
     position: 'relative',
   },
-  messageDetail: {},
+  scrollView: {},
+  messageDetail: {
+    paddingBottom: size(300),
+  },
   messageMain: {
     minHeight: size(440),
     paddingHorizontal: size(32),
@@ -185,5 +209,30 @@ const style = StyleSheet.create({
     paddingVertical: size(6),
     paddingHorizontal: size(16),
     borderRadius: size(10),
+  },
+  inputComment: {
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    bottom: 0,
+    borderTopWidth: size(1),
+    paddingTop: size(20),
+    paddingBottom: size(40),
+    paddingHorizontal: size(32),
+    flexDirection: 'column',
+  },
+  inputWrap: {
+    borderRadius: size(40),
+    flexDirection: 'row',
+    alignItems: 'center',
+    minHeight: size(80),
+    paddingHorizontal: size(20),
+  },
+  inputPlaceholder: {
+    flex: 1,
+    marginLeft: size(20),
+  },
+  inputText: {
+    fontSize: size(28),
   },
 });

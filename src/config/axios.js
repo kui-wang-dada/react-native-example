@@ -75,13 +75,15 @@ export function responseSuccessFunc(response) {
   CONSOLE_RESPONSE_ENABLE && console.info('responseInterceptorFunc', response);
   if (response && response.data) {
     let status = response.data.status;
-    if (status.code !== 200 && status.code !== 401) {
-      modal.showToast(response.data.status.message);
-    }
-    if (status.code === 401) {
-      modal.showToast(response.data.status.message);
+    if (status && status.code) {
+      if (status.code !== 200 && status.code !== 401) {
+        modal.showToast(response.data.status.message);
+      }
+      if (status.code === 401) {
+        modal.showToast(response.data.status.message);
 
-      store.dispatch(commitLoginEmail(''));
+        store.dispatch(commitLoginEmail(''));
+      }
     }
 
     return response.data;

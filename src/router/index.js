@@ -73,9 +73,9 @@ function NavigationLifeCycle() {
       <NavigationContainer theme={colorTheme}>
         <Stack.Navigator
           screenOptions={{
-            headerStyle: { backgroundColor: colorTheme.colors.primary },
+            headerStyle: { backgroundColor: scheme === 'dark' ? colorTheme.colors.card : colorTheme.colors.primary },
 
-            headerTintColor: colorTheme.colors.background,
+            headerTintColor: colorTheme.colors.text,
           }}>
           <Stack.Screen name="Home" component={HomeTabs} />
 

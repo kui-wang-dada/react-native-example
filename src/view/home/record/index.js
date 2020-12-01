@@ -1,25 +1,49 @@
-import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import React, { useState, useEffect, useRef } from 'react';
+import { View, Text, StyleSheet, ScrollView } from 'react-native';
 import { useTheme } from '@react-navigation/native';
 import { useDispatch, useSelector } from 'react-redux';
 import { getRecordDetail } from '@/store/actions';
 import { size, commonStyle, messageTime } from '@/utils';
 import { Touchable, Icon, Button } from 'ui';
-import { ListItem } from 'common';
+import { ListItem, Comment } from 'common';
 export default ({ route, navigation }) => {
   const { colors } = useTheme();
+
   const dispatch = useDispatch();
   const recordDetail = useSelector((state) => state.home.recordDetail);
+  const commentRef = useRef();
   console.log(recordDetail, 'params');
+
+  const { name } = route.params;
+  let params = {
+    name: name,
+  };
   useEffect(() => {
     // Update the document title using the browser API
-    const { name } = route.params;
-    let params = {
-      name: name,
-    };
+
     console.log(params, 'params');
     dispatch(getRecordDetail(params));
   }, []);
+
+  const afterSubmit = async () => {
+    await dispatch(getRecordDetail(params));
+  };
+  const getInput = () => {
+    console.log(commentRef, 'commentRef');
+    commentRef.current.getInput();
+  };
+  const renderInput = () => {
+    return (
+      <View style={[style.inputComment, { backgroundColor: colors.background, borderTopColor: colors.border }]}>
+        <View style={[style.inputWrap, { backgroundColor: colors.card }]}>
+          <Icon name="edit" size={20} color="#666" />
+          <Touchable style={style.inputPlaceholder} onPress={() => getInput()}>
+            <Text style={[style.inputText, { color: colors.text_tag }]}>添加留言</Text>
+          </Touchable>
+        </View>
+      </View>
+    );
+  };
 
   let detail = recordDetail;
   let iconName = detail.tutoring_class_name && detail.tutoring_class_name.split('')[0];
@@ -70,56 +94,64 @@ export default ({ route, navigation }) => {
   ];
   let isParent = !!detail.student_getwords;
   return (
-    <View style={[style.recordDetail, { backgroundColor: colors.card }]}>
-      <View style={[style.recordTop, { backgroundColor: colors.background }]}>
-        <View style={style.top}>
-          <View style={style.topLeft}>
-            <Text style={[style.topIcon, { backgroundColor: colors.primary, color: colors.background }]}>{iconName}</Text>
-            <Text style={[style.topName, { color: colors.text }]}>{detail.tutoring_class_name}</Text>
+    <View style={style.wrap}>
+      <ScrollView>
+        <View style={[style.recordDetail, { backgroundColor: colors.card }]}>
+          <View style={[style.recordTop, { backgroundColor: colors.background }]}>
+            <View style={style.top}>
+              <View style={style.topLeft}>
+                <Text style={[style.topIcon, { backgroundColor: colors.primary, color: colors.background }]}>{iconName}</Text>
+                <Text style={[style.topName, { color: colors.text }]}>{detail.tutoring_class_name}</Text>
+              </View>
+              <Text style={[style.topRight, { color: colors.text_p }]}>{messageTime(detail.start_on)}</Text>
+            </View>
+            <View style={style.center}>
+              <Text style={[style.centerText, { color: colors.text_p }]}>{detail.content}</Text>
+            </View>
+            {isParent ? (
+              <View style={style.recordFeed}>
+                <Text style={[style.title, { color: colors.text }]}>课堂反馈</Text>
+                <View style={style.feed}>
+                  <Text style={[style.feedText, { color: colors.text_p }]}> {detail.student_getwords}</Text>
+                </View>
+              </View>
+            ) : null}
           </View>
-          <Text style={[style.topRight, { color: colors.text_p }]}>{messageTime(detail.start_on)}</Text>
-        </View>
-        <View style={style.center}>
-          <Text style={[style.centerText, { color: colors.text_p }]}>{detail.content}</Text>
-        </View>
-        {isParent ? (
-          <View style={style.recordFeed}>
-            <Text style={[style.title, { color: colors.text }]}>课堂反馈</Text>
-            <View style={style.feed}>
-              <Text style={[style.feedText, { color: colors.text_p }]}> {detail.student_getwords}</Text>
+
+          <View style={[style.recordDes, { backgroundColor: colors.background }]}>
+            <Text style={[style.title, { color: colors.text }]}>课堂信息</Text>
+            <View style={style.listWrap}>
+              {desData.map((des, index) => {
+                return <ListItem item={des} key={index} />;
+              })}
             </View>
           </View>
-        ) : null}
-      </View>
+          {isParent ? (
+            <View style={[style.recordParent, { backgroundColor: colors.background }]}>
+              <View style={style.titleWrap}>
+                <Text style={[style.title, { color: colors.text }]}>学生表现</Text>
+                <Text style={[style.label, { color: colors.text_tag }]}>(满分为5分)</Text>
+              </View>
 
-      <View style={[style.recordDes, { backgroundColor: colors.background }]}>
-        <Text style={style.title}>课堂信息</Text>
-        <View style={style.listWrap}>
-          {desData.map((des, index) => {
-            return <ListItem item={des} key={index} />;
-          })}
+              <View style={style.listWrap}>
+                {parData.map((par, index) => {
+                  return <ListItem item={par} key={index} />;
+                })}
+              </View>
+            </View>
+          ) : null}
+          <View style={[style.sep, { backgroundColor: colors.card }]} />
+          <Comment data={recordDetail} ref={commentRef} type="Tutoring Event" afterSubmit={afterSubmit} />
         </View>
-      </View>
-      {isParent ? (
-        <View style={[style.recordParent, { backgroundColor: colors.background }]}>
-          <View style={style.titleWrap}>
-            <Text style={[style.title, { color: colors.text }]}>学生表现</Text>
-            <Text style={[style.label, { color: colors.text_tag }]}>(满分为5分)</Text>
-          </View>
-
-          <View style={style.listWrap}>
-            {parData.map((par, index) => {
-              return <ListItem item={par} key={index} />;
-            })}
-          </View>
-        </View>
-      ) : null}
-      <View style={[style.sep, { backgroundColor: colors.card }]} />
-      {/* <Comment userInfo={this.props.userInfo} data={this.props.recordDetail} type="Tutoring Event" afterSubmit={this.afterSubmit} /> */}
+      </ScrollView>
+      {renderInput()}
     </View>
   );
 };
 const style = StyleSheet.create({
+  wrap: {
+    position: 'relative',
+  },
   recordDetail: {
     paddingBottom: size(160),
   },
@@ -193,5 +225,30 @@ const style = StyleSheet.create({
   sep: {
     width: '100%',
     height: size(20),
+  },
+  inputComment: {
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    bottom: 0,
+    borderTopWidth: size(1),
+    paddingTop: size(20),
+    paddingBottom: size(40),
+    paddingHorizontal: size(32),
+    flexDirection: 'column',
+  },
+  inputWrap: {
+    borderRadius: size(40),
+    flexDirection: 'row',
+    alignItems: 'center',
+    minHeight: size(80),
+    paddingHorizontal: size(20),
+  },
+  inputPlaceholder: {
+    flex: 1,
+    marginLeft: size(20),
+  },
+  inputText: {
+    fontSize: size(28),
   },
 });

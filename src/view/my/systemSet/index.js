@@ -91,7 +91,7 @@ export default () => {
     action: SetAction,
   };
   return (
-    <View style={style.mysetWrap}>
+    <View style={[style.mysetWrap, { backgroundColor: colors.card }]}>
       <View style={style.listWrap}>
         {setData.map((item, index) => {
           const Component = strategy[item.type];
@@ -108,7 +108,6 @@ const style = StyleSheet.create({
     flex: 1,
     flexDirection: 'column',
     alignItems: 'center',
-    backgroundColor: '#f0f0f0',
   },
   listWrap: {
     width: '100%',

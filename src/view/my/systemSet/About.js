@@ -1,50 +1,32 @@
-import React, { Component } from 'react';
-import { View, Text, StyleSheet, Platform } from 'react-native';
-import { connect } from 'react-redux';
-import { getAboutData } from '@/store/actions/my';
-import lang from '@/assets/lang';
-import { commonStyle, size } from '@/utils';
-import { Icon } from 'ui';
-const mapStateToProps = (state) => {
-  return {
-    aboutData: state.my.aboutData,
-    version: state.common.version,
-  };
+import React, { useState, useEffect } from 'react';
+import { View, Text, StyleSheet } from 'react-native';
+import { useTheme } from '@react-navigation/native';
+import { useDispatch, useSelector } from 'react-redux';
+import { size, commonStyle } from '@/utils';
+import { Touchable, Icon, Button } from 'ui';
+export default () => {
+  const { colors } = useTheme();
+
+  const aboutData = useSelector((state) => state.my.aboutData);
+  const version = useSelector((state) => state.my.version);
+  return (
+    <View style={[style.about, { backgroundColor: colors.background }]}>
+      <View style={style.topWrap}>
+        <Icon name="about" size={60} color={colors.primary} />
+        <Text style={[style.title, { color: colors.text }]}>{'厚仁教育'}</Text>
+        <Text style={[style.des, { color: colors.text_p }]}>
+          版本
+          <Text> {version}</Text>
+        </Text>
+      </View>
+      <View style={style.bottomWrap}>
+        <Text style={[style.label, { color: colors.text_p }]}>{'官方网站'}：www.wholeren.com</Text>
+        <Text style={[style.label, { color: colors.text_p }]}>Copyright ©2020 {'厚仁集团'} All Rights Reserved</Text>
+      </View>
+    </View>
+  );
 };
 
-const mapDispatchToProps = {
-  getAboutData,
-};
-class About extends Component {
-  constructor(props) {
-    super(props);
-  }
-  static navigationOptions = ({ navigation, screenProps }) => ({
-    title: lang.t('common.head.about'),
-  });
-  render() {
-    let { color_theme } = commonStyle;
-    return (
-      <View style={[style.about, { backgroundColor: commonStyle.colorTheme.pageBg }]}>
-        <View style={style.topWrap}>
-          <Icon name="about" size={60} color={color_theme} />
-          <Text style={[style.title, { color: commonStyle.colorTheme.title }]}>{lang.t('my.about.title')}</Text>
-          <Text style={[style.des, { color: commonStyle.colorTheme.label }]}>
-            {lang.t('my.about.version')}
-            <Text> {this.props.version}</Text>
-          </Text>
-        </View>
-        <View style={style.bottomWrap}>
-          <Text style={[style.label, { color: commonStyle.colorTheme.label }]}>{lang.t('my.about.website')}：www.wholeren.com</Text>
-          <Text style={[style.label, { color: commonStyle.colorTheme.label }]}>Copyright ©2020 {lang.t('my.about.group')} All Rights Reserved</Text>
-        </View>
-      </View>
-    );
-  }
-  componentDidMount = async () => {
-    // let res = await this.props.getAboutData();
-  };
-}
 const style = StyleSheet.create({
   about: {
     position: 'relative',
@@ -77,4 +59,3 @@ const style = StyleSheet.create({
     color: '#999',
   },
 });
-export default connect(mapStateToProps, mapDispatchToProps)(About);

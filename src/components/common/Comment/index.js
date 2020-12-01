@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, forwardRef, useImperativeHandle } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { useTheme } from '@react-navigation/native';
 import { useDispatch, useSelector } from 'react-redux';
@@ -7,13 +7,17 @@ import { Touchable, Icon, Button } from 'ui';
 
 import CommentItem from './CommentItem.js';
 import CommentInput from './CommentInput.js';
-export default (props) => {
+export default forwardRef((props, ref) => {
   const { colors } = useTheme();
   const dispatch = useDispatch();
   const userInfo = useSelector((state) => state.my.userInfo);
 
   let type, replyData;
   let inputPlaceholder = '添加留言';
+
+  useImperativeHandle(ref, () => ({
+    getInput: getInput,
+  }));
   const getInput = (item, index) => {
     console.log(item, 'item');
 
@@ -84,25 +88,9 @@ export default (props) => {
       </View>
     );
   };
-  const renderInput = () => {
-    return (
-      <View style={[style.inputComment, { backgroundColor: colors.background, borderTopColor: colors.border }]}>
-        <View style={[style.inputWrap, { backgroundColor: colors.card }]}>
-          <Icon name="edit" size={20} color="#666" />
-          <Touchable style={style.inputPlaceholder} onPress={() => getInput()}>
-            <Text style={[style.inputText, { color: colors.text_tag }]}>添加留言</Text>
-          </Touchable>
-        </View>
-      </View>
-    );
-  };
-  return (
-    <View style={[style.myCommentWrap, { backgroundColor: colors.background }]}>
-      {renderComment()}
-      {renderInput()}
-    </View>
-  );
-};
+
+  return <View style={[style.myCommentWrap, { backgroundColor: colors.background }]}>{renderComment()}</View>;
+});
 const style = StyleSheet.create({
   myCommentWrap: {
     flex: 1,
@@ -136,30 +124,5 @@ const style = StyleSheet.create({
     fontSize: size(24),
     textAlign: 'center',
     fontWeight: 'bold',
-  },
-  inputComment: {
-    position: 'absolute',
-    left: 0,
-    right: 0,
-    bottom: 0,
-    borderTopWidth: size(1),
-    paddingTop: size(20),
-    paddingBottom: size(40),
-    paddingHorizontal: size(32),
-    flexDirection: 'column',
-  },
-  inputWrap: {
-    borderRadius: size(40),
-    flexDirection: 'row',
-    alignItems: 'center',
-    minHeight: size(80),
-    paddingHorizontal: size(20),
-  },
-  inputPlaceholder: {
-    flex: 1,
-    marginLeft: size(20),
-  },
-  inputText: {
-    fontSize: size(28),
   },
 });

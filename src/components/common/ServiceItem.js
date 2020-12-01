@@ -39,7 +39,7 @@ export default (props) => {
         <Text style={[style.serviceTitle, { color: colors.text }]}>服务进度</Text>
         <View style={style.barWrap}>
           <View style={style.progress}>
-            {proStragety[item.status] || <Progress.Bar color={colors.color_blue} progress={percent} unfilledColor={colors.sep} width={null} />}
+            {proStragety[item.status] || <Progress.Bar color={colors.color_blue} progress={percent / 100} unfilledColor={colors.sep} width={null} />}
           </View>
 
           <Text style={[style.barText, { color: colors.text }]}>{percent + '%'}</Text>
