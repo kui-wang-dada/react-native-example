@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, Keyboard, KeyboardAvoidingView, TextInput, Platform } from 'react-native';
 import { useTheme } from '@react-navigation/native';
+import { useColorScheme } from 'react-native-appearance';
 import { size, commonStyle, $api, ymodal, modal, SCREEN_HEIGHT } from '@/utils';
 import { Touchable, Icon, Button } from 'ui';
 import { SubmitButton } from 'common';
 
 export default (props) => {
-  const { colors } = useTheme();
-
+  const scheme = useColorScheme();
+  const colors = scheme === 'dark' ? commonStyle.darkColorTheme.colors : commonStyle.lightColorTheme.colors;
   const [inputValue, setInputValue] = useState('');
 
   const submit = async () => {
@@ -51,8 +52,10 @@ export default (props) => {
     ios: 0.7 * SCREEN_HEIGHT,
     android: 0,
   });
+
+  console.log(colors, scheme, 'colors');
   return (
-    <KeyboardAvoidingView enabled behavior="position" keyboardVerticalOffset={keyboardOffset}>
+    <KeyboardAvoidingView enabled behavior="position" keyboardVerticalOffset={keyboardOffset} style={{ backgroundColor: colors.background }}>
       <Touchable type="withoutFeedback" onPress={() => Keyboard.dismiss()} style={{ backgroundColor: colors.background }}>
         <View style={[style.wrap, { backgroundColor: colors.background }]}>
           <View style={style.uploadWrap}>
@@ -119,7 +122,6 @@ const style = StyleSheet.create({
   title: {
     fontSize: size(32),
     fontWeight: 'bold',
-    color: '#333',
   },
   input: {
     padding: size(40),

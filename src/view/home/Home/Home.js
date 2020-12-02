@@ -5,12 +5,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getUserInfo, getHomeSp, getHomeTp, getHomeCount } from '@/store/actions';
 import { TutorItem, ServiceItem, TopHeader } from 'common';
 import Avatar from './item/Avatar';
+import ServiceStep from './item/ServiceStep';
 import { size, commonStyle, checkStaticImg } from '@/utils';
 import { Touchable, Icon } from 'ui';
 
 export default ({ route, navigation }) => {
   const { colors } = useTheme();
   const dispatch = useDispatch();
+  const userInfo = useSelector((state) => state.my.userInfo);
   const homeTp = useSelector((state) => state.home.homeTp);
   const homeSp = useSelector((state) => state.home.homeSp);
   useEffect(() => {
@@ -70,26 +72,34 @@ export default ({ route, navigation }) => {
   return (
     <ScrollView style={[style.wrap, { backgroundColor: colors.card }]}>
       <Avatar />
-      <View style={style.gridWrap}>{renderGrid()}</View>
-      {tpData ? (
-        <View style={style.tpWrap}>
-          <TutorItem item={tpData} />
+      {userInfo.students_id ? (
+        <View style={style.centerWrap}>
+          <View style={style.gridWrap}>{renderGrid()}</View>
+          {tpData ? (
+            <View style={style.tpWrap}>
+              <TutorItem item={tpData} />
+            </View>
+          ) : null}
+          {services.length ? (
+            <View style={style.serviceWrap}>
+              <TopHeader title="服务项目" hasRight handleRight={goToProject} />
+              <View style={style.serviceList}>
+                {services.map((item, index) => {
+                  return (
+                    <View key={index} style={style.serviceItem}>
+                      <ServiceItem item={item} />
+                    </View>
+                  );
+                })}
+              </View>
+            </View>
+          ) : null}
         </View>
-      ) : null}
-      {services.length ? (
-        <View style={style.serviceWrap}>
-          <TopHeader title="服务项目" hasRight handleRight={goToProject} />
-          <View style={style.serviceList}>
-            {services.map((item, index) => {
-              return (
-                <View key={index} style={style.serviceItem}>
-                  <ServiceItem item={item} />
-                </View>
-              );
-            })}
-          </View>
+      ) : (
+        <View style={[style.recordWrap, { backgroundColor: colors.background }]}>
+          <ServiceStep />
         </View>
-      ) : null}
+      )}
     </ScrollView>
   );
 };
@@ -138,5 +148,12 @@ const style = StyleSheet.create({
   },
   serviceItem: {
     marginBottom: size(30),
+  },
+  recordWrap: {
+    position: 'relative',
+    bottom: size(40),
+    borderTopLeftRadius: size(40),
+    borderTopRightRadius: size(40),
+    padding: size(32),
   },
 });

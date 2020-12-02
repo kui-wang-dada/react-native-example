@@ -14,29 +14,6 @@ export default () => {
 
   const getWechat = useWechatLogin();
 
-  // const getAccessToken = async (code) => {
-  //   let url =
-  //     'https://api.weixin.qq.com/sns/oauth2/access_token?appid=' +
-  //     'wx55b14f887a79758c' +
-  //     '&secret=' +
-  //     '8ed5b4fc35a605858bb62ea4fc0a3f5d' +
-  //     '&code=' +
-  //     code +
-  //     '&grant_type=authorization_code';
-  //   let res = await $api[''](null, { url });
-  //   getRefreshToken(res.refresh_token);
-  // };
-  // const getRefreshToken = async (token) => {
-  //   let url = 'https://api.weixin.qq.com/sns/oauth2/refresh_token?appid=' + 'wx55b14f887a79758c' + '&grant_type=refresh_token&refresh_token=' + token;
-  //   let res = await $api[''](null, { url });
-  //   getUserInfo(res);
-  // };
-  // const getUserInfo = async (res) => {
-  //   let url = 'https://api.weixin.qq.com/sns/userinfo?    access_token=' + res.access_token + '&openid=' + res.openid;
-  //   let res = await $api[''](null, { url });
-  //   console.log(res);
-  // };
-
   const goToMySet = () => {
     navigation.navigate('mySet');
   };
@@ -76,18 +53,17 @@ export default () => {
       ) : (
         <View>
           <View style={style.noLoginWrap}>
-            <View onGetUserInfo={this.getUserInfo} style={[style.noLogin, { backgroundColor: colors.background }]}>
-              <Image style={style.img} src={checkStaticImg('login1.png')} />
+            <Touchable onPress={getWechat} style={[style.noLogin, { backgroundColor: colors.background }]}>
+              <Image style={style.img} source={{ uri: checkStaticImg('login1.png') }} />
               <View style={style.loginLabel}>
                 <Text style={[style.loginLabelTitle, { color: colors.text }]}>登录并绑定后即可实时跟踪服务过程</Text>
                 <Button
                   title="点击登录"
                   style={[style.noLoginBtn, { backgroundColor: colors.primary }]}
                   textStyle={[style.noLoginBtnText, { color: colors.background }]}
-                  onPress={getWechat}
                 />
               </View>
-            </View>
+            </Touchable>
           </View>
         </View>
       )}
@@ -170,6 +146,7 @@ const style = StyleSheet.create({
     fontWeight: 'bold',
   },
   noLoginBtn: {
+    marginTop: size(10),
     height: size(60),
     flexDirection: 'row',
     justifyContent: 'center',

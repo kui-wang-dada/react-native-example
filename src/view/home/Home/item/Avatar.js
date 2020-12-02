@@ -15,7 +15,9 @@ export default () => {
   const barHeight = useSelector((state) => state.common.barHeight);
   const homeCount = useSelector((state) => state.home.homeCount);
 
-  const goToLogin = () => {};
+  const goToLogin = () => {
+    navigation.navigate('我的');
+  };
   const goToAccount = () => {
     navigation.navigate('account');
   };
@@ -67,7 +69,7 @@ export default () => {
   };
   const renderNoLogin = () => {
     return (
-      <View style={style.noLoginWrap} onClick={goToLogin}>
+      <Touchable style={style.noLoginWrap} onPress={goToLogin}>
         <Text style={style.noLoginTitle}>厚仁学生中心</Text>
         <View style={style.noLoginCon}>
           <Image source={{ uri: checkStaticImg('xueshu.png') }} style={style.noLoginImg} />
@@ -77,12 +79,12 @@ export default () => {
           <Text style={style.noLoginText}>点击登录</Text>
           <Icon name="right" size={16} color={'#E6A53D'} />
         </View>
-      </View>
+      </Touchable>
     );
   };
   return (
     <LinearGradient start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }} colors={colors.gradient} style={[style.linearGradient, { paddingTop: barHeight }]}>
-      <View className="avatar-wrap">{userInfo.students_id ? renderLogin() : renderNoLogin()}</View>
+      <View style={style.avatarWrap}>{userInfo.students_id ? renderLogin() : renderNoLogin()}</View>
     </LinearGradient>
   );
 };
@@ -91,6 +93,9 @@ const style = StyleSheet.create({
   linearGradient: {
     borderBottomLeftRadius: size(30),
     borderBottomRightRadius: size(30),
+  },
+  avatarWrap: {
+    paddingTop: size(20),
   },
   loginWrap: {
     paddingHorizontal: size(32),

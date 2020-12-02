@@ -6,16 +6,19 @@ export const ApiConfig = {
   maxContentLength: 2000,
   headers: {
     'Content-Type': 'application/x-www-form-urlencoded',
-    'X-APIS-Application': 'ucmp',
     'X-APIS-Version': 'v1',
-    'X-MP-Platform': 'WeChat',
+    'X-APIS-Application': 'ucmp',
+    'X-MP-Platform': 'Mobile',
     'X-MP-Appname': 'ucmp',
     // 'Content-Type': 'application/json'
   },
   // baseURL: "https://baobao.cctar.us/apis"
   baseURL: 'https://erpapi.wholeren.cn',
 };
-
+export const wechatConfig = {
+  appid: 'wx55b14f887a79758c',
+  secret: '8ed5b4fc35a605858bb62ea4fc0a3f5d',
+};
 // 开启请求参数打印
 export const CONSOLE_REQUEST_ENABLE = true;
 // 开启响应参数打印

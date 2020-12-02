@@ -11,7 +11,11 @@ export default [
     name: 'wechatLogin',
     method: 'POST',
     desc: '登录',
-    path: '/apis/method/frappe.apis.apps.auth.login',
+    path: '/apis/method/frappe.apis.apps.auth.applogin',
+    // path: '/apis/method/frappe.apis.apps.auth.login',
+    headers: {
+      'Content-Type': 'application/json',
+    },
   },
 
   {

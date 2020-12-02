@@ -4,24 +4,21 @@ import { useTheme } from '@react-navigation/native';
 import { useDispatch, useSelector } from 'react-redux';
 import { commitDarkTheme, commitColorTheme } from '@/store/actions';
 import { size, commonStyle } from '@/utils';
+import { commitTheme } from '@/store/actions';
 import { Touchable, Icon, Button, Switch } from 'ui';
 export default (props) => {
   const { colors } = useTheme();
   const dispatch = useDispatch();
-  const darkTheme = useSelector((state) => state.my.darkTheme);
+  const theme = useSelector((state) => state.common.theme);
   let { data } = props;
 
   const handleSwitch = (callback) => {
-    if (darkTheme) {
+    if (theme === 'dark') {
       callback(false);
-      commitDarkTheme(false);
-      commitColorTheme(commonStyle.lightColorTheme);
-      commonStyle.changeTheme('light');
+      dispatch(commitTheme('light'));
     } else {
       callback(true);
-      commitDarkTheme(true);
-      commitColorTheme(commonStyle.darkColorTheme);
-      commonStyle.changeTheme('dark');
+      dispatch(commitTheme('dark'));
     }
   };
   return (
@@ -37,7 +34,7 @@ export default (props) => {
               },
         ]}>
         <Text style={[style.label, { color: colors.text }]}>{data.label}</Text>
-        <Switch value={darkTheme} onAsyncPress={handleSwitch} width={size(100)} height={size(50)} backgroundActive={colors.primary} />
+        <Switch value={theme === 'dark'} onAsyncPress={handleSwitch} width={size(100)} height={size(50)} backgroundActive={colors.primary} />
       </View>
 
       {data.border ? <View style={[style.border, { backgroundColor: colors.border }]} /> : null}

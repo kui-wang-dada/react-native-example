@@ -65,7 +65,7 @@ class Api {
           // let _data = _isEmpty(outerParams) ? params : _pick(_assign({}, params, outerParams), Object.keys(params));
           let _data = _isArray(outerParams) || outerParams instanceof FormData ? outerParams : _merge({}, params, outerParams);
 
-          /*特殊页面，需要对数据做处理*/
+          // /*特殊页面，需要对数据做处理*/
           if ((method.toUpperCase() === 'POST' || method.toUpperCase() === 'PUT') && (!headers || !headers.hasOwnProperty('Content-Type'))) {
             _data = Qs.stringify(_data);
           }

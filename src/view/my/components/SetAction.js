@@ -2,11 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { useTheme } from '@react-navigation/native';
 import RNBottomActionSheet from 'react-native-bottom-action-sheet';
+import { useColorScheme } from 'react-native-appearance';
 import { useDispatch, useSelector } from 'react-redux';
 import { size, commonStyle, modal, $api } from '@/utils';
 import { Touchable, Icon, Button } from 'ui';
 export default (props) => {
   const { colors } = useTheme();
+  const scheme = useColorScheme();
   const dispatch = useDispatch();
   const userInfo = useSelector((state) => state.my.userInfo);
 
@@ -24,7 +26,7 @@ export default (props) => {
         { title: '英语', value: 'insta', icon: instagram },
         { title: '取消', value: 'insta', icon: instagram },
       ],
-      theme: 'light',
+      theme: scheme,
       selection: 3,
       onSelection: (index, value) => {
         // value is optional

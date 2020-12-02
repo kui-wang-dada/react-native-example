@@ -13,6 +13,7 @@ import { modal } from '@/utils';
 import { Loading } from 'ui';
 // import { Navigation } from "@/router";
 const CancelToken = axios.CancelToken;
+const source = axios.CancelToken.source();
 let CancelPromise = {};
 import lang from '@/assets/lang';
 /**
@@ -21,21 +22,28 @@ import lang from '@/assets/lang';
  * @returns {*}
  */
 export async function requestSuccessFunc(req) {
-  modal.showLoading();
+  if (req.loading) {
+    modal.showLoading();
+  }
 
   let session_id;
 
   let res = await store.getState().search.sessionId;
-  console.log(res, 'session');
-  if (!res) {
-    // session_id = DeviceInfo.getUniqueId()
-    session_id = uuidv4();
-    await store.dispatch(commitSessionId(session_id));
-  } else {
+  if (res) {
     session_id = res;
+    console.log(session_id, 'deviceId1');
+    // Do something with return value
+  } else {
+    console.log(2, 'value');
+    let whiteList = ['wechatLogin', 'wechatRegist', 'erpLogin', 'userInfo'];
+    if (!whiteList.includes(req.name)) {
+      return Promise.reject();
+    }
   }
+  console.log(res, 'session');
+
   console.log(req, 'headers');
-  req.headers['X-APIS-Sid'] = 'oOZse5B5-Ecj_12lvDCNEWGZDBFc';
+  req.headers['X-APIS-Sid'] = res;
 
   //取消重复请求
 
@@ -58,7 +66,7 @@ export async function requestSuccessFunc(req) {
  * @returns {Promise.<*>}
  */
 export function requestFailFunc(reqError) {
-  console.log(reqError, 'resError');
+  // console.log(reqError, 'resError');
   getNet(reqError);
   // 自定义请求失败逻辑，处理断网，请求发送监控等
   return Promise.reject(reqError);
