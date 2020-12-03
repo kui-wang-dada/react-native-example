@@ -3,7 +3,7 @@ import { View, Text, StyleSheet } from 'react-native';
 import { useTheme, useNavigation } from '@react-navigation/native';
 import * as WeChat from 'react-native-wechat-lib';
 import { useDispatch, useSelector } from 'react-redux';
-import { commitSessionId, getHomeSp, getHomeTp, getHomeCount, commitUserInfo } from '@/store/actions';
+import { commitSessionId, getHomeSp, getHomeTp, getHomeCount, getUserInfo } from '@/store/actions';
 import { size, $api } from '@/utils';
 import { Touchable, Icon, Button } from 'ui';
 const useWechatLogin = () => {
@@ -24,7 +24,7 @@ const useWechatLogin = () => {
             //返回code码，通过code获取access_token
             console.log('getWechat,', responseCode);
             console.log(43);
-            getUserInfo(responseCode.code);
+            getUser(responseCode.code);
           })
           .catch((err) => {
             console.log(err, 'err');
@@ -36,13 +36,13 @@ const useWechatLogin = () => {
     });
   };
 
-  const getUserInfo = async (code) => {
+  const getUser = async (code) => {
     let params = {
       code,
     };
 
     let res = await $api['my/wechatLogin'](params);
-    console.log('getUserInfo,', res);
+    console.log('getUser,', res);
     if (res.data.display && res.data.display.uid) {
       dispatch(commitSessionId(res.data.display.uid));
       await getHomeData();
@@ -53,10 +53,11 @@ const useWechatLogin = () => {
       limit_start: 0,
       limit_page_length: 10,
     };
+
     dispatch(getHomeSp(params));
     dispatch(getHomeTp(params));
     dispatch(getHomeCount());
-    dispatch(getUserInfo());
+    await dispatch(getUserInfo());
   };
   // const getAccessToken = async (code) => {
   //   let url =

@@ -119,3 +119,44 @@ export function checkImg(item, size) {
 
   return remoteUrl;
 }
+
+export function NumberK(value) {
+  if (!value && value !== 0) {
+    return '数据正在同步中';
+  }
+  let lenArr = value.toString().split('');
+  let len = lenArr.length;
+  let lenStr = '';
+  if (len >= 4) {
+    lenArr.pop();
+    lenArr.pop();
+    lenArr.pop();
+    lenStr = lenArr.join('') + 'K';
+  } else {
+    lenStr = value.toString();
+  }
+
+  return lenStr;
+}
+export function Number10(value) {
+  if (!value && value !== 0) {
+    return '数据正在同步中';
+  }
+  let len = Math.floor(value / 10);
+  let lenStr;
+  if (len === 0) {
+    lenStr = value;
+  } else {
+    lenStr = len * 10;
+  }
+
+  return lenStr;
+}
+export function NumberH(value) {
+  if (!value && value !== 0) {
+    return '数据正在同步中';
+  }
+  let val = Math.floor(value / 60);
+
+  return val;
+}

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { useTheme, useNavigation } from '@react-navigation/native';
 import { useDispatch, useSelector } from 'react-redux';
-import { commitUserInfo } from '@/store/actions';
+import { commitSessionId, commitUserInfo } from '@/store/actions';
 import { size, commonStyle } from '@/utils';
 import { Touchable, Icon, Button, Cell } from 'ui';
 export default () => {
@@ -15,6 +15,8 @@ export default () => {
     // Taro.setStorageSync('deviceId', '');
     // Taro.setStorageSync('studentId', '');
     dispatch(commitUserInfo({}));
+    dispatch(commitSessionId(''));
+    navigation.goBack();
     // Taro.navigateBack();
   };
   const goToAccount = () => {

@@ -103,7 +103,7 @@ function NavigationLifeCycle() {
           screenOptions={{
             headerStyle: { backgroundColor: theme === 'dark' ? colorTheme.colors.card : colorTheme.colors.primary },
 
-            headerTintColor: colorTheme.colors.text,
+            headerTintColor: '#fff',
           }}>
           <Stack.Screen name="Home" component={HomeTabs} />
 

@@ -43,12 +43,6 @@ export default () => {
               <Text style={[style.loginBtnText, { color: colors.background }]}>绑定厚仁账号</Text>
             </Touchable>
           )}
-          <Button
-            title="点击登录"
-            style={[style.noLoginBtn, { backgroundColor: colors.primary }]}
-            textStyle={[style.noLoginBtnText, { color: colors.background }]}
-            onPress={getWechat}
-          />
         </View>
       ) : (
         <View>

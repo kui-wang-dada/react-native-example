@@ -14,7 +14,7 @@ export default (props) => {
       //width 图片的宽度
       //height 图片的高度
       let myImgHeight = Math.floor((SCREEN_WIDTH / width) * height);
-      console.log(width, height, myImgHeight, 'tt');
+      console.log(width, height, myImgHeight, 'ttttt');
       setImgHeight(myImgHeight);
     });
   }, []);

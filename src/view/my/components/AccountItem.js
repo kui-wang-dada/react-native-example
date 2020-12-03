@@ -20,12 +20,12 @@ export default (props) => {
         <Text style={[style.name, { color: colors.text }]}>{item.full_name}</Text>
       </View>
       {isActive ? (
-        <Button title="查看中" style={[style.status, { backgroundColor: colors.primary }]} textStyle={[style.statusText, { color: colors.background }]} />
+        <Button title="查看中" style={[style.status, { backgroundColor: colors.background }]} textStyle={[style.statusText, { color: colors.primary }]} />
       ) : (
         <Button
           title="切换学生"
-          style={[style.status, { backgroundColor: colors.background }]}
-          textStyle={[style.statusText, { color: colors.primary }]}
+          style={[style.status, { backgroundColor: colors.primary }]}
+          textStyle={[style.statusText, { color: colors.background }]}
           onPress={() => switchStudent(item)}
         />
       )}
