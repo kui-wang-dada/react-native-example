@@ -1,15 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, Image } from 'react-native';
-import { useTheme } from '@react-navigation/native';
+import { useTheme, useNavigation } from '@react-navigation/native';
 import { size, commonStyle, checkStaticImg, checkImg } from '@/utils';
 import { Touchable, Icon, Button } from 'ui';
 export default (props) => {
   const { colors } = useTheme();
-
-  const goToAuthor = () => {};
-
-  console.log(props);
+  const navigation = useNavigation();
   let author = props.item;
+
+  const goToAuthor = () => {
+    if (!author.user) {
+      navigation.navigate('authorDetail2');
+      return;
+    }
+    navigation.navigate('authorDetail', { user: author.user });
+  };
 
   let { myAvatar } = author;
 

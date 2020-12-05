@@ -101,7 +101,7 @@ export function checkImg(item, size) {
 
   if (remoteUrl.includes('https://erp-cdn.wholeren.cn')) {
     remoteUrl = remoteUrl.replace('/privatehttps://erp-cdn.wholeren.cn', 'https://erpapi.wholeren.cn/private');
-    remoteUrl = remoteUrl.replace('https://erp-cdn.wholeren.cn', 'https://erpapi.wholeren.cn');
+    // remoteUrl = remoteUrl.replace('https://erp-cdn.wholeren.cn', 'https://erpapi.wholeren.cn');
   }
 
   if (!remoteUrl.includes('http')) {

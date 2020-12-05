@@ -22,10 +22,6 @@ import lang from '@/assets/lang';
  * @returns {*}
  */
 export async function requestSuccessFunc(req) {
-  if (req.loading) {
-    modal.showLoading();
-  }
-
   let session_id;
 
   let res = await store.getState().search.sessionId;
@@ -78,7 +74,6 @@ export function requestFailFunc(reqError) {
  * @returns {*}
  */
 export function responseSuccessFunc(response) {
-  modal.close();
   // 自定义响应成功逻辑，全局拦截接口，根据不同业务做不同处理，响应成功监控等
   CONSOLE_RESPONSE_ENABLE && console.info('responseInterceptorFunc', response);
   if (response && response.data) {
@@ -108,7 +103,6 @@ export function responseSuccessFunc(response) {
  * @returns {Promise.<*>}
  */
 export function responseFailFunc(resError) {
-  modal.close();
   //如果是取消，返回空，前端不提示消息
   if (resError.toString() == 'Cancel') {
     resError = '';
