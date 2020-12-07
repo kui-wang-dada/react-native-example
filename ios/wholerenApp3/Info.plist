@@ -57,7 +57,7 @@
 		</dict>
 	</dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string></string>
+	<string>'Wholeren' would like to use your current location to help you find hosts. It is secure and private</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>'Wholeren' would like to access your photo gallery for your profile and home photos upload. Your photos won’t be shared without your permission</string>
 	<key>UIAppFonts</key>
