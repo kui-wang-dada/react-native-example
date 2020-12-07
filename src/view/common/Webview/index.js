@@ -1,21 +1,22 @@
-import React, {useState, useEffect} from 'react';
-import {View, Text, StyleSheet} from 'react-native';
-import {useTheme} from '@react-navigation/native';
-import {WebView} from 'react-native-webview';
-import {size, commonStyle} from '@/utils';
-import {Touchable, Icon, Button} from 'ui';
-export default ({route, navigation}) => {
-  const {colors} = useTheme();
+import React, { useState, useEffect } from 'react';
+import { View, Text, StyleSheet } from 'react-native';
+import { useTheme } from '@react-navigation/native';
+import { WebView } from 'react-native-webview';
+import { size, commonStyle } from '@/utils';
+import { Touchable, Icon, Button } from 'ui';
+export default ({ route, navigation }) => {
+  const { colors } = useTheme();
 
-  let {url} = route.params;
+  let { url } = route.params;
 
   let source = {
     uri: url,
   };
+  console.log(source, 'url');
   return (
     <View style={style.wrap}>
       <WebView
-        source={source}
+        source={{ uri: 'https://www.baidu.com' }}
         // onLoadStart={this.handleLoadStart}
         // onNavigationStateChange={this.handleNavigationStateChange}
         // ref={(ref) => {

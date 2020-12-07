@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { useTheme, useNavigation } from '@react-navigation/native';
 import { useDispatch, useSelector } from 'react-redux';
-
+import { useOpenMini } from 'hook/wechat';
 import { size, commonStyle } from '@/utils';
 import { Touchable, Icon, Button } from 'ui';
 
@@ -11,6 +11,7 @@ export default (props) => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const loginEmail = useSelector((state) => state.my.loginEmail);
+  const openMini = useOpenMini();
 
   const goToPages = () => {
     let { route, params, icon, type } = props.data;
@@ -20,19 +21,25 @@ export default (props) => {
     //   return;
     // }
 
+    if (type === 'mini') {
+      openMini(params.id, params.path);
+    }
     navigation.navigate(route, params);
   };
 
-  let { title, icon } = props.data;
+  let { title, icon, label } = props.data;
   console.log(123456);
   return (
     <Touchable style={style.listItem} onPress={() => goToPages()}>
       <View style={[style.listWrap, { borderBottomColor: colors.border }]}>
         <View style={style.left}>
           <Icon name={icon} size={30} color={colors.primary} />
-          <Text style={[style.label, { color: colors.text }]}>{title}</Text>
+          <Text style={[style.title, { color: colors.text }]}>{title}</Text>
         </View>
-        <Icon name="right" size={18} color={colors.text_p} />
+        <View style={[style.right]}>
+          {label ? <Text style={[style.label, { color: colors.text_tag }]}>{label}</Text> : null}
+          <Icon name="right" size={18} color={colors.text_tag} />
+        </View>
       </View>
     </Touchable>
   );
@@ -55,9 +62,16 @@ const style = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
   },
+  title: {
+    marginLeft: size(20),
+    fontSize: size(32),
+  },
+  right: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
   label: {
     marginLeft: size(20),
     fontSize: size(32),
-    color: '#333',
   },
 });

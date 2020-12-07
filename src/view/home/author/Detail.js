@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, ScrollView, Image } from 'react-native';
 import { useTheme, useNavigation } from '@react-navigation/native';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAuthorDetail } from '@/store/actions';
+import { useOpenMini } from 'hook/wechat';
 import { size, checkImg, Number10, NumberH, NumberK } from '@/utils';
 import { Touchable, Icon, Button } from 'ui';
 import { TopHeader } from 'common';
@@ -11,6 +12,8 @@ export default ({ route }) => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const authorDetail = useSelector((state) => state.home.authorDetail);
+
+  const openMini = useOpenMini();
 
   const { user } = route.params;
   let newUser = decodeURIComponent(user);
@@ -25,8 +28,16 @@ export default ({ route }) => {
     dispatch(getAuthorDetail(params));
   }, []);
 
-  const goToExpert = () => {};
-  const goToExpertDetail = (post) => {};
+  const goToExpert = () => {
+    let id = 'gh_e6cd6a6f3f7c';
+    let path = '/pageSub/authorDetail/index?name=' + authorDetail.name;
+    openMini(id, path);
+  };
+  const goToExpertDetail = (post) => {
+    let id = 'gh_e6cd6a6f3f7c';
+    let path = 'pageSub/blogDetail/index?name=' + post.name;
+    openMini(id, path);
+  };
   let posts = authorDetail.posts || [];
   let tipData = [
     {
@@ -78,19 +89,19 @@ export default ({ route }) => {
           <View style={style.expert}>
             {posts.map((post) => {
               return (
-                <View key={post.name} style={style.expertItem} onClick={() => goToExpertDetail(post)}>
+                <Touchable key={post.name} style={style.expertItem} onPress={() => goToExpertDetail(post)}>
                   <Image style={style.bgImage} source={{ uri: post.attach_image }} />
 
                   <View style={[style.title, { color: colors.card }]}>
                     <Text style={[style.titleText, { color: colors.background }]}>{post.title}</Text>
                   </View>
-                </View>
+                </Touchable>
               );
             })}
           </View>
-          <View style={style.expertMore} onClick={goToExpert}>
+          <Touchable style={style.expertMore} onPress={goToExpert}>
             <Text style={[style.expertMoreText, { color: colors.primary }]}>更多专家专栏 {'>'}</Text>
-          </View>
+          </Touchable>
         </View>
       ) : null}
     </ScrollView>

@@ -7,7 +7,7 @@ module.exports = {
         root: ['./'],
         alias: {
           common: './src/components/common',
-
+          hook: './src/components/hook',
           ui: './src/components/ui',
 
           '@': './src',
@@ -15,6 +15,6 @@ module.exports = {
         },
       },
     ],
-    ['@babel/plugin-proposal-decorators', {legacy: true}],
+    ['@babel/plugin-proposal-decorators', { legacy: true }],
   ],
 };

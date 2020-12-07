@@ -2,8 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, Image, Alert } from 'react-native';
 import { useTheme, useNavigation } from '@react-navigation/native';
 import { useDispatch, useSelector } from 'react-redux';
-import * as WeChat from 'react-native-wechat-lib';
-import useWechatLogin from '../hooks/wechatLogin';
+import { useWechatLogin } from 'hook/wechat';
 import { size, $api, checkStaticImg } from '@/utils';
 import { Touchable, Icon, Button } from 'ui';
 export default () => {

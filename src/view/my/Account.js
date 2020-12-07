@@ -1,21 +1,48 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { View, Text, StyleSheet, TextInput } from 'react-native';
 import { useTheme, useNavigation } from '@react-navigation/native';
 import { useDispatch, useSelector } from 'react-redux';
-import { getAccount } from '@/store/actions';
-import { size, commonStyle } from '@/utils';
+import { getAccount, commitUserInfo } from '@/store/actions';
+
+import { size, commonStyle, $api } from '@/utils';
 import { Touchable, Icon, Button, FlowList } from 'ui';
 import AccountItem from './components/AccountItem';
+import useGetHomeData from './hooks/useGetHomeData';
 export default () => {
   const { colors } = useTheme();
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const userInfo = useSelector((state) => state.my.userInfo);
+  const listRef = useRef();
+  const getHomeData = useGetHomeData();
   const [searchValue, setSearchValue] = useState('');
+  let params = {
+    limit_start: 0,
+    limit_page_length: 10,
+  };
 
-  const searchConfirm = () => {};
+  const searchConfirm = () => {
+    let search = searchValue.replace(/(^\s*)|(\s*$)/g, '');
+    params.limit_start = 0;
+    if (!search) {
+      delete params.search;
+    } else {
+      params.search = search;
+    }
+    listRef.current.refreshData();
+  };
   const goToErpLogin = () => {
     navigation.navigate('login');
+  };
+
+  const switchStudent = async (item) => {
+    let switchParams = { std: item.name };
+    let res = await $api['my/switchAccount'](switchParams);
+    if (res.data.display) {
+      await dispatch(commitUserInfo(res.data.display));
+      await getHomeData();
+      navigation.navigate('首页');
+    }
   };
   return (
     <View style={[style.wrap, { backgroundColor: colors.background }]}>
@@ -42,10 +69,12 @@ export default () => {
       </View>
 
       <FlowList
+        ref={listRef}
         style={style.flatlistWrap}
         contentContainerStyle={[style.flatlist]}
         request={getAccount}
-        renderItem={({ item, index }) => <AccountItem item={item} keyIndex={index} />}
+        params={params}
+        renderItem={({ item, index }) => <AccountItem switchStudent={switchStudent} item={item} keyIndex={index} />}
         keyExtractor={(item, index) => index.toString()}
       />
 

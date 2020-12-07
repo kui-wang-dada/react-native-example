@@ -17,14 +17,21 @@ export default ({ route, navigation }) => {
     {
       title: '联系客服',
       icon: 'kefu',
-      route: 'webView',
+      route: 'webview',
       params: { url: 'https://lc.chat/now/9055235/1' },
     },
+    // {
+    //   title: '指纹登录',
+    //   icon: 'finger',
+    //   route: 'finger',
+    //   type: 'finger',
+    // },
     {
-      title: '指纹登录',
-      icon: 'finger',
-      route: 'finger',
-      type: 'finger',
+      title: '关于厚仁',
+      label: '查看厚仁业务',
+      icon: 'wholeren',
+      params: { id: 'gh_54505723e513', path: 'pages/home/index' },
+      type: 'mini',
     },
     {
       title: '系统设置',

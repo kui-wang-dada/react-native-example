@@ -1,23 +1,18 @@
 {
-	"compilerOptions": {
-		"allowSyntheticDefaultImports": true,
-		"experimentalDecorators": true,
-		"baseUrl": "./",
-		"paths": {
-			"common": ["./src/components/common"],
-			
-			"ui": ["./src/components/ui"],
-			
-			"@": ["./src"],
-			"@/*": ["./src/*"],
+  "compilerOptions": {
+    "allowSyntheticDefaultImports": true,
+    "experimentalDecorators": true,
+    "baseUrl": "./",
+    "paths": {
+      "common": ["./src/components/common"],
+      "hook": ["./src/components/hook"],
 
-		}
-	},
-	"exclude": [
-		"node_modules",
-		"android",
-        "ios"
-	]
-	// "include": ["./ydk/"]
+      "ui": ["./src/components/ui"],
 
+      "@": ["./src"],
+      "@/*": ["./src/*"]
+    }
+  },
+  "exclude": ["node_modules", "android", "ios"]
+  // "include": ["./ydk/"]
 }

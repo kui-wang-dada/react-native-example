@@ -9,7 +9,9 @@ export default (props) => {
   const dispatch = useDispatch();
   const userInfo = useSelector((state) => state.my.userInfo);
 
-  const switchStudent = () => {};
+  const switchStudent = (item) => {
+    props.switchStudent && props.switchStudent(item);
+  };
 
   let { item } = props;
   let isActive = userInfo.students_id === item.name;
