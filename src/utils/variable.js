@@ -1,6 +1,5 @@
 import { size } from '@/utils';
 import { Dimensions, Platform, PixelRatio, StyleSheet } from 'react-native';
-import { initialMode } from 'react-native-dark-mode';
 
 export const lightColorTheme = {
   dark: false,
@@ -45,7 +44,7 @@ export const darkColorTheme = {
   },
 };
 
-export let colorTheme = initialMode === 'dark' ? darkColorTheme : lightColorTheme;
+export let colorTheme = lightColorTheme;
 
 // export function changeTheme(type) {
 //   if (type === 'dark') {

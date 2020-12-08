@@ -108,10 +108,10 @@ export default () => {
         textStyle={[style.btnLoginText, { color: colors.background }]}
         title={'提交'}
       />
-      <View style={style.tipWrap}>
+      {/* <View style={style.tipWrap}>
         <Button title="忘记密码" style={style.passwordWrap} textStyle={[style.passwordText, { color: colors.text_p }]} onPress={goToPassword} />
         <Button title="注册" style={style.registerWrap} textStyle={[style.registerText, { color: colors.text_p }]} onPress={goToRegister} />
-      </View>
+      </View> */}
     </View>
   );
 };

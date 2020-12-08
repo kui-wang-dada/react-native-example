@@ -119,11 +119,27 @@ export default (props) => {
       </View>
       <View style={style.checkBoxWrap}>
         <View style={style.parentWrap}>
-          <CheckBox style={style.checkBox} disabled={false} value={value1} onValueChange={handleValue1} />
+          <CheckBox
+            tintColors={colors.primary}
+            onCheckColor={colors.primary}
+            onTintColor={colors.primary}
+            style={style.checkBox}
+            disabled={false}
+            value={value1}
+            onValueChange={handleValue1}
+          />
           <Text style={style.parentText}>家长</Text>
         </View>
         <View style={style.studentWrap}>
-          <CheckBox style={style.checkBox} disabled={false} value={value2} onValueChange={handleValue2} />
+          <CheckBox
+            tintColors={colors.primary}
+            onCheckColor={colors.primary}
+            onTintColor={colors.primary}
+            style={style.checkBox}
+            disabled={false}
+            value={value2}
+            onValueChange={handleValue2}
+          />
           <Text style={style.studentText}>学生</Text>
         </View>
       </View>
@@ -133,7 +149,7 @@ export default (props) => {
         textStyle={[style.btnLoginText, { color: colors.background }]}
         title={'提交'}
       />
-      <Button title="注册" style={style.registerWrap} textStyle={[style.registerText, { color: colors.text_p }]} onPress={goToRegister} />
+      {/* <Button title="注册" style={style.registerWrap} textStyle={[style.registerText, { color: colors.text_p }]} onPress={goToRegister} /> */}
     </View>
   );
 };

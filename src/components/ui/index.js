@@ -13,5 +13,6 @@ import Cell from './Cell';
 import Fumi from './Fumi';
 import Loading from './Loading';
 import Switch from './Switch';
+import Progress from './Progress';
 
-export { WModal, YModal, Icon, Touchable, EndTip, FlowList, Message, TabBar, Button, ScrollTabBar, Image, Cell, Fumi, Loading, Switch };
+export { WModal, YModal, Icon, Touchable, EndTip, FlowList, Message, TabBar, Button, ScrollTabBar, Image, Cell, Fumi, Loading, Switch, Progress };

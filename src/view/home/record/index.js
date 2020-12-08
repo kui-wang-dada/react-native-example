@@ -191,6 +191,7 @@ const style = StyleSheet.create({
   center: {},
   centerText: {
     fontSize: size(28),
+    lineHeight: size(40),
   },
   recordFeed: {
     marginTop: size(50),

@@ -12,11 +12,11 @@ export default ({ route, navigation }) => {
   let source = {
     uri: url,
   };
-  console.log(source, 'url');
+
   return (
     <View style={style.wrap}>
       <WebView
-        source={{ uri: 'https://www.baidu.com' }}
+        source={source}
         // onLoadStart={this.handleLoadStart}
         // onNavigationStateChange={this.handleNavigationStateChange}
         // ref={(ref) => {

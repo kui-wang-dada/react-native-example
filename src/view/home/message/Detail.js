@@ -78,12 +78,12 @@ export default ({ route, navigation }) => {
   const renderInput = () => {
     return (
       <View style={[style.inputComment, { backgroundColor: colors.background, borderTopColor: colors.border }]}>
-        <View style={[style.inputWrap, { backgroundColor: colors.card }]}>
+        <Touchable style={[style.inputWrap, { backgroundColor: colors.card }]} onPress={() => getInput()}>
           <Icon name="edit" size={20} color="#666" />
-          <Touchable style={style.inputPlaceholder} onPress={() => getInput()}>
+          <View style={style.inputPlaceholder}>
             <Text style={[style.inputText, { color: colors.text_tag }]}>添加留言</Text>
-          </Touchable>
-        </View>
+          </View>
+        </Touchable>
       </View>
     );
   };

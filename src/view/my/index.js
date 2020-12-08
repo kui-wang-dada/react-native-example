@@ -17,7 +17,7 @@ export default ({ route, navigation }) => {
     {
       title: '联系客服',
       icon: 'kefu',
-      route: 'webview',
+      route: 'livechat',
       params: { url: 'https://lc.chat/now/9055235/1' },
     },
     // {

@@ -2,11 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { useTheme } from '@react-navigation/native';
 import { useColorScheme } from 'react-native-appearance';
+import { useSelector } from 'react-redux';
 import { size, commonStyle } from '@/utils';
 import { Touchable, Icon, Button } from 'ui';
 export default (props) => {
   const { colors } = useTheme();
-  const scheme = useColorScheme();
+
+  const theme = useSelector((state) => state.common.theme);
+  console.log(theme, 'scheme');
   let activeTheme = props.activeTheme;
   return (
     <View style={[style.tabs, { backgroundColor: colors.background }, props.style]}>
@@ -19,7 +22,7 @@ export default (props) => {
                   style.tabText,
                   props.activeTab === i
                     ? { ...style.activeText, ...{ color: activeTheme ? activeTheme : colors.color_blue } }
-                    : { color: scheme === 'dark' ? colors.color_blue : '#203046' },
+                    : { color: theme === 'dark' ? colors.color_blue : '#203046' },
                 ]}>
                 {tab}
               </Text>

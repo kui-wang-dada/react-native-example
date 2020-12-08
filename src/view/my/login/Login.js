@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, Image, ImageBackground } from 'react-native';
-import { useTheme } from '@react-navigation/native';
+import { useTheme, useNavigation } from '@react-navigation/native';
 import { size, checkStaticImg, $api } from '@/utils';
 import { Touchable, Icon, Button, TabBar } from 'ui';
 import ScrollableTabView from 'react-native-scrollable-tab-view';
@@ -8,7 +8,7 @@ import Tab1 from './item/LoginTab1';
 import Tab2 from './item/LoginTab2';
 export default () => {
   const { colors } = useTheme();
-
+  const navigation = useNavigation();
   const [tab, setTab] = useState(1);
   const [hasStd, setHasStd] = useState(false);
 
@@ -25,6 +25,7 @@ export default () => {
   return (
     <View style={style.wrap}>
       <ImageBackground source={require('@/assets/bg-theme.jpeg')} style={style.topWrap}>
+        <Button icon="back" iconColor={'#fff'} iconSize={16} style={style.backWrap} onPress={navigation.goBack} />
         <Text style={[style.title, { color: colors.background }]}>厚仁留学</Text>
         <View style={style.tabTitleWrap}>
           <Button
@@ -48,7 +49,7 @@ export default () => {
       </ImageBackground>
       <View style={style.conWrap}>{tab === 1 ? <Tab1 hasStd={hasStd} /> : <Tab2 />}</View>
 
-      <View style={style.otherWrap}>
+      {/* <View style={style.otherWrap}>
         <View style={style.otherTitle}>
           <View style={[style.line, { backgroundColor: colors.border_2 }]} />
           <Text style={[style.otherText]}>社交账号登录</Text>
@@ -57,7 +58,7 @@ export default () => {
         <Touchable style={style.wechatWrap}>
           <Image source={{ uri: checkStaticImg('wechat.png') }} style={style.wechat} />
         </Touchable>
-      </View>
+      </View> */}
     </View>
   );
 };
@@ -72,6 +73,13 @@ const style = StyleSheet.create({
     paddingBottom: size(80),
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  backWrap: {
+    position: 'absolute',
+    left: size(40),
+    top: size(60),
+    width: size(50),
+    height: size(50),
   },
   tabTitleWrap: {
     flexDirection: 'row',

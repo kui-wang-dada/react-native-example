@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, ScrollView } from 'react-native';
 import { useTheme } from '@react-navigation/native';
 import { useDispatch, useSelector } from 'react-redux';
 import { getWeekReportDetail } from '@/store/actions';
@@ -37,7 +37,7 @@ export default ({ route, navigation }) => {
     },
   ];
   return (
-    <View style={[style.weekReport, { backgroundColor: colors.card }]}>
+    <ScrollView style={[style.weekReport, { backgroundColor: colors.card }]}>
       <View style={[style.weekMain, { backgroundColor: colors.background }]}>
         <View style={style.top}>
           <View style={style.topLeft}>
@@ -56,7 +56,7 @@ export default ({ route, navigation }) => {
           return <ListItem item={item} key={index} style={{ height: size(100) }} />;
         })}
       </View>
-    </View>
+    </ScrollView>
   );
 };
 const style = StyleSheet.create({
@@ -98,6 +98,7 @@ const style = StyleSheet.create({
   center: {},
   centerText: {
     fontSize: size(28),
+    lineHeight: size(40),
   },
   listWrap: {
     paddingHorizontal: size(32),

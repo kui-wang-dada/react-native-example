@@ -68,7 +68,7 @@ export default ({ route, navigation }) => {
     );
   };
   let tpData = homeTp[0];
-  let services = Array.isArray(homeSp) && homeSp.slice(0, 3);
+  let services = Array.isArray(homeSp) && homeSp.slice(0, 3) || [];
   return (
     <ScrollView style={[style.wrap, { backgroundColor: colors.card }]}>
       <Avatar />

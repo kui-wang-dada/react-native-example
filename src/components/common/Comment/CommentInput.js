@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, Keyboard, KeyboardAvoidingView, TextInput, Platform } from 'react-native';
 import { useTheme } from '@react-navigation/native';
+import { useSelector } from 'react-redux';
 import { useColorScheme } from 'react-native-appearance';
 import { size, commonStyle, $api, ymodal, modal, SCREEN_HEIGHT } from '@/utils';
 import { Touchable, Icon, Button } from 'ui';
 import { SubmitButton } from 'common';
 
 export default (props) => {
-  const scheme = useColorScheme();
-  const colors = scheme === 'dark' ? commonStyle.darkColorTheme.colors : commonStyle.lightColorTheme.colors;
+  const theme = useSelector((state) => state.common.theme);
+  const colors = theme === 'dark' ? commonStyle.darkColorTheme.colors : commonStyle.lightColorTheme.colors;
   const [inputValue, setInputValue] = useState('');
 
   const submit = async () => {
@@ -53,14 +54,14 @@ export default (props) => {
     android: 0,
   });
 
-  console.log(colors, scheme, 'colors');
+  console.log(colors, theme, 'colors');
   return (
     <KeyboardAvoidingView enabled behavior="position" keyboardVerticalOffset={keyboardOffset} style={{ backgroundColor: colors.background }}>
       <Touchable type="withoutFeedback" onPress={() => Keyboard.dismiss()} style={{ backgroundColor: colors.background }}>
         <View style={[style.wrap, { backgroundColor: colors.background }]}>
           <View style={style.uploadWrap}>
             <View style={style.titleWrap}>
-              <Text style={[style.title, { color: colors.text }]}>评论</Text>
+              <Text style={[style.title, { color: colors.text }]}>留言</Text>
             </View>
             <TextInput
               style={[
