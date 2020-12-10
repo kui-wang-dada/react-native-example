@@ -16,14 +16,11 @@ export default () => {
   const listRef = useRef();
   const getHomeData = useGetHomeData();
   const [searchValue, setSearchValue] = useState('');
-  let params = {
-    limit_start: 0,
-    limit_page_length: 10,
-  };
+  let params = {};
 
   const searchConfirm = () => {
     let search = searchValue.replace(/(^\s*)|(\s*$)/g, '');
-    params.limit_start = 0;
+
     if (!search) {
       delete params.search;
     } else {

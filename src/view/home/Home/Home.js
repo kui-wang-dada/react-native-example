@@ -32,7 +32,9 @@ export default ({ route, navigation }) => {
     dispatch(getHomeTp(paramsTp));
   }, []);
 
-  const goToProject = () => {};
+  const goToProject = () => {
+    navigation.navigate('project');
+  };
   const goToGridItem = (item) => {
     navigation.navigate(item.route);
   };
@@ -68,7 +70,7 @@ export default ({ route, navigation }) => {
     );
   };
   let tpData = homeTp[0];
-  let services = Array.isArray(homeSp) && homeSp.slice(0, 3) || [];
+  let services = (Array.isArray(homeSp) && homeSp.slice(0, 3)) || [];
   return (
     <ScrollView style={[style.wrap, { backgroundColor: colors.card }]}>
       <Avatar />

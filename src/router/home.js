@@ -1,4 +1,5 @@
 import Home from '@/view/home/home/Home';
+import Project from '@/view/home/home/Project';
 import Tutor from '@/view/home/tutor/Tutor';
 import Service from '@/view/home/service/Service';
 import Message from '@/view/home/message';
@@ -19,6 +20,12 @@ const HomeRoute = {
     name: 'home',
 
     options: { headerShown: false, title: '首页' },
+  },
+  project: {
+    screen: Project,
+    name: 'project',
+
+    options: { headerShown: true, title: '服务列表' },
   },
   tutor: {
     screen: Tutor,

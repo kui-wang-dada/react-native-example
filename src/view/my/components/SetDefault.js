@@ -37,6 +37,7 @@ export default (props) => {
     closeDialog();
     _updateInfo(mes);
   };
+
   const _updateInfo = async (mes) => {
     let params = {};
     params[this.props.data.key] = mes;

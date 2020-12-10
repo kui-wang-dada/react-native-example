@@ -13,7 +13,7 @@ export default (props) => {
     }
   };
   return (
-    <View style={[style.topHeader, padding ? style.pad : null]} onClick={() => handleRight()}>
+    <Touchable style={[style.topHeader, padding ? style.pad : null]} onPress={handleRight}>
       <View style={style.titleWrap}>
         <Text style={[style.line, color ? { backgroundColor: color } : { backgroundColor: colors.primary }]} />
         <Text style={[style.title, { color: colors.text }]}>{title}</Text>
@@ -25,7 +25,7 @@ export default (props) => {
           <Icon name="right" size={20} color={colors.text_p} />
         </View>
       ) : null}
-    </View>
+    </Touchable>
   );
 };
 

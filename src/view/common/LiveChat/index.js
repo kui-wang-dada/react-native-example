@@ -24,8 +24,9 @@ export default ({ route }) => {
 
   const initData = async () => {
     let role = userInfo.roles.includes('Parent') ? '家长' : userInfo.roles.includes('Students') ? '学生' : '老师或者其他';
+
     const customerSDK = init({
-      license: 9055235,
+      licenseId: 9055235,
       clientId: '593d4e1deede71888e49d81f03ef4d61',
       redirectUri: 'https://erp.wholerengroup.com',
     });
@@ -36,27 +37,39 @@ export default ({ route }) => {
 
     customerSDK.on('connected', (payload) => {
       console.log('connected', payload);
-      let chatRoom = payload.chatsSummary[0];
-      let chatId = chatRoom && chatRoom.id;
+
       customerSDK
-        .sendEvent(chatId, {
-          type: 'message',
-          text: `(${userInfo.username},${role},${userInfo.email}） 在App浏览：${data.title}`,
-        })
-        .then((response) => {
-          console.log(response);
+        .listChats({})
+        .then(({ chatsSummary, totalChats }) => {
+          console.log(chatsSummary, totalChats);
+          let chatRoom = chatsSummary[0];
+          let chatId = chatRoom && chatRoom.id;
+          customerSDK
+            .sendEvent({
+              chatId,
+              event: {
+                type: 'message',
+                text: `(${userInfo.username},${role},${userInfo.email}） 在App浏览：${data.title}`,
+              },
+            })
+            .then((response) => {
+              console.log(response);
+            })
+            .catch((error) => {
+              console.log(error);
+            });
+
+          // customerSDK.sendFile(chatId, {
+          //   file: {
+          //     uri: checkImg(data.cover_image),
+          //     type: 'image/jpeg', // optional
+          //     name: 'photo.jpg', // optional
+          //   },
+          // });
         })
         .catch((error) => {
           console.log(error);
         });
-
-      customerSDK.sendFile(chatId, {
-        file: {
-          uri: checkImg(data.cover_image),
-          type: 'image/jpeg', // optional
-          name: 'photo.jpg', // optional
-        },
-      });
     });
   };
   const renderLoading = () => {

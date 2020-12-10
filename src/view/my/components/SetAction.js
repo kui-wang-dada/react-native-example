@@ -1,39 +1,25 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { useTheme } from '@react-navigation/native';
 import RNBottomActionSheet from 'react-native-bottom-action-sheet';
 import { useColorScheme } from 'react-native-appearance';
 import { useDispatch, useSelector } from 'react-redux';
 import { size, commonStyle, modal, $api } from '@/utils';
-import { Touchable, Icon, Button } from 'ui';
+import { Touchable, Icon, Button, ActionSheet } from 'ui';
 export default (props) => {
   const { colors } = useTheme();
   const scheme = useColorScheme();
   const dispatch = useDispatch();
   const userInfo = useSelector((state) => state.my.userInfo);
 
+  const actionRef = useRef();
+  let actionOptions = ['取消', '中文', '英文'];
+
   const clickItem = () => {
-    console.log('visible');
-
-    let facebook = <Icon name={'facebook'} color={'#000000'} size={30} />;
-    let instagram = <Icon name={'instagram'} color={'#000000'} size={30} />;
-    let SheetView = RNBottomActionSheet.SheetView;
-
-    SheetView.Show({
-      title: '请选择语言!',
-      items: [
-        { title: '中文', value: 'fb', icon: facebook },
-        { title: '英语', value: 'insta', icon: instagram },
-        { title: '取消', value: 'insta', icon: instagram },
-      ],
-      theme: scheme,
-      selection: 3,
-      onSelection: (index, value) => {
-        // value is optional
-        console.log('selection: ' + index + ' ' + value);
-      },
-      onCancel: () => console.log('Closing the bottom SheetView!!!'),
-    });
+    actionRef.current.show();
+  };
+  const handleActionPress = async (v) => {
+    let mes = actionOptions[v];
   };
   const _updateInfo = async (mes) => {
     if (!this.props.loginEmail) {
@@ -62,7 +48,6 @@ export default (props) => {
 
   let { data, language } = props;
 
-  let facebook = <Icon name={'facebook'} color={'#000000'} size={30} />;
   return (
     <View style={{ backgroundColor: colors.background }}>
       <Touchable
@@ -81,6 +66,15 @@ export default (props) => {
         <Icon name="right" size={size(30)} color={colors.primary} style={style.icon} />
       </Touchable>
       {data.border ? <View style={[style.border, { backgroundColor: colors.border }]} /> : null}
+      <ActionSheet
+        ref={actionRef}
+        title={'请选择语言!'}
+        options={actionOptions}
+        cancelButtonIndex={0}
+        destructiveButtonIndex={3}
+        tintColor={colors.primary}
+        onPress={handleActionPress}
+      />
     </View>
   );
 };

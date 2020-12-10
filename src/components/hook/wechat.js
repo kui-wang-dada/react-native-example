@@ -43,8 +43,10 @@ export const useWechatLogin = () => {
 
     let res = await $api['my/wechatLogin'](params);
     console.log('getUser,', res);
-    if (res.data.display && res.data.display.uid) {
-      dispatch(commitSessionId(res.data.display.uid));
+
+    if (res.data.display) {
+      let id = res.data.display.unionid || res.data.display.uid;
+      dispatch(commitSessionId(id));
       await getHomeData();
     }
   };
