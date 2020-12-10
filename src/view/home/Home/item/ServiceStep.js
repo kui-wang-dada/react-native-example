@@ -9,7 +9,7 @@ export default () => {
   const navigation = useNavigation();
   return (
     <View style={style.wrap}>
-      <Image source={{ uri: checkStaticImg('home-bg.jpeg') }} style={style.img} />
+      <Image source={{ uri: checkStaticImg('home-bg.jpeg') }} style={[style.img, { backgroundColor: colors.background }]} />
     </View>
   );
 };

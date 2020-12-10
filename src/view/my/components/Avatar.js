@@ -30,7 +30,7 @@ export default () => {
               <View style={style.topName}>
                 <Text style={[style.title, { color: colors.text }]}>{userInfo.username}</Text>
 
-                {/* {userInfo.phone_number ? <Text style={style.phone">{userInfo.phone_number}</Text> : null} */}
+                {/* {userInfo.phone_number ? <Text style={style.phone}>{userInfo.phone_number}</Text> : null} */}
               </View>
 
               {userInfo.students_id ? <Text style={[style.student, { color: colors.text_p }]}>绑定学号：{userInfo.students_id}</Text> : null}
@@ -38,9 +38,12 @@ export default () => {
             <Icon name="edit" size={16} color="#999" />
           </Touchable>
           {userInfo.students_id ? null : (
-            <Touchable onPress={goToLogin} style={[style.loginBtn, { backgroundColor: colors.primary }]}>
-              <Text style={[style.loginBtnText, { color: colors.background }]}>绑定厚仁账号</Text>
-            </Touchable>
+            <Button
+              title="绑定厚仁账号"
+              onPress={goToLogin}
+              style={[style.loginBtn, { backgroundColor: colors.primary }]}
+              textStyle={[style.loginBtnText, { color: colors.background }]}
+            />
           )}
         </View>
       ) : (
@@ -106,7 +109,7 @@ const style = StyleSheet.create({
     paddingHorizontal: size(20),
     borderRadius: size(12),
     marginTop: size(6),
-    width: size(160),
+
     alignSelf: 'center',
   },
   loginBtnText: {

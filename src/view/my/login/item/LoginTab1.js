@@ -128,7 +128,7 @@ export default (props) => {
             value={value1}
             onValueChange={handleValue1}
           />
-          <Text style={style.parentText}>家长</Text>
+          <Text style={[style.parentText, { color: colors.text }]}>家长</Text>
         </View>
         <View style={style.studentWrap}>
           <CheckBox
@@ -140,7 +140,7 @@ export default (props) => {
             value={value2}
             onValueChange={handleValue2}
           />
-          <Text style={style.studentText}>学生</Text>
+          <Text style={[style.studentText, { color: colors.text }]}>学生</Text>
         </View>
       </View>
       <Button

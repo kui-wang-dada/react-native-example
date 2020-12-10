@@ -73,7 +73,7 @@ export default () => {
         <Text style={style.noLoginTitle}>厚仁学生中心</Text>
         <View style={style.noLoginCon}>
           <Image source={{ uri: checkStaticImg('xueshu.png') }} style={style.noLoginImg} />
-          <Text style={style.noLoginLabel}>您好！「厚仁学生中心」小程序仅对厚仁教育用户开放，请您进行微信授权并绑定厚仁学生账号。</Text>
+          <Text style={style.noLoginLabel}>您好！「厚仁学生中心」APP仅对厚仁教育用户开放，请您进行微信授权并绑定厚仁学生账号。</Text>
         </View>
         <View style={style.noLoginBtnWrap}>
           <Text style={style.noLoginText}>点击登录</Text>
@@ -187,6 +187,7 @@ const style = StyleSheet.create({
     flex: 1,
     fontSize: size(28),
     color: '#fff',
+    lineHeight: size(40),
   },
   noLoginBtnWrap: {
     flexDirection: 'row',

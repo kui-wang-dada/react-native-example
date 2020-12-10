@@ -12,7 +12,7 @@ export default () => {
   return (
     <View style={[style.about, { backgroundColor: colors.background }]}>
       <View style={style.topWrap}>
-        <Icon name="about" size={60} color={colors.primary} />
+        <Icon name="wholeren" size={60} color={colors.primary} />
         <Text style={[style.title, { color: colors.text }]}>{'厚仁教育'}</Text>
         <Text style={[style.des, { color: colors.text_p }]}>
           版本

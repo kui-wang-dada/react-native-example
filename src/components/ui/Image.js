@@ -12,17 +12,25 @@ export default (props) => {
     if (!props.source.uri) {
       return;
     }
-    Image.getSize(props.source.uri, (width, height) => {
-      //width 图片的宽度
-      //height 图片的高度
-      let myImgHeight = Math.floor((SCREEN_WIDTH / width) * height);
-      console.log(width, height, myImgHeight, 'ttttt');
-      if (props.style && props.style.height) {
-        setImgHeight(props.style.height);
-      } else {
-        setImgHeight(myImgHeight);
-      }
-    });
+    console.log(props.source.uri, 'tttt');
+    Image.getSize(
+      props.source.uri,
+      (width, height) => {
+        //width 图片的宽度
+        //height 图片的高度
+        console.log(width, height, 'ttttt');
+        let myImgHeight = Math.floor((SCREEN_WIDTH / width) * height);
+        console.log(width, height, myImgHeight, 'ttttt');
+        if (props.style && props.style.height) {
+          setImgHeight(props.style.height);
+        } else {
+          setImgHeight(myImgHeight);
+        }
+      },
+      (e) => {
+        console.log(e, 'tttt');
+      },
+    );
   }, []);
 
   let { source } = props;

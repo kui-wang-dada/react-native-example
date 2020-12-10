@@ -4,6 +4,7 @@ import { useTheme } from '@react-navigation/native';
 import HTMLView from 'react-native-htmlview';
 import { size, commonStyle } from '@/utils';
 import { Touchable, Icon, Button } from 'ui';
+import { color } from 'react-native-reanimated';
 export default (props) => {
   const { colors } = useTheme();
 
@@ -74,8 +75,10 @@ export default (props) => {
   }, []);
 
   const clickItem = (item, index) => {
-    list[index].showCon = !list[index].showCon;
-    setList({ list });
+    let newList = [].concat(list);
+    newList[index].showCon = !newList[index].showCon;
+
+    setList(newList);
   };
   const toggleAllTask = () => {
     let flag = !showAll;
@@ -100,18 +103,18 @@ export default (props) => {
                 <View style={style.icon}>
                   <Icon name={item.icon} size={16} color={item.color} />
                 </View>
-                <View
+                <Touchable
                   style={style.content}
-                  onClick={() => {
-                    this.clickItem(item, index);
+                  onPress={() => {
+                    clickItem(item, index);
                   }}>
-                  <View style={[style.titleWrap, showCon ? style.active : null]}>
+                  <View style={[style.titleWrap, showCon ? style.active : null, { backgroundColor: colors.background }]}>
                     <View style={style.title}>
-                      <Text style={style.titleText}>{item.title}</Text>
+                      <Text style={[style.titleText, { color: colors.text }]}>{item.title}</Text>
                       <View style={style.iconRight}>{showCon ? <Icon name="down" size={16} color={'#4bc694'} /> : <Icon name="up" size={16} color={'#666'} />}</View>
                     </View>
                     {item.showDate ? (
-                      <Text style={style.date}>
+                      <Text style={[style.date, { color: colors.text_p }]}>
                         {item.startDate} 至 {item.endDate}
                       </Text>
                     ) : null}
@@ -124,7 +127,7 @@ export default (props) => {
                       {item.tag}
                     </View>
                   ) : null}
-                </View>
+                </Touchable>
               </View>
             );
           })}
@@ -221,6 +224,7 @@ const style = StyleSheet.create({
   date: {
     fontSize: size(24),
     color: '#999',
+    marginTop: size(10),
   },
   labelWrap: {
     marginBottom: size(20),

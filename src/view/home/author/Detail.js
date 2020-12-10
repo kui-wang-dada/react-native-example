@@ -29,12 +29,12 @@ export default ({ route }) => {
   }, []);
 
   const goToExpert = () => {
-    let id = 'gh_e6cd6a6f3f7c';
+    let id = 'gh_54505723e513';
     let path = '/pageSub/authorDetail/index?name=' + authorDetail.name;
     openMini(id, path);
   };
   const goToExpertDetail = (post) => {
-    let id = 'gh_e6cd6a6f3f7c';
+    let id = 'gh_54505723e513';
     let path = 'pageSub/blogDetail/index?name=' + post.name;
     openMini(id, path);
   };

@@ -26,11 +26,11 @@ export default () => {
     <View style={style.wrap}>
       <ImageBackground source={require('@/assets/bg-theme.jpeg')} style={style.topWrap}>
         <Button icon="back" iconColor={'#fff'} iconSize={16} style={style.backWrap} onPress={navigation.goBack} />
-        <Text style={[style.title, { color: colors.background }]}>厚仁留学</Text>
+        <Text style={[style.title, { color: '#fff' }]}>厚仁留学</Text>
         <View style={style.tabTitleWrap}>
           <Button
             style={style.tabTextWrap}
-            textStyle={[style.tabText, { color: colors.card }, tab === 1 ? { ...style.tabTextActive, ...{ color: colors.background } } : null]}
+            textStyle={[style.tabText, tab === 1 ? { ...style.tabTextActive } : null]}
             title="邀请码登录"
             onPress={() => {
               setTab(1);
@@ -39,7 +39,7 @@ export default () => {
           <View style={style.tabLine} />
           <Button
             style={style.tabTextWrap}
-            textStyle={[style.tabText, { color: colors.card }, tab === 0 ? { ...style.tabTextActive, ...{ color: colors.background } } : null]}
+            textStyle={[style.tabText, tab === 0 ? { ...style.tabTextActive } : null]}
             title="账号密码登录"
             onPress={() => {
               setTab(0);
@@ -47,7 +47,7 @@ export default () => {
           />
         </View>
       </ImageBackground>
-      <View style={style.conWrap}>{tab === 1 ? <Tab1 hasStd={hasStd} /> : <Tab2 />}</View>
+      <View style={[style.conWrap, { backgroundColor: colors.card }]}>{tab === 1 ? <Tab1 hasStd={hasStd} /> : <Tab2 />}</View>
 
       {/* <View style={style.otherWrap}>
         <View style={style.otherTitle}>
@@ -99,10 +99,12 @@ const style = StyleSheet.create({
   },
   tabText: {
     fontSize: size(28),
+    color: '#fff',
   },
   tabTextActive: {
     fontSize: size(32),
     fontWeight: 'bold',
+    color: '#fff',
   },
   conWrap: {
     flex: 1,
@@ -110,7 +112,7 @@ const style = StyleSheet.create({
     top: -size(40),
     borderRadius: size(20),
     marginHorizontal: size(40),
-    backgroundColor: '#fff',
+
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
