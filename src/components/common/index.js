@@ -11,5 +11,21 @@ import SchoolItem from './SchoolItem';
 import ListItem from './ListItem';
 import SubmitButton from './SubmitButton';
 import Comment from './Comment';
+import SecurityInput from './SecurityInput';
 
-export { TutorItem, ServiceItem, TopHeader, RecordItem, WeekReportItem, ReportItem, CourseItem, MessageItem, AuthorItem, SchoolItem, ListItem, SubmitButton, Comment };
+export {
+  TutorItem,
+  ServiceItem,
+  TopHeader,
+  RecordItem,
+  WeekReportItem,
+  ReportItem,
+  CourseItem,
+  MessageItem,
+  AuthorItem,
+  SchoolItem,
+  ListItem,
+  SubmitButton,
+  Comment,
+  SecurityInput,
+};

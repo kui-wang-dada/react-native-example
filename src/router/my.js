@@ -29,7 +29,10 @@ export default {
   login: {
     screen: Login,
     name: 'login',
-    options: { headerShown: false, title: '登录' },
+    options: {
+      headerShown: false,
+      title: '登录',
+    },
   },
   register: {
     screen: Register,
