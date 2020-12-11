@@ -22,7 +22,7 @@ export default class Main extends Component {
     let { sendCoding, second } = this.state;
     return (
       <View style={[style.wrap, this.props.style]}>
-        <Icon style={style.img} name={this.props.icon} />
+        <Icon style={style.img} size={20} color={'#666'} name={this.props.icon} />
         <TextInput
           placeholderTextColor={commonStyle.colorTheme.tag}
           placeholder={this.props.placeholder}

@@ -67,10 +67,10 @@ export default ({ route }) => {
       <Button icon="back" iconColor={'#fff'} iconSize={16} style={style.backWrap} onPress={navigation.goBack} />
 
       <View style={[style.pageTitleWrap]}>
-        <Text style={[style.pageTitle, { color: colors.primary }]}>厚仁留学{title}</Text>
+        <Text style={[style.pageTitle, { color: '#fff' }]}>厚仁留学{title}</Text>
       </View>
       <View style={style.conWrap}>
-        <Icon name="wholeren" />
+        <Icon style={style.logo} name="wholeren" size={50} color={colors.primary} />
         <View style={style.tabWrap}>
           <Button
             style={[style.tab, tab ? null : style.tabActive]}
@@ -102,7 +102,7 @@ export default ({ route }) => {
               />
             ) : null}
             <SecurityInput
-              icon={'pwd'}
+              icon={'code'}
               secureTextEntry={true}
               style={style.pwd}
               value={invitation}
@@ -201,8 +201,6 @@ const style = StyleSheet.create({
     alignItems: 'center',
   },
   logo: {
-    width: size(116),
-    height: size(100),
     marginTop: size(66),
   },
   tabWrap: {
@@ -252,7 +250,7 @@ const style = StyleSheet.create({
     marginBottom: size(10),
   },
   linear: {
-    marginTop: size(88),
+    marginTop: size(44),
     width: size(488),
     height: size(80),
     borderRadius: size(4),
