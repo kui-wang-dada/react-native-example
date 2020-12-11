@@ -24,6 +24,8 @@ export default ({ route }) => {
   const [tab, setTab] = useState(0);
   const [std, setStd] = useState('');
   const [invitation, setInvitation] = useState('');
+  const [value1, setValue1] = useState(false);
+  const [value2, setValue2] = useState(false);
   const [email, setEmail] = useState('');
   const [pwd, setPwd] = useState('');
   const [check, setCheck] = useState(false);
@@ -38,6 +40,22 @@ export default ({ route }) => {
     let res = await $api['my/bindConfig']();
     if (res.data.display && !res.data.display.allow_bind_using_invitation_code) {
       setHasStd(true);
+    }
+  };
+  const handleValue1 = (newV) => {
+    if (newV) {
+      setValue2(false);
+      setValue1(true);
+    } else {
+      setValue1(false);
+    }
+  };
+  const handleValue2 = (newV) => {
+    if (newV) {
+      setValue1(false);
+      setValue2(true);
+    } else {
+      setValue2(false);
     }
   };
   const loginCode = () => {};
@@ -110,6 +128,32 @@ export default ({ route }) => {
                 setInvitation(text);
               }}
             />
+            <View style={style.checkBoxWrap}>
+              <View style={style.parentWrap}>
+                <CheckBox
+                  tintColors={colors.primary}
+                  onCheckColor={colors.primary}
+                  onTintColor={colors.primary}
+                  style={style.checkBox}
+                  disabled={false}
+                  value={value1}
+                  onValueChange={handleValue1}
+                />
+                <Text style={[style.parentText, { color: colors.text }]}>家长</Text>
+              </View>
+              <View style={style.studentWrap}>
+                <CheckBox
+                  tintColors={colors.primary}
+                  onCheckColor={colors.primary}
+                  onTintColor={colors.primary}
+                  style={style.checkBox}
+                  disabled={false}
+                  value={value2}
+                  onValueChange={handleValue2}
+                />
+                <Text style={[style.studentText, { color: colors.text }]}>学生</Text>
+              </View>
+            </View>
             <LinearGradient colors={['#475C78', '#203046']} style={style.linear} start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }}>
               <Button style={style.btnWrap} textStyle={style.btn} title="登录" onPress={loginCode} />
             </LinearGradient>
@@ -181,7 +225,7 @@ const style = StyleSheet.create({
     alignItems: 'center',
   },
   pageTitle: {
-    fontSize: size(54),
+    fontSize: size(40),
     fontWeight: 'bold',
   },
   backWrap: {
@@ -236,6 +280,32 @@ const style = StyleSheet.create({
   pwd: {
     marginTop: size(16),
     marginBottom: size(10),
+  },
+  checkBoxWrap: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    height: size(100),
+  },
+  parentWrap: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  checkBox: {
+    width: size(36),
+    height: size(36),
+  },
+  parentText: {
+    marginLeft: size(20),
+    fontSize: size(28),
+  },
+  studentWrap: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  studentText: {
+    marginLeft: size(20),
+    fontSize: size(28),
   },
   tabRightWrap: {
     width: size(488),
