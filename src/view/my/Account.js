@@ -7,7 +7,7 @@ import { getAccount, commitUserInfo } from '@/store/actions';
 import { size, commonStyle, $api } from '@/utils';
 import { Touchable, Icon, Button, FlowList } from 'ui';
 import AccountItem from './components/AccountItem';
-import useGetHomeData from './hooks/useGetHomeData';
+import { useGetHomeData } from 'hook/useGetData';
 export default () => {
   const { colors } = useTheme();
   const navigation = useNavigation();
@@ -29,7 +29,7 @@ export default () => {
     listRef.current.refreshData();
   };
   const goToErpLogin = () => {
-    navigation.navigate('login');
+    navigation.navigate('login', { type: 'bind' });
   };
 
   const switchStudent = async (item) => {

@@ -8,7 +8,7 @@ import { size, $api, modal } from '@/utils';
 import { commitSessionId, getHomeSp, getHomeTp, getHomeCount, getUserInfo } from '@/store/actions';
 
 import { Touchable, Icon, Button, Fumi } from 'ui';
-export default () => {
+export default (props) => {
   const { colors } = useTheme();
   const navigation = useNavigation();
   const dispatch = useDispatch();
@@ -16,17 +16,6 @@ export default () => {
   const [email, setEmail] = useState('');
   const [pwd, setPwd] = useState('');
 
-  const getHomeData = async () => {
-    let params = {
-      limit_start: 0,
-      limit_page_length: 10,
-    };
-    dispatch(getHomeSp(params));
-    dispatch(getHomeTp(params));
-
-    dispatch(getHomeCount());
-    await dispatch(getUserInfo());
-  };
   const login = async () => {
     if (!email) {
       modal.showToast('请输入账号');
@@ -41,22 +30,9 @@ export default () => {
       pwd: pwd,
     };
 
-    try {
-      let res = await $api['my/erpLogin'](params);
-      console.log(res, 'erp');
-
-      if (res.data && res.data.display && res.data.display.students_id) {
-        dispatch(commitSessionId(res.data.display.uid));
-        await getHomeData();
-
-        navigation.navigate('首页');
-      } else {
-        modal.showToast(res.status.message);
-      }
-    } catch (error) {
-      modal.showToast('绑定失败');
-    }
+    props.login && props.login(params);
   };
+
   const goToRegister = () => {
     navigation.navigate('register');
   };
@@ -64,7 +40,7 @@ export default () => {
     navigation.navigate('password');
   };
   return (
-    <View style={style.wrap}>
+    <View style={[style.wrap, { backgroundColor: colors.background }]}>
       <View style={style.fieldWrap}>
         <Fumi
           label={'邮箱'}
@@ -108,16 +84,17 @@ export default () => {
         textStyle={[style.btnLoginText, { color: colors.background }]}
         title={'提交'}
       />
-      {/* <View style={style.tipWrap}>
-        <Button title="忘记密码" style={style.passwordWrap} textStyle={[style.passwordText, { color: colors.text_p }]} onPress={goToPassword} />
-        <Button title="注册" style={style.registerWrap} textStyle={[style.registerText, { color: colors.text_p }]} onPress={goToRegister} />
-      </View> */}
+      {props.type ? null : (
+        <View style={style.tipWrap}>
+          <Button title="忘记密码" style={style.passwordWrap} textStyle={[style.passwordText, { color: colors.text_p }]} onPress={goToPassword} />
+          <Button title="注册" style={style.registerWrap} textStyle={[style.registerText, { color: colors.text_p }]} onPress={goToRegister} />
+        </View>
+      )}
     </View>
   );
 };
 const style = StyleSheet.create({
   wrap: {
-    flex: 1,
     paddingHorizontal: size(32),
   },
   fieldWrap: {
@@ -141,9 +118,9 @@ const style = StyleSheet.create({
   },
   tipWrap: {
     marginTop: size(40),
+    paddingHorizontal: size(40),
     flexDirection: 'row',
     justifyContent: 'space-between',
-    paddingHorizontal: size(20),
   },
   passwordText: {
     fontSize: size(28),

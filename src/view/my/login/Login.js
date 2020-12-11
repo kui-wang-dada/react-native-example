@@ -1,17 +1,27 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, Image, ImageBackground } from 'react-native';
+
 import { useTheme, useNavigation } from '@react-navigation/native';
-import { size, checkStaticImg, $api } from '@/utils';
+import { useWechatLogin } from 'hook/wechat';
+import { useDispatch, useSelector } from 'react-redux';
+import { commitSessionId, getHomeSp, getHomeTp, getHomeCount, getUserInfo } from '@/store/actions';
+import { useGetHomeData } from 'hook/useGetData';
+import { size, checkStaticImg, $api, modal } from '@/utils';
 import { Touchable, Icon, Button, TabBar } from 'ui';
 import ScrollableTabView from 'react-native-scrollable-tab-view';
+import LinearGradient from 'react-native-linear-gradient';
 import Tab1 from './item/LoginTab1';
 import Tab2 from './item/LoginTab2';
-export default () => {
+export default ({ route }) => {
   const { colors } = useTheme();
   const navigation = useNavigation();
-  const [tab, setTab] = useState(1);
+  const getWechat = useWechatLogin();
+  const getHomeData = useGetHomeData();
+  const dispatch = useDispatch();
   const [hasStd, setHasStd] = useState(false);
 
+  const type = route.params && route.params.type;
+  const title = type ? '绑定' : '登录';
   useEffect(() => {
     getData();
   }, []);
@@ -22,43 +32,53 @@ export default () => {
     }
   };
 
-  return (
-    <View style={style.wrap}>
-      <ImageBackground source={require('@/assets/bg-theme.jpeg')} style={style.topWrap}>
-        <Button icon="back" iconColor={'#fff'} iconSize={16} style={style.backWrap} onPress={navigation.goBack} />
-        <Text style={[style.title, { color: '#fff' }]}>厚仁留学</Text>
-        <View style={style.tabTitleWrap}>
-          <Button
-            style={style.tabTextWrap}
-            textStyle={[style.tabText, tab === 1 ? { ...style.tabTextActive } : null]}
-            title="邀请码登录"
-            onPress={() => {
-              setTab(1);
-            }}
-          />
-          <View style={style.tabLine} />
-          <Button
-            style={style.tabTextWrap}
-            textStyle={[style.tabText, tab === 0 ? { ...style.tabTextActive } : null]}
-            title="账号密码登录"
-            onPress={() => {
-              setTab(0);
-            }}
-          />
-        </View>
-      </ImageBackground>
-      <View style={[style.conWrap, { backgroundColor: colors.card }]}>{tab === 1 ? <Tab1 hasStd={hasStd} /> : <Tab2 />}</View>
+  const login = async (params) => {
+    try {
+      let res = await $api['my/erpLogin'](params);
+      console.log(res, 'erp');
 
-      {/* <View style={style.otherWrap}>
-        <View style={style.otherTitle}>
-          <View style={[style.line, { backgroundColor: colors.border_2 }]} />
-          <Text style={[style.otherText]}>社交账号登录</Text>
-          <View style={[style.line, { backgroundColor: colors.border_2 }]} />
+      if (res.data && res.data.display && res.data.display.students_id) {
+        dispatch(commitSessionId(res.data.display.uid));
+        await getHomeData();
+
+        navigation.navigate('首页');
+      } else {
+        modal.showToast(res.status.message);
+      }
+    } catch (error) {
+      modal.showToast('绑定失败');
+    }
+  };
+
+  return (
+    <View style={[style.wrap, { backgroundColor: colors.background }]}>
+      <LinearGradient start={{ x: 0, y: 0 }} end={{ x: 0, y: 1 }} colors={colors.gradient_login} style={[style.linearGradient]}>
+        <Button icon="back" iconColor={'#fff'} iconSize={16} style={style.backWrap} onPress={navigation.goBack} />
+        <Text style={[style.title, { color: colors.primary }]}>厚仁留学{title}</Text>
+      </LinearGradient>
+
+      <ScrollableTabView
+        contentProps={{
+          keyboardShouldPersistTaps: 'always',
+        }}
+        renderTabBar={() => <TabBar style={style.tabBar} activeSize={size(36)} />}>
+        <Tab1 tabLabel={'邀请码' + title} hasStd={hasStd} type={type} login={login} />
+        <Tab2 tabLabel={'账号密码' + title} type={type} login={login} />
+      </ScrollableTabView>
+
+      {type ? null : (
+        <View style={style.otherWrap}>
+          <View style={style.otherTitle}>
+            <View style={[style.line, { backgroundColor: colors.border_2 }]} />
+            <Text style={[style.otherText]}>推荐使用微信登录</Text>
+            <View style={[style.line, { backgroundColor: colors.border_2 }]} />
+          </View>
+
+          <Touchable onPress={getWechat} style={style.wechatWrap}>
+            <Image source={require('@/assets/images/wechat.png')} style={style.wechat} />
+          </Touchable>
         </View>
-        <Touchable style={style.wechatWrap}>
-          <Image source={{ uri: checkStaticImg('wechat.png') }} style={style.wechat} />
-        </Touchable>
-      </View> */}
+      )}
     </View>
   );
 };
@@ -67,10 +87,8 @@ const style = StyleSheet.create({
     flex: 1,
   },
 
-  topWrap: {
-    backgroundColor: 'red',
-    paddingTop: '20%',
-    paddingBottom: size(80),
+  linearGradient: {
+    height: '20%',
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -81,57 +99,10 @@ const style = StyleSheet.create({
     width: size(50),
     height: size(50),
   },
-  tabTitleWrap: {
-    flexDirection: 'row',
-    marginTop: size(60),
-  },
-  tabLine: {
-    width: size(4),
-    backgroundColor: '#fff',
-    height: '100%',
-    marginHorizontal: size(40),
-  },
-  tabTextWrap: {
-    width: '35%',
-    height: size(60),
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  tabText: {
-    fontSize: size(28),
-    color: '#fff',
-  },
-  tabTextActive: {
-    fontSize: size(32),
-    fontWeight: 'bold',
-    color: '#fff',
-  },
-  conWrap: {
-    flex: 1,
-    position: 'relative',
-    top: -size(40),
-    borderRadius: size(20),
-    marginHorizontal: size(40),
 
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.3,
-    shadowRadius: 4,
-    elevation: 5,
-  },
   title: {
     fontSize: size(54),
     fontWeight: 'bold',
-  },
-
-  tabBar: {
-    borderBottomWidth: size(1),
-  },
-  bgImg: {
-    position: 'absolute',
   },
 
   otherTitle: {
@@ -154,8 +125,8 @@ const style = StyleSheet.create({
     alignItems: 'center',
   },
   wechat: {
-    width: size(60),
-    height: size(60),
+    width: size(100),
+    height: size(100),
     marginTop: size(30),
     marginBottom: size(50),
   },

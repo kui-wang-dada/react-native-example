@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { commitSessionId, getHomeSp, getHomeTp, getHomeCount, getUserInfo } from '@/store/actions';
 import { size } from '@/utils';
 import { Touchable, Icon, Button } from 'ui';
-const useGetHomeData = () => {
+export const useGetHomeData = () => {
   const { colors } = useTheme();
   const navigation = useNavigation();
   const dispatch = useDispatch();
@@ -24,5 +24,3 @@ const useGetHomeData = () => {
   };
   return getHomeData;
 };
-
-export default useGetHomeData;

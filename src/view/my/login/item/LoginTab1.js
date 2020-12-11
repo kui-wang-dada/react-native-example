@@ -19,17 +19,6 @@ export default (props) => {
   const [value1, setValue1] = useState(false);
   const [value2, setValue2] = useState(false);
 
-  const getHomeData = async () => {
-    let params = {
-      limit_start: 0,
-      limit_page_length: 10,
-    };
-    dispatch(getHomeSp(params));
-    dispatch(getHomeTp(params));
-
-    dispatch(getHomeCount());
-    await dispatch(getUserInfo());
-  };
   const login = async () => {
     if (!invitation) {
       modal.showToast('请输入邀请码');
@@ -43,21 +32,7 @@ export default (props) => {
     if (props.hasStd) {
       params.std = std;
     }
-    try {
-      let res = await $api['my/erpLogin'](params);
-      console.log(res, 'erp');
-
-      if (res.data && res.data.display && res.data.display.students_id) {
-        dispatch(commitSessionId(res.data.display.uid));
-        await getHomeData();
-
-        navigation.navigate('首页');
-      } else {
-        modal.showToast(res.status.message);
-      }
-    } catch (error) {
-      modal.showToast('绑定失败');
-    }
+    props.login && props.login(params);
   };
 
   const handleValue1 = (newV) => {
@@ -76,11 +51,15 @@ export default (props) => {
       setValue2(false);
     }
   };
+
   const goToRegister = () => {
     navigation.navigate('register');
   };
+  const goToPassword = () => {
+    navigation.navigate('password');
+  };
   return (
-    <View style={style.wrap}>
+    <View style={[style.wrap, { backgroundColor: colors.background }]}>
       <View style={style.fieldWrap}>
         {props.hasStd ? (
           <Fumi
@@ -149,13 +128,17 @@ export default (props) => {
         textStyle={[style.btnLoginText, { color: colors.background }]}
         title={'提交'}
       />
-      {/* <Button title="注册" style={style.registerWrap} textStyle={[style.registerText, { color: colors.text_p }]} onPress={goToRegister} /> */}
+      {props.type ? null : (
+        <View style={style.tipWrap}>
+          <Button title="忘记密码" style={style.passwordWrap} textStyle={[style.passwordText, { color: colors.text_p }]} onPress={goToPassword} />
+          <Button title="注册" style={style.registerWrap} textStyle={[style.registerText, { color: colors.text_p }]} onPress={goToRegister} />
+        </View>
+      )}
     </View>
   );
 };
 const style = StyleSheet.create({
   wrap: {
-    flex: 1,
     paddingHorizontal: size(32),
   },
   fieldWrap: {
@@ -203,12 +186,17 @@ const style = StyleSheet.create({
     fontSize: size(32),
     fontWeight: 'bold',
   },
-  registerWrap: {
+
+  tipWrap: {
     marginTop: size(40),
+    paddingHorizontal: size(40),
     flexDirection: 'row',
-    justifyContent: 'flex-end',
-    paddingHorizontal: size(20),
+    justifyContent: 'space-between',
   },
+  passwordText: {
+    fontSize: size(28),
+  },
+
   registerText: {
     fontSize: size(28),
   },

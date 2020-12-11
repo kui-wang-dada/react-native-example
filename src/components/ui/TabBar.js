@@ -11,6 +11,7 @@ export default (props) => {
   const theme = useSelector((state) => state.common.theme);
   console.log(theme, 'scheme');
   let activeTheme = props.activeTheme;
+  let activeSize = props.activeSize;
   return (
     <View style={[style.tabs, { backgroundColor: colors.background }, props.style]}>
       {props.tabs.map((tab, i) => {

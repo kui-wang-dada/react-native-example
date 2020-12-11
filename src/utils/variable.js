@@ -6,6 +6,7 @@ export const lightColorTheme = {
   colors: {
     primary: '#4bc694',
     gradient: ['#44a8d1', '#48e1b7'],
+    gradient_login: ['#48e1b7', '#fff'],
     assist: '#fc8300',
     color_yellow: '#fdc940',
     color_blue: '#78a4f4',
@@ -27,6 +28,7 @@ export const darkColorTheme = {
   colors: {
     primary: '#48fef8',
     gradient: ['#23282d', '#353442'],
+    gradient_login: ['#23282d', '#353442'],
     assist: '#fc8300',
     color_yellow: '#fddd6b',
     color_blue: '#0ea8ff',

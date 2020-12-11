@@ -11,13 +11,14 @@ export default () => {
   const dispatch = useDispatch();
   const userInfo = useSelector((state) => state.my.userInfo);
 
-  const getWechat = useWechatLogin();
-
   const goToMySet = () => {
     navigation.navigate('mySet');
   };
   const goToLogin = () => {
-    navigation.navigate('mySet');
+    navigation.navigate('login');
+  };
+  const goToErp = () => {
+    navigation.navigate('login', { type: 'bind' });
   };
 
   return (
@@ -40,7 +41,7 @@ export default () => {
           {userInfo.students_id ? null : (
             <Button
               title="绑定厚仁账号"
-              onPress={goToLogin}
+              onPress={goToErp}
               style={[style.loginBtn, { backgroundColor: colors.primary }]}
               textStyle={[style.loginBtnText, { color: colors.background }]}
             />
@@ -49,7 +50,7 @@ export default () => {
       ) : (
         <View>
           <View style={style.noLoginWrap}>
-            <Touchable onPress={getWechat} style={[style.noLogin, { backgroundColor: colors.background }]}>
+            <Touchable onPress={goToLogin} style={[style.noLogin, { backgroundColor: colors.background }]}>
               <Image style={style.img} source={{ uri: checkStaticImg('login1.png') }} />
               <View style={style.loginLabel}>
                 <Text style={[style.loginLabelTitle, { color: colors.text }]}>登录并绑定后即可实时跟踪服务过程</Text>

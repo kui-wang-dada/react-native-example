@@ -4,7 +4,7 @@ import { useTheme, useNavigation } from '@react-navigation/native';
 import * as WeChat from 'react-native-wechat-lib';
 import { useDispatch, useSelector } from 'react-redux';
 import { commitSessionId, getHomeSp, getHomeTp, getHomeCount, getUserInfo } from '@/store/actions';
-import { size, $api } from '@/utils';
+import { size, $api, modal } from '@/utils';
 import { Touchable, Icon, Button } from 'ui';
 export const useWechatLogin = () => {
   const { colors } = useTheme();
@@ -47,7 +47,10 @@ export const useWechatLogin = () => {
     if (res.data.display) {
       let id = res.data.display.unionid || res.data.display.uid;
       dispatch(commitSessionId(id));
+      modal.showLoading();
       await getHomeData();
+      modal.close();
+      navigation.navigate('首页');
     }
   };
   const getHomeData = async () => {
