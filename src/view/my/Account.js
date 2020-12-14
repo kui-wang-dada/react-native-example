@@ -28,8 +28,8 @@ export default () => {
     }
     listRef.current.refreshData();
   };
-  const goToErpLogin = () => {
-    navigation.navigate('login', { type: 'bind' });
+  const goToErpBind = () => {
+    navigation.navigate('erpBind');
   };
 
   const switchStudent = async (item) => {
@@ -77,7 +77,7 @@ export default () => {
 
       <View style={[style.bottomWrap, { backgroundColor: colors.background }]}>
         <Button
-          onPress={goToErpLogin}
+          onPress={goToErpBind}
           style={[style.bottom, { backgroundColor: colors.background, borderColor: colors.primary }]}
           textStyle={[style.bottomBtn, { color: colors.primary }]}
           title="添加学生"

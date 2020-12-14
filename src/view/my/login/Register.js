@@ -1,19 +1,100 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { View, Text, StyleSheet, KeyboardAvoidingView, Keyboard } from 'react-native';
 import { useTheme } from '@react-navigation/native';
-import { size, commonStyle } from '@/utils';
+import { useGetHomeData } from 'hook/useGetData';
+import { useDispatch, useSelector } from 'react-redux';
+import { size, commonStyle, modal, $api, regex } from '@/utils';
 import { Touchable, Icon, Button, Fumi } from 'ui';
 export default () => {
   const { colors } = useTheme();
-
-  const [activeRole, setActiveRole] = useState(0);
+  const getHomeData = useGetHomeData();
+  const dispatch = useDispatch();
+  // const [activeRole, setActiveRole] = useState(0);
   const [sendCoding, setSendCoding] = useState(false);
   const [second, setSecond] = useState(10);
   const [email, setEmail] = useState('');
   const [pwd, setPwd] = useState('');
   const [pwdConfirm, setPwdConfirm] = useState('');
   const [code, setCode] = useState('');
-  const [invitation, setInvitation] = useState('');
+  let timer = useRef(null);
+
+  const submit = async () => {
+    Keyboard.dismiss();
+
+    if (!regex.email.test(email)) {
+      modal.showToast('邮箱格式错误');
+      return;
+    }
+
+    if (pwd !== pwdConfirm) {
+      modal.showToast('两次密码不一致');
+      return;
+    }
+    if (!code) {
+      modal.showToast('请输入验证码');
+      return;
+    }
+
+    let params = {
+      account: email,
+      password: pwd,
+      code: code,
+    };
+    modal.showLoading();
+    try {
+      let res = await $api['my/register'](params);
+      modal.showToast('注册成功');
+
+      if (res.status.code === 200) {
+        let deviceId = res.data.display.unionid || res.data.display.uid;
+        dispatch(commitSessionId(deviceId));
+        await getHomeData();
+        navigation.navigate('首页');
+      }
+    } catch (err) {
+      modal.showToast(err.message);
+    }
+  };
+
+  const getCode = async () => {
+    if (!email) {
+      modal.showToast('请输入邮箱');
+      return;
+    }
+    modal.showLoading();
+    let params = {
+      account: email,
+    };
+
+    try {
+      let res = await $api['my/sendCode'](params);
+      if (res.status.code === 200) {
+        modal.showToast(res.status.message);
+        setSendCoding(true);
+        setSecond(10);
+
+        getCount();
+      } else {
+        modal.showToast(res.status.message);
+      }
+    } catch (err) {
+      modal.showToast(err.message);
+    }
+  };
+  const getCount = () => {
+    timer.current = setInterval(() => {
+      setSecond((second) => second - 1);
+    }, 1000);
+  };
+  useEffect(() => {
+    if (second <= 0) {
+      setSendCoding(false);
+      setSecond(10);
+      clearInterval(timer.current);
+
+      return;
+    }
+  }, [second]);
 
   let roles = ['student', 'parent'];
   return (
@@ -31,7 +112,7 @@ export default () => {
             <Text style={[style.title, { color: colors.text }]}>欢迎来到厚仁留学！</Text>
             <Text style={[style.label, { color: colors.text_p }]}>为您提供扎根美国的留学全服务</Text>
           </View>
-          <View style={style.roleWrap}>
+          {/* <View style={style.roleWrap}>
             {roles.map((item, index) => {
               return (
                 <View style={{ flexDirection: 'row', alignItems: 'center' }} key={index}>
@@ -54,7 +135,7 @@ export default () => {
                 </View>
               );
             })}
-          </View>
+          </View> */}
           <View style={style.inputWrap}>
             <Fumi
               label={'邮箱'}
@@ -109,27 +190,6 @@ export default () => {
               inputPadding={13}
               returnKeyType="done"
             />
-            <View style={style.codeWrap}>
-              <Fumi
-                label={'邀请码'}
-                keyboardType="numeric"
-                style={[style.input, { backgroundColor: colors.card }]}
-                value={invitation}
-                clear={() => setInvitation('')}
-                onChangeText={(text) => {
-                  setInvitation(text);
-                }}
-                showClose={false}
-                iconClass={Icon}
-                iconName={'code'}
-                iconColor={colors.primary}
-                iconSize={25}
-                iconWidth={40}
-                inputPadding={13}
-                returnKeyType="done"
-              />
-              <Text style={style.invitationText}>{'(选填)'}</Text>
-            </View>
 
             <View style={style.codeWrap}>
               <Fumi
@@ -149,10 +209,10 @@ export default () => {
                 inputPadding={13}
                 returnKeyType="done"
               />
-              <Button style={style.code} onPress={() => this.getCode()} textStyle={style.codeText} title={sendCoding ? '再发送' + second + 's' : '发送验证码'} />
+              <Button style={style.code} onPress={getCode} textStyle={style.codeText} title={sendCoding ? '再发送' + second + 's' : '发送验证码'} />
             </View>
 
-            <Button textStyle={style.btnText} title={'注册'} style={[style.btn, { backgroundColor: colors.primary }]} onPress={() => this.submit()} />
+            <Button textStyle={style.btnText} title={'注册'} style={[style.btn, { backgroundColor: colors.primary }]} onPress={submit} />
           </View>
         </View>
       </Touchable>

@@ -15,5 +15,6 @@ import Loading from './Loading';
 import Switch from './Switch';
 import Progress from './Progress';
 import ActionSheet from './ActionSheet';
+import CheckBox from './CheckBox';
 
-export { WModal, YModal, Icon, Touchable, EndTip, FlowList, Message, TabBar, Button, ScrollTabBar, Image, Cell, Fumi, Loading, Switch, Progress, ActionSheet };
+export { WModal, YModal, Icon, Touchable, EndTip, FlowList, Message, TabBar, Button, ScrollTabBar, Image, Cell, Fumi, Loading, Switch, Progress, ActionSheet, CheckBox };

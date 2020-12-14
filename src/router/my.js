@@ -2,6 +2,7 @@ import My from '@/view/my';
 import MySet from '@/view/my/MySet';
 import Account from '@/view/my/Account';
 import Login from '@/view/my/login/Login';
+import ErpBind from '@/view/my/login/ErpBind';
 import SystemSet from '@/view/my/systemSet';
 import About from '@/view/my/systemSet/About';
 import Privacy from '@/view/my/systemSet/Privacy';
@@ -29,11 +30,14 @@ export default {
   login: {
     screen: Login,
     name: 'login',
-    options: {
-      headerShown: false,
-      title: '登录',
-    },
+    options: { headerShown: false, title: '登录' },
   },
+  erpBind: {
+    screen: ErpBind,
+    name: 'erpBind',
+    options: { headerShown: false, title: '绑定' },
+  },
+
   register: {
     screen: Register,
     name: 'register',

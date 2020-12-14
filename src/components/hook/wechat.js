@@ -76,19 +76,19 @@ export const useWechatLogin = () => {
   //     '&code=' +
   //     code +
   //     '&grant_type=authorization_code';
-  //   let res = await $api['my/erpLogin'](null, { url });
+  //   let res = await $api['my/erpBind'](null, { url });
   //   console.log('getAccessToken,', res);
   //   getRefreshToken(res.refresh_token);
   // };
   // const getRefreshToken = async (token) => {
   //   let url = 'https://api.weixin.qq.com/sns/oauth2/refresh_token?appid=' + 'wx55b14f887a79758c' + '&grant_type=refresh_token&refresh_token=' + token;
-  //   let res = await $api['my/erpLogin'](null, { url });
+  //   let res = await $api['my/erpBind'](null, { url });
   //   console.log('getRefreshToken,', res);
   //   getUserInfo(res);
   // };
   // const getUserInfo = async (res) => {
   //   let url = 'https://api.weixin.qq.com/sns/userinfo?access_token=' + res.access_token + '&openid=' + res.openid;
-  //   let resData = await $api['my/erpLogin'](null, { url });
+  //   let resData = await $api['my/erpBind'](null, { url });
   //   console.log('getUserInfo', resData);
   // };
 };

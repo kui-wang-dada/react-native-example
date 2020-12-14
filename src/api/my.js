@@ -8,9 +8,43 @@ export default [
     path: '/apis/method/frappe.apis.apps.my.info',
   },
   {
-    name: 'wechatLogin',
+    name: 'login',
     method: 'POST',
     desc: '登录',
+    path: '/apis/method/frappe.apis.apps.auth.accountlogin',
+    // path: '/apis/method/frappe.apis.apps.auth.login',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  },
+  {
+    name: 'register',
+    method: 'POST',
+    desc: '账号注册',
+    path: '/apis/method/frappe.apis.apps.auth.accountsignup',
+  },
+  {
+    name: 'sendCode',
+    method: 'GET',
+    desc: '发送验证码',
+    path: '/apis/method/frappe.apis.apps.auth.sendcode',
+  },
+  {
+    name: 'password',
+    method: 'POST',
+    desc: '忘记密码',
+    path: '/apis/method/frappe.apis.apps.auth.resetpassword',
+  },
+  {
+    name: 'updatePwd',
+    method: 'POST',
+    desc: '更新密码',
+    path: '/apis/method/frappe.apis.apps.auth.updatepassword',
+  },
+  {
+    name: 'wechatLogin',
+    method: 'POST',
+    desc: '微信登录',
     path: '/apis/method/frappe.apis.apps.auth.applogin',
     // path: '/apis/method/frappe.apis.apps.auth.login',
     headers: {
@@ -19,7 +53,7 @@ export default [
   },
 
   {
-    name: 'erpLogin',
+    name: 'erpBind',
     method: 'POST',
     desc: '绑定erp',
     path: '/apis/method/frappe.apis.apps.auth.bind',

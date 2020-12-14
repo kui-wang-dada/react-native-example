@@ -31,7 +31,7 @@ export async function requestSuccessFunc(req) {
     // Do something with return value
   } else {
     console.log(2, 'value');
-    let whiteList = ['wechatLogin', 'wechatRegist', 'erpLogin', 'userInfo'];
+    let whiteList = ['wechatLogin', 'wechatRegist', 'login', 'sendCode', 'register', 'password', 'updatePwd', 'erpBind', 'userInfo'];
     if (!whiteList.includes(req.name)) {
       return Promise.reject();
     }
@@ -104,9 +104,9 @@ export function responseSuccessFunc(response) {
  */
 export function responseFailFunc(resError) {
   //如果是取消，返回空，前端不提示消息
-  if (resError.toString() == 'Cancel') {
-    resError = '';
-  }
+  // if (resError.toString() == 'Cancel') {
+  //   resError = '';
+  // }
   getNet(resError);
   console.log('fail', resError, resError.response);
 
@@ -120,7 +120,7 @@ export function responseFailFunc(resError) {
 }
 
 function getNet(resError) {
-  console.log(resError.message, 'resError');
+  console.log(resError, 'resError');
   // let timeout = resError.message.includes('timeout');
   NetInfo.fetch().then((state) => {
     let { isConnected } = state;

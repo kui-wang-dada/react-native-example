@@ -18,7 +18,7 @@ export default () => {
     navigation.navigate('login');
   };
   const goToErp = () => {
-    navigation.navigate('login', { type: 'bind' });
+    navigation.navigate('erpBind');
   };
 
   return (
@@ -26,7 +26,7 @@ export default () => {
       {userInfo.username ? (
         <View style={style.topWrap}>
           <Touchable style={style.topWrapCon} onPress={goToMySet}>
-            <Image style={style.logo} source={{ uri: userInfo.avatar }} />
+            <Image style={style.logo} source={{ uri: userInfo.avatar ? userInfo.avatar : checkStaticImg('login1.png') }} />
             <View style={style.topCon}>
               <View style={style.topName}>
                 <Text style={[style.title, { color: colors.text }]}>{userInfo.username}</Text>
@@ -74,6 +74,7 @@ export default () => {
 const style = StyleSheet.create({
   myWrap: {},
   topWrap: {
+    width: '100%',
     paddingVertical: size(60),
     paddingHorizontal: size(40),
   },
@@ -89,6 +90,7 @@ const style = StyleSheet.create({
   },
   topCon: {
     marginHorizontal: size(30),
+    flex: 1,
   },
   topName: {
     flexDirection: 'row',
