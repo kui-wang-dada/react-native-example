@@ -7,6 +7,10 @@ import { Touchable, Icon, Button } from 'ui';
 export default () => {
   const { colors } = useTheme();
   const navigation = useNavigation();
+
+  const goToLiveChat = () => {
+    navigation.navigate('livechat', { title: 'app服务团队学术哥' });
+  };
   return (
     <View style={style.authorDetail2}>
       <View style={style.top}>
@@ -15,7 +19,12 @@ export default () => {
           <Text style={[style.name, { color: colors.primary }]}>厚仁学术哥</Text>
         </View>
 
-        <Button style={[style.contact, { borderColor: colors.primary }]} textStyle={[style.contactText, { color: colors.primary }]} title="在线咨询" />
+        <Button
+          onPress={goToLiveChat}
+          style={[style.contact, { borderColor: colors.primary }]}
+          textStyle={[style.contactText, { color: colors.primary }]}
+          title="在线咨询"
+        />
       </View>
       <View style={style.conWrap}>
         <Text style={[style.conText, { color: colors.text }]}>美国拨打：+1 (412) 756-3137</Text>

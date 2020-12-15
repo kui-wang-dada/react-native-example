@@ -111,6 +111,7 @@ const style = StyleSheet.create({
   input: {
     flex: 1,
     fontSize: size(30),
+    height: size(80),
   },
   codeWrap: {
     paddingVertical: size(10),

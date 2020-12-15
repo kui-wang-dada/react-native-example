@@ -47,9 +47,9 @@ export default () => {
 
       if (res.status.code === 200) {
         let deviceId = res.data.display.unionid || res.data.display.uid;
-        dispatch(commitSessionId(deviceId));
-        await getHomeData();
-        navigation.navigate('首页');
+        // dispatch(commitSessionId(deviceId));
+        // await getHomeData();
+        // navigation.navigate('首页');
       }
     } catch (err) {
       modal.showToast(err.message);

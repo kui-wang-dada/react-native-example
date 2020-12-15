@@ -34,7 +34,7 @@ export default (props) => {
       <View style={[style.listWrap, { borderBottomColor: colors.border }]}>
         <View style={style.left}>
           <Icon name={icon} size={30} color={colors.primary} />
-          <Text style={[style.title, { color: colors.text }]}>{title}</Text>
+          <Text style={[style.title, { color: colors.text }]}>{title || '--'}</Text>
         </View>
         <View style={[style.right]}>
           {label ? <Text style={[style.label, { color: colors.text_tag }]}>{label}</Text> : null}

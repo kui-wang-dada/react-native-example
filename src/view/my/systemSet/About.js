@@ -7,8 +7,7 @@ import { Touchable, Icon, Button } from 'ui';
 export default () => {
   const { colors } = useTheme();
 
-  const aboutData = useSelector((state) => state.my.aboutData);
-  const version = useSelector((state) => state.my.version);
+  const version = useSelector((state) => state.common.version);
   return (
     <View style={[style.about, { backgroundColor: colors.background }]}>
       <View style={style.topWrap}>

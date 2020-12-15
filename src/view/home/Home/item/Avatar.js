@@ -16,7 +16,7 @@ export default () => {
   const homeCount = useSelector((state) => state.home.homeCount);
 
   const goToLogin = () => {
-    navigation.navigate('我的');
+    navigation.navigate('login');
   };
   const goToAccount = () => {
     navigation.navigate('account');

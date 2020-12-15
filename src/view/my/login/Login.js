@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, Image, ImageBackground, ScrollView } from 'react-native';
-
+import { View, Text, StyleSheet, Image, ImageBackground, ScrollView, Keyboard } from 'react-native';
 import { useTheme, useNavigation } from '@react-navigation/native';
 import { useWechatLogin } from 'hook/wechat';
 import { useDispatch, useSelector } from 'react-redux';
@@ -29,6 +28,13 @@ export default ({ route }) => {
 
   const title = '登录';
 
+  const handleLogin = () => {
+    if (tab) {
+      loginEmail();
+    } else {
+      loginCode();
+    }
+  };
   const loginCode = () => {
     if (!invitation) {
       modal.showToast('请输入邀请码');
@@ -81,72 +87,66 @@ export default ({ route }) => {
   };
 
   return (
-    <ScrollView contentContainerStyle={[style.loginWrap, { paddingTop: barHeight }]} keyboardShouldPersistTaps="always" bounces={false}>
-      <Button icon="back" iconColor={'#fff'} iconSize={16} style={style.backWrap} onPress={navigation.goBack} />
-
-      <View style={[style.pageTitleWrap]}>
-        <Text style={[style.pageTitle, { color: '#fff' }]}>厚仁留学{title}</Text>
-      </View>
-      <View style={[style.conWrap, { backgroundColor: '#f1f1f1' }]}>
-        <Icon style={style.logo} name="wholeren" size={50} color={colors.primary} />
-        <View style={style.tabWrap}>
-          <Button
-            style={[style.tab, tab ? null : style.tabActive]}
-            textStyle={[style.tabText, tab ? null : style.tabTextActive]}
-            title={'邀请码' + title}
-            onPress={() => {
-              setTab(0);
-            }}
-          />
-          <Button
-            style={[style.tab, tab ? style.tabActive : null]}
-            textStyle={[style.tabText, tab ? style.tabTextActive : null]}
-            title={'账号密码' + title}
-            onPress={() => {
-              setTab(1);
-            }}
-          />
+    <Touchable type="withoutFeedback" onPress={() => Keyboard.dismiss()}>
+      <View style={[style.loginWrap, { paddingTop: barHeight }]}>
+        <View style={[style.pageTitleWrap]}>
+          <Button icon="back" iconColor={'#fff'} iconSize={16} style={style.backWrap} onPress={navigation.goBack} />
+          <Text style={[style.pageTitle, { color: '#fff' }]}>厚仁留学{title}</Text>
         </View>
-        {!tab ? (
-          <View style={style.tabLeftWrap}>
-            <SecurityInput
-              icon={'code'}
-              secureTextEntry={true}
-              style={style.pwd}
-              value={invitation}
-              changeText={(text) => {
-                setInvitation(text);
+        <View style={[style.conWrap, { backgroundColor: '#f1f1f1' }]}>
+          <Icon style={style.logo} name="wholeren" size={50} color={colors.primary} />
+          <View style={style.tabWrap}>
+            <Button
+              style={[style.tab, tab ? null : style.tabActive]}
+              textStyle={[style.tabText, tab ? null : style.tabTextActive]}
+              title={'邀请码' + title}
+              onPress={() => {
+                setTab(0);
               }}
             />
-            <LinearGradient colors={['#475C78', '#203046']} style={style.linear} start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }}>
-              <Button style={style.btnWrap} textStyle={style.btn} title={title} onPress={loginCode} />
-            </LinearGradient>
+            <Button
+              style={[style.tab, tab ? style.tabActive : null]}
+              textStyle={[style.tabText, tab ? style.tabTextActive : null]}
+              title={'账号密码' + title}
+              onPress={() => {
+                setTab(1);
+              }}
+            />
           </View>
-        ) : (
-          <View style={style.tabRightWrap}>
-            <SecurityInput
-              icon={'email'}
-              style={style.phone}
-              value={email}
-              changeText={(text) => {
-                setEmail(text);
-              }}
-            />
-            <SecurityInput
-              icon={'code'}
-              style={style.code}
-              value={pwd}
-              changeText={(text) => {
-                setPwd(text);
-              }}
-            />
-            <LinearGradient colors={['#475C78', '#203046']} style={style.linear} start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }}>
-              <Button style={style.btnWrap} textStyle={style.btn} title={title} onPress={loginEmail} />
-            </LinearGradient>
-          </View>
-        )}
+          {!tab ? (
+            <View style={style.tabLeftWrap}>
+              <SecurityInput
+                icon={'code'}
+                style={style.pwd}
+                value={invitation}
+                changeText={(text) => {
+                  setInvitation(text);
+                }}
+              />
+            </View>
+          ) : (
+            <View style={style.tabRightWrap}>
+              <SecurityInput
+                icon={'email'}
+                style={style.phone}
+                value={email}
+                changeText={(text) => {
+                  setEmail(text);
+                }}
+              />
+              <SecurityInput
+                icon={'code'}
+                secureTextEntry={true}
+                style={style.code}
+                value={pwd}
+                changeText={(text) => {
+                  setPwd(text);
+                }}
+              />
+            </View>
+          )}
 
-        {/* <View style={style.tipsWrap}>
+          {/* <View style={style.tipsWrap}>
           <Text style={style.tipsRegister} onPress={() => navigation.navigate('register')}>
             没有账号？立即注册
           </Text>
@@ -154,48 +154,55 @@ export default ({ route }) => {
             忘记密码？
           </Text>
         </View> */}
-        <View style={style.otherLoginWrap}>
-          <View style={style.loginTipsWrap}>
-            <View style={style.line} />
-            <Text style={style.loginTips}>其他登录方式</Text>
-            <View style={style.line} />
-          </View>
-          <View>
-            <Touchable style={style.wechatWrap} onPress={getWechat}>
-              <Image style={style.wechat} source={require('@/assets/images/wechat.png')} />
-            </Touchable>
+          <View style={style.otherLoginWrap}>
+            <LinearGradient colors={['#475C78', '#203046']} style={style.linear} start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }}>
+              <Button style={style.btnWrap} textStyle={style.btn} title={title} onPress={handleLogin} />
+            </LinearGradient>
+            <View style={style.loginTipsWrap}>
+              <View style={style.line} />
+              <Text style={style.loginTips}>推荐使用微信登录</Text>
+              <View style={style.line} />
+            </View>
+            <View>
+              <Touchable style={style.wechatWrap} onPress={getWechat}>
+                <Image style={style.wechat} source={require('@/assets/images/wechat.png')} />
+              </Touchable>
+            </View>
           </View>
         </View>
-      </View>
 
-      <View style={style.agreeWrap}>
-        <CheckBox
-          tintColors={colors.primary}
-          onCheckColor={colors.primary}
-          onTintColor={colors.primary}
-          style={style.checkBoxBottom}
-          boxType="square"
-          value={check}
-          onValueChange={() => setCheck(!check)}
-        />
-        <Text style={style.agree}>阅读并同意</Text>
-        <Text style={[style.proto, { color: colors.primary }]} onPress={goToPrivacy}>
-          《隐私权政策》
-        </Text>
-        <Text style={[style.proto, { color: colors.primary }]} onPress={goToTerms}>
-          《服务条款说明》
-        </Text>
+        <View style={style.agreeWrap}>
+          <CheckBox
+            tintColors={colors.primary}
+            onCheckColor={colors.primary}
+            onTintColor={colors.primary}
+            style={style.checkBoxBottom}
+            boxType="square"
+            value={check}
+            onValueChange={() => setCheck(!check)}
+          />
+          <Text style={style.agree}>阅读并同意</Text>
+          <Text style={[style.proto, { color: colors.primary }]} onPress={goToPrivacy}>
+            《隐私权政策》
+          </Text>
+          <Text style={[style.proto, { color: colors.primary }]} onPress={goToTerms}>
+            《服务条款说明》
+          </Text>
+        </View>
       </View>
-    </ScrollView>
+    </Touchable>
   );
 };
 const style = StyleSheet.create({
   loginWrap: {
     flex: 1,
+    height: '100%',
     backgroundColor: '#203046',
     paddingHorizontal: size(80),
     alignItems: 'center',
+    position: 'relative',
   },
+
   pageTitleWrap: {
     width: '100%',
     height: 65,
@@ -203,17 +210,18 @@ const style = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  backWrap: {
+    position: 'absolute',
+    left: -size(40),
+
+    width: size(50),
+    height: size(50),
+  },
   pageTitle: {
     fontSize: size(40),
     fontWeight: 'bold',
   },
-  backWrap: {
-    position: 'absolute',
-    left: size(40),
-    top: size(60),
-    width: size(50),
-    height: size(50),
-  },
+
   conWrap: {
     width: '100%',
     height: SCREEN_HEIGHT * 0.7,
@@ -273,7 +281,7 @@ const style = StyleSheet.create({
     marginBottom: size(10),
   },
   linear: {
-    marginTop: size(44),
+    marginBottom: size(60),
     width: size(488),
     height: size(80),
     borderRadius: size(4),

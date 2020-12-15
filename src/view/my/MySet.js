@@ -23,13 +23,14 @@ export default () => {
     navigation.navigate('account');
   };
 
+  const location = userInfo.province + userInfo.city;
   return (
     <View style={style.mysetWrap}>
       <View style={style.cellWrap}>
         <Cell label="昵称" style={style.cell} title={userInfo.username} />
       </View>
       <View style={style.cellWrap}>
-        <Cell label="地址" style={style.cell} title={userInfo.province + '/' + userInfo.city} />
+        <Cell label="地址" style={style.cell} title={location} />
       </View>
       <View style={style.cellWrap}>
         <Cell label="绑定学号" style={style.cell} title={userInfo.students_id} onPress={goToAccount} islink={true} />

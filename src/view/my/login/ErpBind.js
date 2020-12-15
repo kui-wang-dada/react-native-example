@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, Image, ImageBackground, ScrollView } from 'react-native';
+import { View, Text, StyleSheet, Image, ImageBackground, ScrollView, Keyboard } from 'react-native';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 import { useTheme, useNavigation } from '@react-navigation/native';
 import { useDispatch, useSelector } from 'react-redux';
@@ -45,6 +46,13 @@ export default ({ route }) => {
     }
   };
 
+  const handleBind = () => {
+    if (tab) {
+      bindEmail();
+    } else {
+      bindCode();
+    }
+  };
   const bindCode = () => {
     if (!invitation) {
       modal.showToast('请输入邀请码');
@@ -95,83 +103,81 @@ export default ({ route }) => {
   };
 
   return (
-    <ScrollView contentContainerStyle={[style.loginWrap, { paddingTop: barHeight }]} keyboardShouldPersistTaps="always" bounces={false}>
-      <Button icon="back" iconColor={'#fff'} iconSize={16} style={style.backWrap} onPress={navigation.goBack} />
-
-      <View style={[style.pageTitleWrap]}>
-        <Text style={[style.pageTitle, { color: '#fff' }]}>厚仁留学{title}</Text>
-      </View>
-      <View style={[style.conWrap, { backgroundColor: '#f1f1f1' }]}>
-        <Icon style={style.logo} name="wholeren" size={50} color={colors.primary} />
-        <View style={style.tabWrap}>
-          <Button
-            style={[style.tab, tab ? null : style.tabActive]}
-            textStyle={[style.tabText, tab ? null : style.tabTextActive]}
-            title={'邀请码' + title}
-            onPress={() => {
-              setTab(0);
-            }}
-          />
-          <Button
-            style={[style.tab, tab ? style.tabActive : null]}
-            textStyle={[style.tabText, tab ? style.tabTextActive : null]}
-            title={'账号密码' + title}
-            onPress={() => {
-              setTab(1);
-            }}
-          />
+    <Touchable type="withoutFeedback" onPress={() => Keyboard.dismiss()}>
+      <ScrollView contentContainerStyle={[style.loginWrap, { paddingTop: barHeight }]} bounces={false}>
+        <View style={[style.pageTitleWrap]}>
+          <Button icon="back" iconColor={'#fff'} iconSize={16} style={style.backWrap} onPress={navigation.goBack} />
+          <Text style={[style.pageTitle, { color: '#fff' }]}>厚仁留学{title}</Text>
         </View>
-        {!tab ? (
-          <View style={style.tabLeftWrap}>
-            {hasStd ? (
+        <View style={[style.conWrap, { backgroundColor: '#f1f1f1' }]}>
+          <Icon style={style.logo} name="wholeren" size={50} color={colors.primary} />
+          <View style={style.tabWrap}>
+            <Button
+              style={[style.tab, tab ? null : style.tabActive]}
+              textStyle={[style.tabText, tab ? null : style.tabTextActive]}
+              title={'邀请码' + title}
+              onPress={() => {
+                setTab(0);
+              }}
+            />
+            <Button
+              style={[style.tab, tab ? style.tabActive : null]}
+              textStyle={[style.tabText, tab ? style.tabTextActive : null]}
+              title={'账号密码' + title}
+              onPress={() => {
+                setTab(1);
+              }}
+            />
+          </View>
+          {!tab ? (
+            <View style={style.tabLeftWrap}>
+              {hasStd ? (
+                <SecurityInput
+                  icon={'pwd'}
+                  style={style.account}
+                  value={std}
+                  changeText={(text) => {
+                    setStd(text);
+                  }}
+                />
+              ) : null}
               <SecurityInput
-                icon={'pwd'}
-                style={style.account}
-                value={std}
+                icon={'code'}
+                style={style.pwd}
+                value={invitation}
                 changeText={(text) => {
-                  setStd(text);
+                  setInvitation(text);
                 }}
               />
-            ) : null}
-            <SecurityInput
-              icon={'code'}
-              secureTextEntry={true}
-              style={style.pwd}
-              value={invitation}
-              changeText={(text) => {
-                setInvitation(text);
-              }}
-            />
-            <CheckBox role={role} handleChange={changeBox} />
-            <LinearGradient colors={['#475C78', '#203046']} style={style.linear} start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }}>
-              <Button style={style.btnWrap} textStyle={style.btn} title={title} onPress={bindCode} />
-            </LinearGradient>
-          </View>
-        ) : (
-          <View style={style.tabRightWrap}>
-            <SecurityInput
-              icon={'email'}
-              style={style.phone}
-              value={email}
-              changeText={(text) => {
-                setEmail(text);
-              }}
-            />
-            <SecurityInput
-              icon={'code'}
-              style={style.code}
-              value={pwd}
-              changeText={(text) => {
-                setPwd(text);
-              }}
-            />
-            <LinearGradient colors={['#475C78', '#203046']} style={style.linear} start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }}>
-              <Button style={style.btnWrap} textStyle={style.btn} title={title} onPress={bindEmail} />
-            </LinearGradient>
-          </View>
-        )}
-      </View>
-    </ScrollView>
+              <CheckBox role={role} handleChange={changeBox} />
+            </View>
+          ) : (
+            <View style={style.tabRightWrap}>
+              <SecurityInput
+                icon={'email'}
+                style={style.phone}
+                value={email}
+                changeText={(text) => {
+                  setEmail(text);
+                }}
+              />
+              <SecurityInput
+                icon={'code'}
+                secureTextEntry={true}
+                style={style.code}
+                value={pwd}
+                changeText={(text) => {
+                  setPwd(text);
+                }}
+              />
+            </View>
+          )}
+          <LinearGradient colors={['#475C78', '#203046']} style={style.linear} start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }}>
+            <Button style={style.btnWrap} textStyle={style.btn} title={title} onPress={handleBind} />
+          </LinearGradient>
+        </View>
+      </ScrollView>
+    </Touchable>
   );
 };
 const style = StyleSheet.create({
@@ -194,8 +200,8 @@ const style = StyleSheet.create({
   },
   backWrap: {
     position: 'absolute',
-    left: size(40),
-    top: size(60),
+    left: -size(40),
+
     width: size(50),
     height: size(50),
   },

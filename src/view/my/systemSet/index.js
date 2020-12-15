@@ -30,30 +30,12 @@ export default () => {
   };
 
   const setData = [
-    {
-      label: '语言',
-      key: 'language_mobile',
-      type: 'action',
-      border: false,
-
-      action: [
-        {
-          zh: '中文',
-          en: '中文',
-          value: 'zh',
-        },
-        {
-          zh: 'English',
-          en: 'English',
-          value: 'en',
-        },
-        {
-          zh: '取消',
-          en: 'Cancel',
-          value: '',
-        },
-      ],
-    },
+    // {
+    //   label: '语言',
+    //   key: 'language_mobile',
+    //   type: 'action',
+    //   border: false,
+    // },
 
     {
       label: '夜间模式',

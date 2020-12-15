@@ -2,6 +2,7 @@ import { doAction } from './getData';
 
 export const BAR_HEIGHT = 'BAR_HEIGHT';
 export const THEME = 'THEME';
+export const VERSION = 'VERSION';
 
 // export const getOfferList = (params) =>
 //   doAction(params, 'common/offer', 'OFFER_LIST', 'offerList');
@@ -18,6 +19,14 @@ export const commitTheme = (params) => {
     return dispatch({
       type: THEME,
       payload: { theme: params },
+    });
+  };
+};
+export const commitVersion = (params) => {
+  return (dispatch) => {
+    return dispatch({
+      type: VERSION,
+      payload: { version: params },
     });
   };
 };
