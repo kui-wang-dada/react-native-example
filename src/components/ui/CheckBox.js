@@ -8,82 +8,54 @@ import { Touchable, Icon, Button } from 'ui';
 export default (props) => {
   const { colors } = useTheme();
   const navigation = useNavigation();
-  const [value1, setValue1] = useState(false);
-  const [value2, setValue2] = useState(false);
 
-  const handleValue1 = (newV) => {
-    if (newV) {
-      setValue2(false);
-      setValue1(true);
-    } else {
-      setValue1(false);
-    }
-    props.handleChange && props.handleChange(1);
-  };
-  const handleValue2 = (newV) => {
-    if (newV) {
-      setValue1(false);
-      setValue2(true);
-    } else {
-      setValue2(false);
-    }
-    props.handleChange && props.handleChange(2);
-  };
+  const [activeRole, setActiveRole] = useState(0);
 
+  let roles = ['student', 'parent'];
   return (
-    <View style={style.checkBoxWrap}>
-      <View style={style.parentWrap}>
-        <CheckBox
-          tintColors={colors.primary}
-          onCheckColor={colors.primary}
-          onTintColor={colors.primary}
-          style={style.checkBox}
-          disabled={false}
-          value={value1}
-          onValueChange={handleValue1}
-        />
-        <Text style={[style.parentText, { color: colors.text }]}>家长</Text>
-      </View>
-      <View style={style.studentWrap}>
-        <CheckBox
-          tintColors={colors.primary}
-          onCheckColor={colors.primary}
-          onTintColor={colors.primary}
-          style={style.checkBox}
-          disabled={false}
-          value={value2}
-          onValueChange={handleValue2}
-        />
-        <Text style={[style.studentText, { color: colors.text }]}>学生</Text>
-      </View>
+    <View style={style.roleWrap}>
+      {roles.map((item, index) => {
+        return (
+          <View style={{ flexDirection: 'row', alignItems: 'center' }} key={index}>
+            <Button
+              key={index}
+              style={style.roleItem}
+              onPress={() => setActiveRole(index + 1)}
+              icon={item}
+              iconSize={25}
+              iconColor={activeRole === index + 1 ? colors.primary : colors.text_p}
+              textStyle={[
+                style.roleText,
+                { color: colors.text_p },
+                activeRole === index + 1 && {
+                  color: colors.primary,
+                },
+              ]}
+              title={index ? '家长' : '学生'}
+            />
+          </View>
+        );
+      })}
     </View>
   );
 };
 const style = StyleSheet.create({
-  checkBoxWrap: {
+  roleWrap: {
+    width: '100%',
     flexDirection: 'row',
     justifyContent: 'space-around',
     alignItems: 'center',
     height: size(100),
   },
-  parentWrap: {
+  roleItem: {
     flexDirection: 'row',
+    justifyContent: 'space-around',
     alignItems: 'center',
   },
-  checkBox: {
-    width: size(36),
-    height: size(36),
-  },
-  parentText: {
+  roleText: {
+    fontSize: size(32),
+    fontWeight: 'bold',
+
     marginLeft: size(20),
-    fontSize: size(28),
-  },
-  studentWrap: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  studentText: {
-    marginLeft: size(20),
-    fontSize: size(28),
   },
 });

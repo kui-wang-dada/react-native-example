@@ -24,7 +24,7 @@ export default () => {
       });
     } else {
       StatusBar.setTranslucent(true);
-
+      StatusBar.setBackgroundColor('transparent');
       dispatch(commitBarHeight(StatusBar.currentHeight));
       console.log(StatusBar.currentHeight, 'statusBarHeight');
     }

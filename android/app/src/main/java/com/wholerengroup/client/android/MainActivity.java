@@ -1,4 +1,4 @@
-package com.android;
+package com.wholerengroup.client.android;
 
 import com.facebook.react.ReactActivity;
 

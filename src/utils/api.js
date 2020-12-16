@@ -7,7 +7,7 @@ import _assign from 'lodash/assign';
 import _merge from 'lodash/merge';
 import _isEmpty from 'lodash/isEmpty';
 import _isArray from 'lodash/isArray';
-
+import store from '../store/store';
 import { assert } from '@/utils';
 import { API_DEFAULT_CONFIG, ApiConfig } from '@/config';
 import API_CONFIG from '@/api';
@@ -70,7 +70,7 @@ class Api {
             _data = Qs.stringify(_data);
           }
           // _data = Qs.stringify(_data);
-
+          console.log(store.getState(), 'storeApi');
           return axios(
             _normoalize(
               _assign(

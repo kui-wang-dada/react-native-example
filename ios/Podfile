@@ -12,6 +12,8 @@ target 'wholerenApp3' do
 
   pod 'RNImageCropPicker', :path => '../node_modules/react-native-image-crop-picker'
 
+  pod 'RCTWeChat', :path => '../node_modules/react-native-wechat-lib'
+
   target 'wholerenApp3Tests' do
     inherit! :complete
     # Pods for testing

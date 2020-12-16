@@ -88,7 +88,7 @@ export default ({ route }) => {
 
   return (
     <Touchable type="withoutFeedback" onPress={() => Keyboard.dismiss()}>
-      <View style={[style.loginWrap, { paddingTop: barHeight }]}>
+      <ScrollView contentContainerStyle={[style.loginWrap, { paddingTop: barHeight }]} bounces={false}>
         <View style={[style.pageTitleWrap]}>
           <Button icon="back" iconColor={'#fff'} iconSize={16} style={style.backWrap} onPress={navigation.goBack} />
           <Text style={[style.pageTitle, { color: '#fff' }]}>厚仁留学{title}</Text>
@@ -189,7 +189,7 @@ export default ({ route }) => {
             《服务条款说明》
           </Text>
         </View>
-      </View>
+      </ScrollView>
     </Touchable>
   );
 };

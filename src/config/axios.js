@@ -15,7 +15,7 @@ import { Loading } from 'ui';
 const CancelToken = axios.CancelToken;
 const source = axios.CancelToken.source();
 let CancelPromise = {};
-import lang from '@/assets/lang';
+
 /**
  * 请求成功拦截器
  * @param req 请求参数
@@ -23,8 +23,8 @@ import lang from '@/assets/lang';
  */
 export async function requestSuccessFunc(req) {
   let session_id;
-
-  let res = await store.getState().search.sessionId;
+  console.log(store.getState(), 'store');
+  let res = store.getState().search.sessionId;
   if (res) {
     session_id = res;
     console.log(session_id, 'deviceId1');

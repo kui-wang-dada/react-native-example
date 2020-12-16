@@ -57,8 +57,16 @@ export function openReport(url, navigation) {
   }
   let isPdf = /(.*)\.(pdf|doc|docx|xls|xlsx|ppt|pptx)$/.test(url);
   let isImage = /(.*)\.(jpg|bmp|gif|ico|pcx|jpeg|tif|png|raw|tga)$/.test(url);
+
+  let route = 'webview';
+  if (Platform.OS === 'android') {
+    if (/(.*)\.(pdf)$/.test(url)) {
+      route = 'pdf';
+    }
+  }
+
   if (isPdf) {
-    navigation.navigate('webview', { url: url });
+    navigation.navigate(route, { url: url });
   } else if (isImage) {
     let imgUrl = [
       {

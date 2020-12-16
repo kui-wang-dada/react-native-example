@@ -54,7 +54,7 @@ export default ({ route, navigation }) => {
 
     return (
       <View style={style.desWrap}>
-        <Text style={[style.desText, { color: colors.text_p }]} selectable="true">
+        <Text style={[style.desText, { color: colors.text_p }]} selectable={true}>
           {discuss}
         </Text>
         {parentDiscuss ? (

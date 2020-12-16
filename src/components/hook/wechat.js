@@ -18,6 +18,7 @@ export const useWechatLogin = () => {
     //判断微信是否安装
     WeChat.isWXAppInstalled().then((isInstalled) => {
       if (isInstalled) {
+        console.log(WeChat, 'wechat');
         //发送授权请求
         WeChat.sendAuthRequest(scope, state)
           .then((responseCode) => {
@@ -46,7 +47,7 @@ export const useWechatLogin = () => {
 
     if (res.data.display) {
       let id = res.data.display.unionid || res.data.display.uid;
-      dispatch(commitSessionId(id));
+      await dispatch(commitSessionId(id));
       modal.showLoading();
       await getHomeData();
       modal.close();

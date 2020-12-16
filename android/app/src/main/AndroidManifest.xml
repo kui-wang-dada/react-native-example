@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-  package="com.wholerenapp3">
+  package="com.wholerengroup.client.android">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -23,10 +23,10 @@
       </activity>
       <activity android:name="com.facebook.react.devsupport.DevSettingsActivity" />
       <activity
-        android:name=".WXEntryActivity"
+        android:name=".wxapi.WXEntryActivity"
         android:label="@string/app_name"
         android:exported="true"
-        android:taskAffinity="com.wholerenapp3"
+        android:taskAffinity="com.wholerengroup.client.android"
         android:launchMode="singleTask"
       />
     </application>
