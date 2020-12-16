@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { useTheme } from '@react-navigation/native';
 import { useDispatch, useSelector } from 'react-redux';
-import ImagePicker from 'react-native-image-crop-picker';
+// import ImagePicker from 'react-native-image-crop-picker';
 import { size, checkImg, modal, commonStyle, $api, checkStaticImg } from '@/utils';
 import { Icon, Touchable, Image, Loading } from 'ui';
 export default (props) => {
@@ -10,14 +10,13 @@ export default (props) => {
   const dispatch = useDispatch();
   const userInfo = useSelector((state) => state.my.userInfo);
   const chooseImg = () => {
-    ImagePicker.openPicker({
-      includeBase64: true,
-    }).then((image) => {
-      let fileData = 'data:image/jpeg;base64,' + image.data;
-      let fileName = image.filename || image.modificationDate;
-
-      this.uploadImg(fileData, fileName);
-    });
+    // ImagePicker.openPicker({
+    //   includeBase64: true,
+    // }).then((image) => {
+    //   let fileData = 'data:image/jpeg;base64,' + image.data;
+    //   let fileName = image.filename || image.modificationDate;
+    //   this.uploadImg(fileData, fileName);
+    // });
   };
   const uploadImg = async (fileData, fileName) => {
     let params = {

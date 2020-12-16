@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, NativeModules } from 'react-native';
+import { View, Text, StyleSheet, NativeModules, Platform, StatusBar } from 'react-native';
 import { useDispatch } from 'react-redux';
 import { commitBarHeight } from '@/store/actions/common';
 import * as WeChat from 'react-native-wechat-lib';
@@ -17,12 +17,18 @@ export default () => {
     WeChat.registerApp('wx55b14f887a79758c', 'https://staticapp.hourenlx.com/');
     const { StatusBarManager } = NativeModules;
 
-    // iOS Only
-    StatusBarManager.getHeight((statusBarHeight) => {
-      dispatch(commitBarHeight(statusBarHeight.height));
-      console.log(statusBarHeight);
-    });
-  }, [dispatch]);
+    if (Platform.OS === 'ios') {
+      StatusBarManager.getHeight((statusBarHeight) => {
+        dispatch(commitBarHeight(statusBarHeight.height));
+        console.log(statusBarHeight);
+      });
+    } else {
+      StatusBar.setTranslucent(true);
+
+      dispatch(commitBarHeight(StatusBar.currentHeight));
+      console.log(StatusBar.currentHeight, 'statusBarHeight');
+    }
+  }, []);
   return (
     <View style={style.wrap}>
       <MyRouter />
