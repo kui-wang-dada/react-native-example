@@ -100,7 +100,10 @@ export default ({ route, navigation }) => {
           <View style={[style.recordTop, { backgroundColor: colors.background }]}>
             <View style={style.top}>
               <View style={style.topLeft}>
-                <Text style={[style.topIcon, { backgroundColor: colors.primary, color: colors.background }]}>{iconName}</Text>
+                <View style={[style.topIconWrap, { backgroundColor: colors.primary }]}>
+                  <Text style={[style.topIcon, { color: colors.background }]}>{iconName}</Text>
+                </View>
+
                 <Text style={[style.topName, { color: colors.text }]}>{detail.tutoring_class_name}</Text>
               </View>
               <Text style={[style.topRight, { color: colors.text_p }]}>{messageTime(detail.start_on)}</Text>
@@ -171,15 +174,17 @@ const style = StyleSheet.create({
 
     alignItems: 'center',
   },
+  topIconWrap: {
+    width: size(60),
+    height: size(60),
+    borderRadius: size(30),
+    marginRight: size(16),
+  },
   topIcon: {
     textAlign: 'center',
     lineHeight: size(60),
     fontSize: size(28),
     fontWeight: 'bold',
-    width: size(60),
-    height: size(60),
-    borderRadius: size(30),
-    marginRight: size(16),
   },
   topName: {
     fontSize: size(32),

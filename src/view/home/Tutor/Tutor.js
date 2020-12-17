@@ -1,22 +1,23 @@
-import React, {useState, useEffect} from 'react';
-import {View, Text, StyleSheet} from 'react-native';
-import {useTheme} from '@react-navigation/native';
-import {useDispatch, useSelector} from 'react-redux';
-import {getTpDetail} from '@/store/actions';
+import React, { useState, useEffect } from 'react';
+import { View, Text, StyleSheet } from 'react-native';
+import { useTheme } from '@react-navigation/native';
+import { useDispatch, useSelector } from 'react-redux';
+import { getTpDetail } from '@/store/actions';
 
 import ScrollableTabView from 'react-native-scrollable-tab-view';
-import {TutorItem} from 'common';
-import {size, commonStyle} from '@/utils';
-import {Touchable, Icon, Button, TabBar} from 'ui';
-import {Tab1, Tab2, Tab3, Tab4, Tab5} from './item';
-export default ({route, navigation}) => {
-  const {colors} = useTheme();
+import { TutorItem } from 'common';
+import { size, commonStyle } from '@/utils';
+import { Touchable, Icon, Button, TabBar } from 'ui';
+import { Tab1, Tab2, Tab3, Tab4, Tab5 } from './item';
+export default ({ route, navigation }) => {
+  const { colors } = useTheme();
   const dispatch = useDispatch();
+  const userInfo = useSelector((state) => state.my.userInfo);
   const tpDetail = useSelector((state) => state.home.tpDetail);
   console.log(tpDetail, 'params');
   useEffect(() => {
     // Update the document title using the browser API
-    const {name} = route.params;
+    const { name } = route.params;
     let params = {
       name: name,
     };
@@ -34,7 +35,7 @@ export default ({route, navigation}) => {
       percent: percent,
     });
   };
-  const {name} = route.params;
+  const { name } = route.params;
   return (
     <View style={style.wrap}>
       <View>
@@ -46,13 +47,8 @@ export default ({route, navigation}) => {
         }}
         renderTabBar={() => <TabBar style={style.tabBar} />}>
         <Tab1 tabLabel="辅导记录" name={name} />
-        <Tab2 tabLabel="周报告" name={name} />
-        <Tab3
-          tabLabel="文档报告"
-          name={name}
-          handleModal={handleModal}
-          handleProgress={handleProgress}
-        />
+        {userInfo.is_std ? null : <Tab2 tabLabel="辅导报告" name={name} />}
+        <Tab3 tabLabel="文档报告" name={name} handleModal={handleModal} handleProgress={handleProgress} />
         <Tab4 tabLabel="辅导课程" name={name} />
         <Tab5 tabLabel="沟通记录" name={name} />
       </ScrollableTabView>

@@ -35,7 +35,7 @@ export default ({ route, navigation }) => {
   const renderHeader = () => {
     let data = messageDetail;
     let [name, avatar, time] = [data.contact_by_full_name, data.contact_by_img, data.creation];
-    let imgUrl = checkImg(data.contact_by_img, '180') ? checkImg(data.contact_by_img, '180') : checkStaticImg('female.png');
+    let imgUrl = checkImg(data.contact_by_img, '180') ? checkImg(data.contact_by_img, '180') : checkStaticImg('female.jpg');
     return (
       <View style={style.headerWrap}>
         <View style={style.headerLeft}>

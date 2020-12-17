@@ -12,6 +12,7 @@ export default (props) => {
     if (!props.source.uri) {
       return;
     }
+    let isMounted = true;
     console.log(props.source.uri, 'tttt');
     Image.getSize(
       props.source.uri,
@@ -20,22 +21,25 @@ export default (props) => {
         //height 图片的高度
         console.log(width, height, 'ttttt');
         let myImgHeight = Math.floor((SCREEN_WIDTH / width) * height);
-        console.log(width, height, myImgHeight, 'ttttt');
+        let lastHeight = 0;
         if (props.style && props.style.height) {
-          setImgHeight(props.style.height);
+          lastHeight = props.style.height;
         } else {
-          setImgHeight(myImgHeight);
+          lastHeight = myImgHeight;
+        }
+        if (isMounted) {
+          setImgHeight(lastHeight);
         }
       },
       (e) => {
         console.log(e, 'tttt');
       },
     );
+    return () => {
+      isMounted = false;
+    };
   }, []);
 
   let { source } = props;
   return <Image source={source} resizeMode="cover" style={[props.style, { height: imgHeight }]} />;
 };
-const style = StyleSheet.create({
-  wrap: {},
-});

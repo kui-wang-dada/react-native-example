@@ -25,7 +25,7 @@ export default (props) => {
           {author.avatar ? (
             <Image source={{ uri: checkImg(author.avatar, '180') }} alt style={style.img} lazyLoad={true} />
           ) : (
-            <Image source={{ uri: myAvatar ? myAvatar : checkStaticImg('female.png') }} alt style={style.img} />
+            <Image source={{ uri: myAvatar ? myAvatar : checkStaticImg('female.jpg') }} alt style={style.img} />
           )}
 
           <View style={style.textWrap}>

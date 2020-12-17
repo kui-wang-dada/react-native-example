@@ -3,7 +3,9 @@ import { View, Text, StyleSheet } from 'react-native';
 import { useTheme } from '@react-navigation/native';
 import { size, commonStyle, SCREEN_WIDTH } from '@/utils';
 import { Touchable, Icon, Button, Image } from 'ui';
-import { SafeAreaInsetsContext } from 'react-native-safe-area-context';
+import BarEchart from '../../components/barEchart';
+import RadarEchart from '../../components/radarEchart';
+
 export default (props) => {
   const { colors } = useTheme();
 
@@ -45,6 +47,7 @@ export default (props) => {
               </View>
             );
           })}
+          {item.conType === 'bar' ? <BarEchart data={item.con} /> : <RadarEchart data={item.con} />}
         </View>
       ) : item.nodata ? (
         <View style={style.itemValue}>
@@ -108,12 +111,13 @@ const style = StyleSheet.create({
     paddingHorizontal: size(16),
     position: 'relative',
     top: size(20),
+    marginBottom: size(10),
   },
   arrTitle: {
-    fontSize: size(24),
+    fontSize: size(28),
   },
   arrLabel: {
-    fontSize: size(24),
+    fontSize: size(28),
   },
   arrTip: {
     fontSize: size(24),

@@ -14,7 +14,7 @@ export default (props) => {
   };
 
   let imgUrl = checkImg(item.contact_by_img, '180');
-  imgUrl = imgUrl ? imgUrl : checkStaticImg('female.png');
+  imgUrl = imgUrl ? imgUrl : checkStaticImg('female.jpg');
   let name = item.contact_by_full_name || item.contact_by || '厚仁学术哥';
   return (
     <Touchable style={[style.messageItem, { backgroundColor: colors.background }]} onPress={goToDetail}>

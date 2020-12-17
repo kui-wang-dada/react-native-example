@@ -66,7 +66,7 @@ export default (props) => {
 
   let { from_full_name, to_full_name, from_user_image, content, comment_on } = props.data;
   let flag = from_user_image && from_user_image.includes('private');
-  let source = flag ? checkStaticImg('female.png') : from_user_image;
+  let source = flag ? checkStaticImg('female.jpg') : from_user_image;
   return (
     <Touchable
       style={[style.commentItem, { borderBottomColor: colors.border }]}

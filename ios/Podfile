@@ -8,11 +8,9 @@ target 'wholerenApp3' do
 
   use_react_native!(:path => config["reactNativePath"])
 
-  pod 'react-native-appearance', :path => '../node_modules/react-native-appearance'
+  # pod 'react-native-appearance', :path => '../node_modules/react-native-appearance'
 
-  pod 'RNImageCropPicker', :path => '../node_modules/react-native-image-crop-picker'
-
-  pod 'RCTWeChat', :path => '../node_modules/react-native-wechat-lib'
+  # pod 'RCTWeChat', :path => '../node_modules/react-native-wechat-lib'
 
   target 'wholerenApp3Tests' do
     inherit! :complete

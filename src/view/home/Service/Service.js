@@ -46,8 +46,8 @@ export default ({ route, navigation }) => {
         }}
         renderTabBar={() => <TabBar style={style.tabBar} />}>
         <Tab1 tabLabel="沟通记录" name={name} />
-        <Tab2 tabLabel="服务流程" name={name} list={spDetail.tasks} />
-        <Tab3 tabLabel="选校单" name={name} />
+        {spDetail.tasks && spDetail.tasks.length ? <Tab2 tabLabel="服务流程" name={name} list={spDetail.tasks} /> : null}
+        {spDetail.is_transfer ? <Tab3 tabLabel="选校单" name={name} /> : null}
         <Tab4 tabLabel="文档报告" name={name} handleModal={handleModal} handleProgress={handleProgress} />
       </ScrollableTabView>
     </View>
