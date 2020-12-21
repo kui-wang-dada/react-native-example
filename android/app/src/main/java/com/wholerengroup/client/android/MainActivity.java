@@ -5,7 +5,9 @@ import com.facebook.react.ReactActivity;
 import android.content.Intent; // <--- import
 import android.content.res.Configuration; // <--- import
 
-
+import android.os.Bundle; // here
+// react-native-splash-screen >= 0.3.1
+import org.devio.rn.splashscreen.SplashScreen;
 
 public class MainActivity extends ReactActivity {
 
@@ -25,4 +27,9 @@ public class MainActivity extends ReactActivity {
     intent.putExtra("newConfig", newConfig);
     sendBroadcast(intent);
   }
+  @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        SplashScreen.show(this);  // here
+        super.onCreate(savedInstanceState);
+    }
 }

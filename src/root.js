@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { commitBarHeight, commitVersion } from '@/store/actions/common';
 import * as WeChat from 'react-native-wechat-lib';
 import { size, commonStyle, $api, checkImg } from '@/utils';
+import SplashScreen from 'react-native-splash-screen';
 import { Touchable, Icon } from 'ui';
 import MyRouter from '@/router';
 
@@ -14,7 +15,7 @@ export default () => {
   useEffect(() => {
     // Update the document title using the browser API
     console.log(5);
-
+    SplashScreen.hide();
     WeChat.registerApp('wx55b14f887a79758c', 'https://staticapp.hourenlx.com/');
     const { StatusBarManager } = NativeModules;
 

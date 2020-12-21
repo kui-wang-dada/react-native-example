@@ -4,7 +4,7 @@ import { useTheme, useNavigation } from '@react-navigation/native';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAccount, commitUserInfo } from '@/store/actions';
 
-import { size, commonStyle, $api } from '@/utils';
+import { size, commonStyle, $api, modal } from '@/utils';
 import { Touchable, Icon, Button, FlowList } from 'ui';
 import AccountItem from './components/AccountItem';
 import { useGetHomeData } from 'hook/useGetData';
@@ -34,7 +34,9 @@ export default () => {
 
   const switchStudent = async (item) => {
     let switchParams = { std: item.name };
+    modal.showLoading();
     let res = await $api['my/switchAccount'](switchParams);
+    modal.close();
     if (res.data.display) {
       await dispatch(commitUserInfo(res.data.display));
       await getHomeData();

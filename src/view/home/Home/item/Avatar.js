@@ -49,7 +49,7 @@ export default () => {
           </View>
           <Text style={style.stuName}>{userInfo.students_name}</Text>
         </Touchable>
-
+        {/*
         <View style={style.stuCon}>
           {conData.map((item, index) => {
             return (
@@ -63,7 +63,7 @@ export default () => {
               </View>
             );
           })}
-        </View>
+        </View> */}
       </View>
     );
   };
@@ -104,7 +104,7 @@ const style = StyleSheet.create({
   },
   stuNameWrap: {
     flexDirection: 'column',
-    marginBottom: size(30),
+    marginBottom: size(40),
   },
   stuId: {
     flexDirection: 'row',

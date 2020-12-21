@@ -1,3 +1,4 @@
+
 package com.wholerengroup.client.android;
 
 import android.app.Application;
@@ -12,6 +13,9 @@ import com.facebook.soloader.SoLoader;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 import com.theweflex.react.WeChatPackage; // Add this line
+
+
+
 
 public class MainApplication extends Application implements ReactApplication {
 
@@ -29,6 +33,8 @@ public class MainApplication extends Application implements ReactApplication {
           // Packages that cannot be autolinked yet can be added manually here, for example:
           // packages.add(new MyReactNativePackage());
           packages.add(new WeChatPackage()); // Add this line
+          
+
           return packages;
         }
 
@@ -45,7 +51,9 @@ public class MainApplication extends Application implements ReactApplication {
 
   @Override
   public void onCreate() {
+  
     super.onCreate();
+
     SoLoader.init(this, /* native exopackage */ false);
     initializeFlipper(this, getReactNativeHost().getReactInstanceManager());
   }

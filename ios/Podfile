@@ -12,6 +12,8 @@ target 'wholerenApp3' do
 
   # pod 'RCTWeChat', :path => '../node_modules/react-native-wechat-lib'
 
+  pod 'react-native-splash-screen', :path => '../node_modules/react-native-splash-screen'
+
   target 'wholerenApp3Tests' do
     inherit! :complete
     # Pods for testing
