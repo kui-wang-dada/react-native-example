@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, ScrollView } from 'react-native';
 import { useTheme } from '@react-navigation/native';
+import { useDispatch, useSelector } from 'react-redux';
 import HTMLView from 'react-native-htmlview';
 import { size, commonStyle } from '@/utils';
 import { Touchable, Icon, Button } from 'ui';
 import { color } from 'react-native-reanimated';
 export default (props) => {
   const { colors } = useTheme();
-
+  const theme = useSelector((state) => state.common.theme);
   const [list, setList] = useState([]);
   const [showAll, setShowAll] = useState(true);
 
@@ -18,7 +19,7 @@ export default (props) => {
         icon: 'task-wait',
         color: '#e69a40',
         tag: (
-          <View style={[style.tagWrap, { backgroundColor: '#F6EFE6' }]}>
+          <View style={[style.tagWrap, { backgroundColor: theme === 'dark' ? colors.card : '#F6EFE6' }]}>
             <Text style={{ color: '#E6A53D' }}>待开启</Text>
           </View>
         ),
@@ -28,7 +29,7 @@ export default (props) => {
         icon: 'task-doing',
         color: '#6ca5e4',
         tag: (
-          <View style={[style.tagWrap, { backgroundColor: '#E9F0F8' }]}>
+          <View style={[style.tagWrap, { backgroundColor: theme === 'dark' ? colors.card : '#E9F0F8' }]}>
             <Text style={{ color: '#7CAFEA' }}>服务中</Text>
           </View>
         ),
@@ -38,7 +39,7 @@ export default (props) => {
         icon: 'task-over',
         color: '#4bc694',
         tag: (
-          <View style={[style.tagWrap, { backgroundColor: '#E4F7EF' }]}>
+          <View style={[style.tagWrap, { backgroundColor: theme === 'dark' ? colors.card : '#E4F7EF' }]}>
             <Text style={{ color: '#4BC69A' }}>已完成</Text>
           </View>
         ),
@@ -48,7 +49,7 @@ export default (props) => {
         icon: 'task-wait',
         color: '#d83f42',
         tag: (
-          <View style={[style.tagWrap, { backgroundColor: '#F2F2F2' }]}>
+          <View style={[style.tagWrap, { backgroundColor: theme === 'dark' ? colors.card : '#F2F2F2' }]}>
             <Text style={{ color: '#AAAAAA' }}>已取消</Text>
           </View>
         ),

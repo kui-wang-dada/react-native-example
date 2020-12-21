@@ -4,8 +4,6 @@ export const BAR_HEIGHT = 'BAR_HEIGHT';
 export const THEME = 'THEME';
 export const VERSION = 'VERSION';
 
-// export const getOfferList = (params) =>
-//   doAction(params, 'common/offer', 'OFFER_LIST', 'offerList');
 export const commitBarHeight = (params) => {
   return (dispatch) => {
     return dispatch({

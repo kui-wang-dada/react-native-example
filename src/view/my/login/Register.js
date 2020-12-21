@@ -46,7 +46,7 @@ export default () => {
       modal.showToast('注册成功');
 
       if (res.status.code === 200) {
-        let deviceId = res.data.display.unionid || res.data.display.uid;
+        let deviceId = res.data.display.uid;
         // dispatch(commitSessionId(deviceId));
         // await getHomeData();
         // navigation.navigate('首页');

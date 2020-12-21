@@ -1,11 +1,11 @@
 /** @format */
-import {ApiConfig} from '@/config';
+import { ApiConfig } from '@/config';
 
 export default [
   {
-    name: 'offer',
+    name: 'version',
     method: 'GET',
-    desc: 'offer榜单',
-    path: ApiConfig.baseUrl + '/apis/method/soa.ncov.api.coronavirus_news',
+    desc: 'app版本信息',
+    path: '/apis/method/frappe.apis.apps.settings.latest_app_version',
   },
 ];

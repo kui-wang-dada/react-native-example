@@ -23,6 +23,7 @@ export default (props) => {
 
     if (type === 'mini') {
       openMini(params.id, params.path);
+      return;
     }
     navigation.navigate(route, params);
   };

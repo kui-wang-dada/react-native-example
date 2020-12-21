@@ -30,12 +30,15 @@ export default (props) => {
     tooltip: {
       trigger: 'axis',
       position: function (point, params, dom, rect, size) {
-        console.log(params, size, 'posit');
-        if (params[0].dataIndex > 2) {
-          return [point[0] - size.contentSize[0], '10%'];
-        }
-        // 固定在顶部
-        return [point[0], '10%'];
+        var obj = { top: 60 };
+        obj[['left', 'right'][+(point[0] < size.viewSize[0] / 2)]] = 5;
+        return obj;
+        // console.log(params, size, 'posit');
+        // if (params[0].dataIndex > 2) {
+        //   return [point[0] - size.contentSize[0], '10%'];
+        // }
+        // // 固定在顶部
+        // return [point[0], '10%'];
       },
       extraCssText: 'text-align:left;z-index:999',
       formatter: function (params, ticket, callback) {
@@ -43,8 +46,8 @@ export default (props) => {
         var showHtm = '';
         for (var i = 0; i < params.length; i++) {
           let displayValue = params[i].value;
-          let marker = '{marker' + i + 'at0|} ';
-          showHtm += marker + params[i].name + '：' + displayValue;
+
+          showHtm += params[i].name + '：' + displayValue;
         }
         return showHtm;
       },

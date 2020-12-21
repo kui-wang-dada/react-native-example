@@ -29,10 +29,12 @@ export const useWechatLogin = () => {
           })
           .catch((err) => {
             console.log(err, 'err');
+            modal.showToast('微信授权失败，请使用邮箱或者邀请码登录');
           });
         console.log(123);
       } else {
         console.log('nowechat');
+        modal.showToast('没有检测到微信，请确定手机含有微信app并保持运行');
       }
     });
   };
@@ -46,7 +48,7 @@ export const useWechatLogin = () => {
     console.log('getUser,', res);
 
     if (res.data.display) {
-      let id = res.data.display.unionid || res.data.display.uid;
+      let id = res.data.display.uid;
       await dispatch(commitSessionId(id));
       modal.showLoading();
       await getHomeData();

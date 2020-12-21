@@ -24,12 +24,12 @@ export default (props) => {
     title: {
       text: '',
     },
-    tooltip: {},
+    tooltip: { trigger: 'item' },
     color: '#fc8300',
     zlevel: 100,
-    symbolSize: 3,
+    symbolSize: 6,
     symbolOffset: [20, 20],
-    layoutSize: '90%',
+    layoutSize: '80%',
     radar: {
       shape: 'circle',
 
@@ -65,7 +65,7 @@ export default (props) => {
   };
   return (
     <View style={style.wrap}>
-      <ECharts option={option} backgroundColor="red" />
+      <ECharts option={option} />
     </View>
   );
 };

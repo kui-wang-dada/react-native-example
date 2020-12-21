@@ -74,7 +74,7 @@ export default ({ route }) => {
       console.log(res, 'login');
       modal.close();
       if (res.data && res.data.display) {
-        let deviceId = res.data.display.unionid || res.data.display.uid;
+        let deviceId = res.data.display.uid;
         dispatch(commitSessionId(deviceId));
         await getHomeData();
         navigation.navigate('首页');

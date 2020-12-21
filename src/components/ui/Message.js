@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { StyleSheet, View, Text, Image } from 'react-native';
 
-import { commonStyle, size, checkStaticImg } from '@/utils';
+import { size, checkStaticImg } from '@/utils';
 import { useTheme } from '@react-navigation/native';
 import { Button } from 'ui';
 
-export default class Message extends Component {
+class Message extends Component {
   constructor(props) {
     super(props);
   }
@@ -65,10 +65,11 @@ export default class Message extends Component {
         button: this.props.button,
       };
     }
+    let { colors } = this.props;
 
     const image = config.image ? <Image source={{ uri: config.image }} style={s.image} /> : null;
-    const title = config.title ? <Text style={[s.title, { color: commonStyle.colorTheme.title }]}>{config.title}</Text> : null;
-    const textColor = this.props.textColor ? this.props.textColor : commonStyle.colorTheme.title;
+    const title = config.title ? <Text style={[s.title, { color: colors.text }]}>{config.title}</Text> : null;
+    const textColor = this.props.textColor ? this.props.textColor : colors.text;
     const content = config.content ? <Text style={[s.content, { color: textColor }]}>{config.content}</Text> : null;
     const btn = config.button ? <Button style={[s.btnWrap]} textStyle={s.btn} title={config.button} onPress={this.props.clickButton} /> : null;
 
@@ -136,3 +137,9 @@ const s = StyleSheet.create({
     color: '#333',
   },
 });
+
+export default function (props) {
+  const { colors } = useTheme();
+
+  return <Message {...props} colors={colors} />;
+}

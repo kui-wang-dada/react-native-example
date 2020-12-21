@@ -17,7 +17,7 @@ export default (props) => {
 
   let { item, from } = props;
   let statusStragety = {
-    Completed: '已完结',
+    Complete: '已完结',
     Working: '服务中',
     Terminate: '已取消',
     HangOn: '暂停中',

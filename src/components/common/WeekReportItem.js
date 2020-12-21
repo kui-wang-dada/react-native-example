@@ -19,7 +19,13 @@ export default (props) => {
 
   let { item } = props;
 
-  let iconName = item.tutoring_class_name && item.tutoring_class_name.split('')[0];
+  let stragety = {
+    'TPRT-00001': { title: item.tutoring_class_name, label: item.content },
+    'TPRT-00002': { title: '月报告', label: item.report_title },
+    'TPRT-00004': { title: '期末总结', label: item.report_title },
+  };
+
+  let iconName = stragety[item.report_type].title && stragety[item.report_type].title.split('')[0];
   return (
     <Touchable style={[style.recordItem, { backgroundColor: colors.background }]} onPress={goToDetail}>
       <View style={style.topWrap}>
@@ -28,13 +34,13 @@ export default (props) => {
             <Text style={[style.topIcon, { color: colors.background }]}>{iconName}</Text>
           </View>
 
-          <Text style={[style.topName, { color: colors.text }]}>{item.tutoring_class_name}</Text>
+          <Text style={[style.topName, { color: colors.text }]}>{stragety[item.report_type].title}</Text>
         </View>
         <Text style={[style.topRight, { color: colors.text_p }]}>{messageTime(item.start_on)}</Text>
       </View>
       <View style={[style.center]}>
         <Text numberOfLines={3} style={[style.centerText, { color: colors.text_p }]}>
-          {item.content}
+          {stragety[item.report_type].label}
         </Text>
       </View>
     </Touchable>
