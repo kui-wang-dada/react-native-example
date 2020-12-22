@@ -18,6 +18,7 @@ export default ({ route }) => {
   const getHomeData = useGetHomeData();
   const dispatch = useDispatch();
   const barHeight = useSelector((state) => state.common.barHeight);
+  const hasWechat = useSelector((state) => state.common.hasWechat);
 
   const [tab, setTab] = useState(0);
   const [invitation, setInvitation] = useState('');
@@ -154,21 +155,23 @@ export default ({ route }) => {
             忘记密码？
           </Text>
         </View> */}
-          <View style={style.otherLoginWrap}>
-            <LinearGradient colors={['#475C78', '#203046']} style={style.linear} start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }}>
-              <Button style={style.btnWrap} textStyle={style.btn} title={title} onPress={handleLogin} />
-            </LinearGradient>
-            <View style={style.loginTipsWrap}>
-              <View style={style.line} />
-              <Text style={style.loginTips}>推荐使用微信登录</Text>
-              <View style={style.line} />
+          {hasWechat ? (
+            <View style={style.otherLoginWrap}>
+              <LinearGradient colors={['#475C78', '#203046']} style={style.linear} start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }}>
+                <Button style={style.btnWrap} textStyle={style.btn} title={title} onPress={handleLogin} />
+              </LinearGradient>
+              <View style={style.loginTipsWrap}>
+                <View style={style.line} />
+                <Text style={style.loginTips}>推荐使用微信登录</Text>
+                <View style={style.line} />
+              </View>
+              <View>
+                <Touchable style={style.wechatWrap} onPress={getWechat}>
+                  <Image style={style.wechat} source={require('@/assets/images/wechat.png')} />
+                </Touchable>
+              </View>
             </View>
-            <View>
-              <Touchable style={style.wechatWrap} onPress={getWechat}>
-                <Image style={style.wechat} source={require('@/assets/images/wechat.png')} />
-              </Touchable>
-            </View>
-          </View>
+          ) : null}
         </View>
 
         <View style={style.agreeWrap}>

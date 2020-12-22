@@ -4,6 +4,7 @@ const INITIAL_STATE = {
   barHeight: 0,
   theme: 'light',
   version: '3.0',
+  hasWechat: false,
 };
 
 export default function (state = INITIAL_STATE, action) {
@@ -13,6 +14,8 @@ export default function (state = INITIAL_STATE, action) {
     case common.THEME:
       return { ...state, ...action.payload };
     case common.VERSION:
+      return { ...state, ...action.payload };
+    case common.HAS_WECHAT:
       return { ...state, ...action.payload };
     default:
       return state;

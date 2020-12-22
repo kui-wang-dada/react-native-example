@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { commitSessionId, getHomeSp, getHomeTp, getHomeCount, getUserInfo } from '@/store/actions';
 import { size, $api, modal } from '@/utils';
 import { Touchable, Icon, Button } from 'ui';
+
 export const useWechatLogin = () => {
   const { colors } = useTheme();
   const navigation = useNavigation();

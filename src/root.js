@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, NativeModules, Platform, StatusBar, Linking, Alert } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
-import { commitBarHeight, commitVersion } from '@/store/actions/common';
+import { commitBarHeight, commitVersion, commitHasWechat } from '@/store/actions/common';
 import * as WeChat from 'react-native-wechat-lib';
 import { size, commonStyle, $api, checkImg } from '@/utils';
 import SplashScreen from 'react-native-splash-screen';
@@ -16,7 +16,22 @@ export default () => {
     // Update the document title using the browser API
     console.log(5);
     SplashScreen.hide();
+
+    getWechat();
+    getStatusBar();
+    getVersion();
+  }, []);
+
+  const getWechat = () => {
     WeChat.registerApp('wx55b14f887a79758c', 'https://staticapp.hourenlx.com/');
+
+    WeChat.isWXAppInstalled().then((isInstalled) => {
+      if (isInstalled) {
+        dispatch(commitHasWechat(true));
+      }
+    });
+  };
+  const getStatusBar = () => {
     const { StatusBarManager } = NativeModules;
 
     if (Platform.OS === 'ios') {
@@ -30,8 +45,7 @@ export default () => {
       dispatch(commitBarHeight(StatusBar.currentHeight));
       console.log(StatusBar.currentHeight, 'statusBarHeight');
     }
-    getVersion();
-  }, []);
+  };
 
   const getVersion = async () => {
     let res = await $api['common/version']();
