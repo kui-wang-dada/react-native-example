@@ -16,7 +16,11 @@ export default () => {
   const homeCount = useSelector((state) => state.home.homeCount);
 
   const goToLogin = () => {
-    navigation.navigate('login');
+    if (userInfo.name) {
+      navigation.navigate('erpBind');
+    } else {
+      navigation.navigate('login');
+    }
   };
   const goToAccount = () => {
     navigation.navigate('account');
@@ -75,10 +79,11 @@ export default () => {
           <Image source={{ uri: checkStaticImg('xueshu.png') }} style={style.noLoginImg} />
           <Text style={style.noLoginLabel}>您好！「厚仁学生中心」APP仅对厚仁教育用户开放，请您进行微信授权并绑定厚仁学生账号。</Text>
         </View>
-        <View style={style.noLoginBtnWrap}>
-          <Text style={style.noLoginText}>点击登录</Text>
-          <Icon name="right" size={16} color={'#E6A53D'} />
-        </View>
+        {userInfo.name ? (
+          <Button style={style.noLoginBtnWrap} textStyle={style.noLoginText} icon="right" iconSize={16} iconColor="#E6A53D" title="绑定厚仁账号" />
+        ) : (
+          <Button style={style.noLoginBtnWrap} textStyle={style.noLoginText} icon="right" iconSize={16} iconColor="#E6A53D" title="点击登录" />
+        )}
       </Touchable>
     );
   };

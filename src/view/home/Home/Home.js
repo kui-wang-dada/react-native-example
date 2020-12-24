@@ -6,6 +6,7 @@ import { getUserInfo, getHomeSp, getHomeTp, getHomeCount } from '@/store/actions
 import { TutorItem, ServiceItem, TopHeader } from 'common';
 import Avatar from './item/Avatar';
 import ServiceStep from './item/ServiceStep';
+import Agreement from './item/Agreement';
 import { size, commonStyle, checkStaticImg } from '@/utils';
 import { Touchable, Icon } from 'ui';
 
@@ -102,6 +103,7 @@ export default ({ route, navigation }) => {
           <ServiceStep />
         </View>
       )}
+      <Agreement />
     </ScrollView>
   );
 };

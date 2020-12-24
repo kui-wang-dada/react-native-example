@@ -132,8 +132,8 @@ android {
         applicationId "com.wholerengroup.client.android"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 1
-        versionName "1.0"
+        versionCode 300000
+        versionName "3.0"
         // react-native-image-crop-picker
         multiDexEnabled true
         vectorDrawables.useSupportLibrary = true

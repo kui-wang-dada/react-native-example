@@ -8,7 +8,7 @@ import privacy from 'common/wenshu/privacy';
 export default () => {
   const { colors } = useTheme();
   const dispatch = useDispatch();
-  const agreementFlag = useSelector((state) => state.my.agreementFlag);
+  const agreementFlag = useSelector((state) => state.search.agreementFlag);
   return (
     <View style={{ flex: 1, backgroundColor: colors.background }}>
       <ScrollView
