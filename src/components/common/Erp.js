@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, SafeAreaView } from 'react-native';
+import { View, Text, StyleSheet, SafeAreaView, Platform } from 'react-native';
 import { useTheme } from '@react-navigation/native';
 import { useDispatch, useSelector } from 'react-redux';
 import { WebView } from 'react-native-webview';
@@ -53,7 +53,7 @@ export default () => {
     dispatch(commitShowErp('out'));
   };
   return showErp === 'out' ? null : (
-    <SafeAreaView
+    <View
       style={{
         position: 'absolute',
         top: 0,
@@ -61,7 +61,6 @@ export default () => {
         left: 0,
         right: 0,
         backgroundColor: '#4bc694',
-        zIndex: -1,
       }}>
       <View
         style={{
@@ -106,7 +105,7 @@ export default () => {
         mixedContentMode={'always'}
         // nativeConfig={{ props: { backgroundColor:colors.pageBg, flex: 1 } }}
       />
-    </SafeAreaView>
+    </View>
   );
 };
 const style = StyleSheet.create({

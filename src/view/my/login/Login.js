@@ -152,6 +152,10 @@ export default ({ route }) => {
             </View>
           )}
 
+          <LinearGradient colors={['#475C78', '#203046']} style={style.linear} start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }}>
+            <Button style={style.btnWrap} textStyle={style.btn} title={title} onPress={handleLogin} />
+          </LinearGradient>
+
           {/* <View style={style.tipsWrap}>
           <Text style={style.tipsRegister} onPress={() => navigation.navigate('register')}>
             没有账号？立即注册
@@ -162,9 +166,6 @@ export default ({ route }) => {
         </View> */}
           {hasWechat ? (
             <View style={style.otherLoginWrap}>
-              <LinearGradient colors={['#475C78', '#203046']} style={style.linear} start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }}>
-                <Button style={style.btnWrap} textStyle={style.btn} title={title} onPress={handleLogin} />
-              </LinearGradient>
               <View style={style.loginTipsWrap}>
                 <View style={style.line} />
                 <Text style={style.loginTips}>推荐使用微信登录</Text>
@@ -289,7 +290,7 @@ const style = StyleSheet.create({
     marginBottom: size(10),
   },
   linear: {
-    marginBottom: size(60),
+    marginTop: size(60),
     width: size(488),
     height: size(80),
     borderRadius: size(4),
