@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, Image, ScrollView } from 'react-native';
 import { useTheme } from '@react-navigation/native';
 import { useDispatch, useSelector } from 'react-redux';
-import { getRecordDetail } from '@/store/actions';
+import { commitShowErp } from '@/store/actions';
 import { size, commonStyle, checkStaticImg } from '@/utils';
 import { Touchable, Icon, Button } from 'ui';
 import Avatar from './components/Avatar';
@@ -11,7 +11,13 @@ export default ({ route, navigation }) => {
   const { colors } = useTheme();
   const dispatch = useDispatch();
   const userInfo = useSelector((state) => state.my.userInfo);
+  const showErp = useSelector((state) => state.common.showErp);
+  const version = useSelector((state) => state.common.version);
   console.log(userInfo, 'params');
+
+  const handleShowErp = () => {
+    dispatch(commitShowErp('show'));
+  };
 
   const listData = [
     {
@@ -33,12 +39,21 @@ export default ({ route, navigation }) => {
       params: { id: 'gh_54505723e513', path: 'pages/home/index' },
       type: 'mini',
     },
+
     {
       title: '系统设置',
       icon: 'setting',
       route: 'systemSet',
     },
   ];
+
+  if (userInfo.roles && userInfo.roles.includes('Employee')) {
+    listData.push({
+      title: 'ERP',
+      icon: 'erp',
+      type: 'erp',
+    });
+  }
   return (
     <View style={style.myWrap}>
       <Avatar />
@@ -53,16 +68,54 @@ export default ({ route, navigation }) => {
           })}
         </View>
       </ScrollView>
+      <View style={style.versionWrap}>
+        <Text style={[style.version, { color: colors.text_tag }]}>当前版本：{version}</Text>
+      </View>
+      {showErp === 'hide' ? (
+        <Button
+          onPress={handleShowErp}
+          style={style.btnWrap}
+          title="erp"
+          textStyle={{
+            color: 'white',
+            fontSize: size(28),
+            fontWeight: 'bold',
+          }}
+        />
+      ) : null}
     </View>
   );
 };
 const style = StyleSheet.create({
-  myWrap: {},
+  myWrap: {
+    flex: 1,
+  },
   sep: {
     width: '100%',
     height: size(20),
   },
   myList: {
     flex: 1,
+  },
+  btnWrap: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    position: 'absolute',
+    bottom: size(60),
+    right: size(30),
+    width: size(100),
+    height: size(100),
+    backgroundColor: '#ff6f6b',
+    borderRadius: size(50),
+  },
+  versionWrap: {
+    position: 'absolute',
+    bottom: size(60),
+    right: 0,
+    left: 0,
+  },
+  version: {
+    textAlign: 'center',
+    fontSize: size(24),
   },
 });

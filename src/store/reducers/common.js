@@ -5,6 +5,7 @@ const INITIAL_STATE = {
   theme: 'light',
   version: '3.0',
   hasWechat: false,
+  showErp: 'out',
 };
 
 export default function (state = INITIAL_STATE, action) {
@@ -16,6 +17,8 @@ export default function (state = INITIAL_STATE, action) {
     case common.VERSION:
       return { ...state, ...action.payload };
     case common.HAS_WECHAT:
+      return { ...state, ...action.payload };
+    case common.SHOW_ERP:
       return { ...state, ...action.payload };
     default:
       return state;

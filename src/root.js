@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, NativeModules, Platform, StatusBar, Linking, Alert } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
-import { commitBarHeight, commitVersion, commitHasWechat } from '@/store/actions/common';
+import { commitBarHeight, commitVersion, commitHasWechat, commitDeviceId } from '@/store/actions';
 import * as WeChat from 'react-native-wechat-lib';
+import { getUniqueId, getManufacturer } from 'react-native-device-info';
 import { size, commonStyle, $api, checkImg } from '@/utils';
 import SplashScreen from 'react-native-splash-screen';
 import { Touchable, Icon } from 'ui';
@@ -11,6 +12,7 @@ import MyRouter from '@/router';
 export default () => {
   const dispatch = useDispatch();
   const version = useSelector((state) => state.common.version);
+  const deviceId = useSelector((state) => state.search.deviceId);
 
   useEffect(() => {
     // Update the document title using the browser API
@@ -20,6 +22,9 @@ export default () => {
     getWechat();
     getStatusBar();
     getVersion();
+    if (!deviceId) {
+      getDeviceId();
+    }
   }, []);
 
   const getWechat = () => {
@@ -77,6 +82,14 @@ export default () => {
         ],
         { cancelable: false },
       );
+    }
+  };
+
+  const getDeviceId = () => {
+    let uniqueId = getUniqueId();
+    console.log(uniqueId, 'uniqueId');
+    if (uniqueId) {
+      dispatch(commitDeviceId(uniqueId));
     }
   };
 

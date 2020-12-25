@@ -3,6 +3,7 @@ import { View, Text, StyleSheet } from 'react-native';
 import { useTheme, useNavigation } from '@react-navigation/native';
 import { useDispatch, useSelector } from 'react-redux';
 import { useOpenMini } from 'hook/wechat';
+import { commitShowErp } from '@/store/actions';
 import { size, commonStyle } from '@/utils';
 import { Touchable, Icon, Button } from 'ui';
 
@@ -23,6 +24,10 @@ export default (props) => {
 
     if (type === 'mini') {
       openMini(params.id, params.path);
+      return;
+    }
+    if (type === 'erp') {
+      dispatch(commitShowErp('show'));
       return;
     }
     navigation.navigate(route, params);

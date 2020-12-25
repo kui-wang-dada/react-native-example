@@ -12,6 +12,7 @@ import ListItem from './ListItem';
 import SubmitButton from './SubmitButton';
 import Comment from './Comment';
 import SecurityInput from './SecurityInput';
+import Erp from './Erp';
 
 export {
   TutorItem,
@@ -28,4 +29,5 @@ export {
   SubmitButton,
   Comment,
   SecurityInput,
+  Erp,
 };

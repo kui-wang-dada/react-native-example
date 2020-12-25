@@ -4,6 +4,7 @@ export const BAR_HEIGHT = 'BAR_HEIGHT';
 export const THEME = 'THEME';
 export const VERSION = 'VERSION';
 export const HAS_WECHAT = 'HAS_WECHAT';
+export const SHOW_ERP = 'SHOW_ERP';
 
 export const commitBarHeight = (params) => {
   return (dispatch) => {
@@ -34,6 +35,14 @@ export const commitHasWechat = (params) => {
     return dispatch({
       type: HAS_WECHAT,
       payload: { hasWechat: params },
+    });
+  };
+};
+export const commitShowErp = (params) => {
+  return (dispatch) => {
+    return dispatch({
+      type: SHOW_ERP,
+      payload: { showErp: params },
     });
   };
 };

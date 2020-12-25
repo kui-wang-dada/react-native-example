@@ -19,6 +19,7 @@ export default ({ route }) => {
   const dispatch = useDispatch();
   const barHeight = useSelector((state) => state.common.barHeight);
   const hasWechat = useSelector((state) => state.common.hasWechat);
+  const deviceId = useSelector((state) => state.search.deviceId);
 
   const [tab, setTab] = useState(0);
   const [invitation, setInvitation] = useState('');
@@ -69,14 +70,18 @@ export default ({ route }) => {
   };
 
   const login = async (params) => {
+    let newParams = {
+      ...params,
+      deviceid: deviceId,
+    };
     try {
       modal.showLoading();
-      let res = await $api['my/login'](params);
+      let res = await $api['my/login'](newParams);
       console.log(res, 'login');
       modal.close();
       if (res.data && res.data.display) {
-        let deviceId = res.data.display.uid;
-        dispatch(commitSessionId(deviceId));
+        let sessionId = res.data.display.uid;
+        dispatch(commitSessionId(sessionId));
         await getHomeData();
         navigation.navigate('首页');
       } else {
