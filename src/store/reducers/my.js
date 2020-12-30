@@ -7,6 +7,9 @@ const INITIAL_STATE = {
   },
   userInfoTran: {},
   account: [],
+  contract: [],
+  order: [],
+  orderDetail: {},
 };
 
 export default function (state = INITIAL_STATE, action) {
@@ -16,6 +19,12 @@ export default function (state = INITIAL_STATE, action) {
     case my.USER_INFO_TRAN:
       return { ...state, ...action.payload };
     case my.ACCOUNT:
+      return { ...state, ...action.payload };
+    case my.CONTRACT:
+      return { ...state, ...action.payload };
+    case my.ORDER:
+      return { ...state, ...action.payload };
+    case my.ORDER_DETAIL:
       return { ...state, ...action.payload };
 
     default:

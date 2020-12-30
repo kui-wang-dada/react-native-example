@@ -76,4 +76,17 @@ export default [
     desc: '关联配置',
     path: '/apis/method/frappe.apis.apps.auth.sysinfo',
   },
+  {
+    name: 'order',
+    method: 'GET',
+    desc: '交易记录',
+    path: '/apis/method/frappe.apis.apps.my.pay',
+  },
+
+  {
+    name: 'contract',
+    method: 'GET',
+    desc: '我的合同',
+    path: '/apis/method/frappe.apis.apps.my.contract',
+  },
 ];

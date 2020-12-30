@@ -10,6 +10,9 @@ import Terms from '@/view/my/systemSet/Terms';
 import Finger from '@/view/my/Finger';
 import Register from '@/view/my/login/Register';
 import Password from '@/view/my/login/Password';
+import Contract from '@/view/my/Contract';
+import Order from '@/view/my/order';
+import OrderDetail from '@/view/my/order/OrderDetail';
 
 export default {
   my: {
@@ -73,5 +76,20 @@ export default {
     screen: Terms,
     name: 'terms',
     options: { headerShown: true, title: '服务条款说明' },
+  },
+  contract: {
+    screen: Contract,
+    name: 'contract',
+    options: { headerShown: true, title: '我的合同' },
+  },
+  order: {
+    screen: Order,
+    name: 'order',
+    options: { headerShown: true, title: '我的订单' },
+  },
+  orderDetail: {
+    screen: OrderDetail,
+    name: 'orderDetail',
+    options: { headerShown: true, title: '订单详情' },
   },
 };

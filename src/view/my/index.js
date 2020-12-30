@@ -21,10 +21,21 @@ export default ({ route, navigation }) => {
 
   const listData = [
     {
+      title: '我的合同',
+      icon: 'contract',
+      route: 'contract',
+    },
+    {
+      title: '交易记录',
+      icon: 'order',
+      route: 'order',
+      border: true,
+    },
+    {
       title: '联系客服',
       icon: 'kefu',
       route: 'livechat',
-      params: { data: { title: 'app个人中心' } },
+      params: { title: 'app个人中心' },
     },
     // {
     //   title: '指纹登录',
@@ -64,7 +75,14 @@ export default ({ route, navigation }) => {
       <ScrollView>
         <View style={style.myList}>
           {listData.map((item, index) => {
-            return <ListItem key={index} data={item} />;
+            return item.border ? (
+              <View>
+                <ListItem key={index} data={item} />
+                <View style={[style.sep, { height: size(10), backgroundColor: colors.sep }]} />
+              </View>
+            ) : (
+              <ListItem key={index} data={item} />
+            );
           })}
         </View>
       </ScrollView>

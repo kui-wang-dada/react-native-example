@@ -30,6 +30,10 @@ export default ({ route }) => {
 
   const title = '登录';
 
+  const goToLiveChat = () => {
+    navigation.navigate('livechat', { title: 'app忘记邀请码' });
+  };
+
   const handleLogin = () => {
     if (tab) {
       loginEmail();
@@ -151,19 +155,24 @@ export default ({ route }) => {
               />
             </View>
           )}
+          <View style={style.loginBtnWrap}>
+            <LinearGradient colors={['#475C78', '#203046']} style={style.linear} start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }}>
+              <Button style={style.btnWrap} textStyle={style.btn} title={title} onPress={handleLogin} />
+            </LinearGradient>
 
-          <LinearGradient colors={['#475C78', '#203046']} style={style.linear} start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }}>
-            <Button style={style.btnWrap} textStyle={style.btn} title={title} onPress={handleLogin} />
-          </LinearGradient>
+            <View style={style.tipsWrap}>
+              {tab ? (
+                <Text style={style.tipsPwd} onPress={() => navigation.navigate('password')}>
+                  忘记密码？
+                </Text>
+              ) : (
+                <Text style={style.tipsRegister} onPress={goToLiveChat}>
+                  忘记邀请码？
+                </Text>
+              )}
+            </View>
+          </View>
 
-          {/* <View style={style.tipsWrap}>
-          <Text style={style.tipsRegister} onPress={() => navigation.navigate('register')}>
-            没有账号？立即注册
-          </Text>
-          <Text style={style.tipsPwd} onPress={() => navigation.navigate('password')}>
-            忘记密码？
-          </Text>
-        </View> */}
           {hasWechat ? (
             <View style={style.otherLoginWrap}>
               <View style={style.loginTipsWrap}>
@@ -289,6 +298,11 @@ const style = StyleSheet.create({
     marginTop: size(16),
     marginBottom: size(10),
   },
+  loginBtnWrap: {
+    position: 'absolute',
+    bottom: size(240),
+    height: size(200),
+  },
   linear: {
     marginTop: size(60),
     width: size(488),
@@ -309,15 +323,17 @@ const style = StyleSheet.create({
     marginTop: size(42),
     width: size(488),
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'flex-end',
   },
   tipsRegister: {
     fontSize: size(24),
     color: '#4B87E0',
+    fontWeight: 'bold',
   },
   tipsPwd: {
     fontSize: size(24),
-    color: '#666',
+    color: '#4B87E0',
+    fontWeight: 'bold',
   },
   loginTipsWrap: {
     // marginTop: size(114),

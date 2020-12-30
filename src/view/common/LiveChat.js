@@ -13,17 +13,22 @@ export default ({ route }) => {
   const userInfo = useSelector((state) => state.my.userInfo);
   const [progress, setProgress] = useState(0);
 
-  let data = route.params.data;
+  let { title } = route.params;
 
   useEffect(() => {
     // LC_API.open_chat_window()
-    if (data) {
+    if (title) {
       initData();
     }
   }, []);
 
   const initData = async () => {
-    let role = userInfo.roles.includes('Parent') ? '家长' : userInfo.roles.includes('Students') ? '学生' : '老师或者其他';
+    let text = '';
+    if (userInfo && userInfo.name) {
+      let role = userInfo.roles.includes('Parent') ? '家长' : userInfo.roles.includes('Students') ? '学生' : '老师或者其他';
+      text += `（${userInfo.username},${role},${userInfo.email}）`;
+    }
+    text += ` 在App浏览：${title}`;
 
     const customerSDK = init({
       licenseId: 9055235,
@@ -49,7 +54,7 @@ export default ({ route }) => {
               chatId,
               event: {
                 type: 'message',
-                text: `(${userInfo.username},${role},${userInfo.email}） 在App浏览：${data.title}`,
+                text: text,
               },
             })
             .then((response) => {
