@@ -27,4 +27,4 @@ export const getUserInfo = (params) => doAction(params, 'my/userInfo', 'USER_INF
 export const getAccount = (params) => doAction(params, 'my/account', 'ACCOUNT', 'account');
 export const getContract = (params) => doAction(params, 'my/contract', 'CONTRACT', 'contract');
 export const getOrder = (params) => doAction(params, 'my/order', 'ORDER', 'order');
-export const getOrderDetail = (params) => doAction(params, 'my/order', 'ORDER_DETAIL', 'orderDetail');
+export const getOrderDetail = (params) => doAction(params, 'my/orderDetail', 'ORDER_DETAIL', 'orderDetail');

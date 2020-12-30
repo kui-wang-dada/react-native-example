@@ -80,13 +80,19 @@ export default [
     name: 'order',
     method: 'GET',
     desc: '交易记录',
-    path: '/apis/method/frappe.apis.apps.my.pay',
+    path: '/apis/method/frappe.apis.apps.my.pays',
+  },
+  {
+    name: 'orderDetail',
+    method: 'GET',
+    desc: '交易记录',
+    path: '/apis/method/frappe.apis.apps.my.pay_detail',
   },
 
   {
     name: 'contract',
     method: 'GET',
     desc: '我的合同',
-    path: '/apis/method/frappe.apis.apps.my.contract',
+    path: '/apis/method/frappe.apis.apps.my.contracts',
   },
 ];

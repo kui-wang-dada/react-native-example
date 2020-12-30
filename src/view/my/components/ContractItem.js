@@ -22,7 +22,13 @@ export default (props) => {
 
   let fileFormat = checkStaticImg('pdf.png');
   if (data.contract_file_url) {
-    fileFormat = data.contract_file_url.includes('.pdf') ? checkStaticImg('pdf.png') : data.contract_file_url;
+    let url = data.contract_file_url;
+    if (url.includes('https://erp-cdn.wholeren.cn')) {
+      url = url.replace('/privatehttps://erp-cdn.wholeren.cn', 'https://erpapi.wholeren.cn/private');
+      url = url.replace('https://erp-cdn.wholeren.cn', 'https://erpapi.wholeren.cn');
+      console.log(url, 'url');
+    }
+    fileFormat = url.includes('.pdf') ? checkStaticImg('pdf.png') : url;
   }
   return (
     <View
@@ -34,7 +40,7 @@ export default (props) => {
         },
       ]}>
       <Touchable style={[style.topWrap, { borderBottomColor: colors.border }]} onPress={openContract}>
-        <Image style={style.image} source={fileFormat} />
+        <Image style={style.image} source={{ uri: fileFormat }} />
         <View style={style.conWrap}>
           <Text style={[style.title, { color: colors.text }]} numberOfLines={2}>
             {data.title}

@@ -9,14 +9,14 @@ export default () => {
   const { colors } = useTheme();
   const navigation = useNavigation();
 
-  const goToDetail = (id) => {
-    navigation.navigate('orderDetail', { id });
+  const goToDetail = (name) => {
+    navigation.navigate('orderDetail', { name });
   };
 
   const renderItem = ({ item, index }) => {
-    let { amount, creation, currency, pay_method_cn, pay_method_en, id } = item;
+    let { amount, creation, currency, pay_method_cn, pay_method_en, name } = item;
     return (
-      <Touchable key={index} style={[style.itemWrap, { borderBottomColor: colors.border }]} onPress={() => goToDetail(id)}>
+      <Touchable key={index} style={[style.itemWrap, { borderBottomColor: colors.border }]} onPress={() => goToDetail(name)}>
         <View style={style.left}>
           <View
             style={[

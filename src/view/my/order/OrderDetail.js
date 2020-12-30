@@ -10,10 +10,10 @@ export default ({ route, navigation }) => {
   const dispatch = useDispatch();
   const orderDetail = useSelector((state) => state.my.orderDetail);
 
-  let routerId = route.params.id;
+  let name = route.params.name;
 
   useEffect(() => {
-    dispatch(getOrderDetail({ id: routerId }));
+    dispatch(getOrderDetail({ name }));
   }, []);
 
   let { id, currency, amount } = orderDetail;
@@ -33,7 +33,7 @@ export default ({ route, navigation }) => {
         key: 'pay_id',
       },
     ];
-    let detail = this.props.paylinkDetailData;
+
     return (
       <View style={[style.listWrap, { backgroundColor: colors.background }]}>
         {list.map((item, index) => {
@@ -42,7 +42,7 @@ export default ({ route, navigation }) => {
               key={index}
               style={[style.itemWrap, index === list.length - 1 ? { borderBottomWidth: 0 } : { borderBottomColor: colors.border }]}>
               <Text style={[style.label, { color: colors.text_p }]}>{item.label}</Text>
-              <Text style={[style.con, { color: colors.text }]}>{detail[item.key]}</Text>
+              <Text style={[style.con, { color: colors.text }]}>{orderDetail[item.key]}</Text>
             </View>
           );
         })}
@@ -50,7 +50,7 @@ export default ({ route, navigation }) => {
     );
   };
 
-  return id === routerId ? (
+  return orderDetail.name === name ? (
     <ScrollView style={{ backgroundColor: colors.card }}>
       <View style={[style.topWrap, { backgroundColor: colors.background }]}>
         <View
