@@ -24,12 +24,14 @@ export default ({ route, navigation }) => {
       title: '我的合同',
       icon: 'contract',
       route: 'contract',
+      beLogin: true,
     },
     {
       title: '交易记录',
       icon: 'order',
       route: 'order',
       border: true,
+      beLogin: true,
     },
     {
       title: '联系客服',
@@ -75,13 +77,14 @@ export default ({ route, navigation }) => {
       <ScrollView>
         <View style={style.myList}>
           {listData.map((item, index) => {
-            return item.border ? (
+            if (item.beLogin && !userInfo.name) {
+              return null;
+            }
+            return (
               <View>
                 <ListItem key={index} data={item} />
-                <View style={[style.sep, { height: size(10), backgroundColor: colors.sep }]} />
+                {item.border ? <View style={[style.sep, { height: size(10), backgroundColor: colors.sep }]} /> : null}
               </View>
-            ) : (
-              <ListItem key={index} data={item} />
             );
           })}
         </View>
