@@ -4,7 +4,7 @@ import axios from 'axios';
 import { v4 as uuidv4 } from 'uuid';
 import { CONSOLE_REQUEST_ENABLE, CONSOLE_RESPONSE_ENABLE } from './index';
 import store from '@/store/store';
-
+import * as RootNavigation from '../router/RootNavigation.js';
 import NetInfo from '@react-native-community/netinfo';
 import { Alert } from 'react-native';
 import { commitSessionId, commitLoginEmail } from '@/store/actions/search';
@@ -78,6 +78,7 @@ export function responseSuccessFunc(response) {
   CONSOLE_RESPONSE_ENABLE && console.info('responseInterceptorFunc', response);
   if (response && response.data) {
     let status = response.data.status;
+
     if (status && status.code) {
       if (status.code !== 200 && status.code !== 401) {
         modal.showToast(response.data.status.message);
@@ -109,6 +110,11 @@ export function responseFailFunc(resError) {
   // }
   getNet(resError);
   console.log('fail', resError, resError.response);
+  let statusCode = resError.response.status;
+
+  if (statusCode === 401) {
+    RootNavigation.navigate('webview', { url: 'https://status.wholeren.cn/index.html' });
+  }
 
   // if (resError.response.status === 500 || resError.response.status === 417) {
   // if (resError.response.status === 500) {

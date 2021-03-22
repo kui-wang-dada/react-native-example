@@ -13,7 +13,7 @@ export default ({ route, navigation }) => {
   let { url } = route.params;
 
   useEffect(() => {
-    navigation.setOptions({ title: 'Updated!' });
+    navigation.setOptions({ title: '厚仁学生中心' });
   }, []);
 
   let source = {

@@ -13,7 +13,8 @@ export const ApiConfig = {
     // 'Content-Type': 'application/json'
   },
   // baseURL: "https://baobao.cctar.us/apis"
-  baseURL: 'https://erpapi.wholeren.cn',
+  // baseURL: 'https://erpapi.wholeren.cn',
+  baseURL: 'https://dev2.wholeren.com',
 };
 export const wechatConfig = {
   appid: 'wx55b14f887a79758c',

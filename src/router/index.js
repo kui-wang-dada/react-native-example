@@ -8,6 +8,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { AppearanceProvider, useColorScheme } from 'react-native-appearance';
 import { useDispatch, useSelector } from 'react-redux';
 import { Icon, Touchable, Button } from 'ui';
+import { navigationRef } from './RootNavigation';
 
 import { commitTheme } from '@/store/actions';
 
@@ -92,13 +93,15 @@ function NavigationLifeCycle() {
 
   const renderStackItem = (routerGroup) => {
     return Object.keys(routerGroup).map((item, index) => {
-      return <Stack.Screen key={index} name={routerGroup[item].name} component={routerGroup[item].screen} options={routerGroup[item].options} />;
+      return (
+        <Stack.Screen key={index} name={routerGroup[item].name} component={routerGroup[item].screen} options={routerGroup[item].options} />
+      );
     });
   };
 
   return (
     <AppearanceProvider>
-      <NavigationContainer theme={colorTheme} onStateChange={onNavigationStateChange}>
+      <NavigationContainer ref={navigationRef} theme={colorTheme} onStateChange={onNavigationStateChange}>
         <Stack.Navigator
           screenOptions={{
             headerStyle: { backgroundColor: theme === 'dark' ? colorTheme.colors.card : colorTheme.colors.primary },
