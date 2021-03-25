@@ -3,7 +3,7 @@ import { View, Text, StyleSheet } from 'react-native';
 import { useTheme, useNavigation } from '@react-navigation/native';
 import * as WeChat from 'react-native-wechat-lib';
 import { useDispatch, useSelector } from 'react-redux';
-import { commitSessionId, getHomeSp, getHomeTp, getHomeCount, getUserInfo } from '@/store/actions';
+import { commitSessionId, getHomeSp, getHomeTp, getHomeCount, getUserInfo, commitLoginMessage } from '@/store/actions';
 import { size, $api, modal } from '@/utils';
 import { Touchable, Icon, Button } from 'ui';
 
@@ -51,6 +51,7 @@ export const useWechatLogin = () => {
     if (res.data.display) {
       let id = res.data.display.uid;
       await dispatch(commitSessionId(id));
+      dispatch(commitLoginMessage(id));
       modal.showLoading();
       await getHomeData();
       modal.close();

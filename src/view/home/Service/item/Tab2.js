@@ -112,7 +112,9 @@ export default (props) => {
                   <View style={[style.titleWrap, showCon ? style.active : null, { backgroundColor: colors.background }]}>
                     <View style={style.title}>
                       <Text style={[style.titleText, { color: colors.text }]}>{item.title}</Text>
-                      <View style={style.iconRight}>{showCon ? <Icon name="down" size={16} color={'#4bc694'} /> : <Icon name="up" size={16} color={'#666'} />}</View>
+                      <View style={style.iconRight}>
+                        {showCon ? <Icon name="down" size={16} color={'#4bc694'} /> : <Icon name="up" size={16} color={'#666'} />}
+                      </View>
                     </View>
                     {item.showDate ? (
                       <Text style={[style.date, { color: colors.text_p }]}>
@@ -123,7 +125,7 @@ export default (props) => {
 
                   {showCon ? (
                     <View style={style.labelWrap}>
-                      <HTMLView value={`<p>${item.content}</p>`} stylesheet={styleHtml} paragraphBreak="" addLineBreaks={true} />
+                      <HTMLView value={`<p>${item.content || '--'}</p>`} stylesheet={styleHtml} paragraphBreak="" addLineBreaks={true} />
 
                       {item.tag}
                     </View>

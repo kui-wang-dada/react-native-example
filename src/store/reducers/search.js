@@ -7,10 +7,7 @@ const DEFAULT_STATE = {
   agreementFlag: false,
   deviceId: '',
   finger: false,
-  loginMessage: {
-    usr: '',
-    pwd: '',
-  },
+  loginMessage: '',
 };
 
 export default function (state = DEFAULT_STATE, action = {}) {

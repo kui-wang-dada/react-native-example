@@ -89,7 +89,7 @@ export default ({ route }) => {
       if (res.data && res.data.display) {
         let sessionId = res.data.display.uid;
         dispatch(commitSessionId(sessionId));
-        dispatch(commitLoginMessage(newParams));
+        dispatch(commitLoginMessage(sessionId));
         await getHomeData();
         navigation.navigate('首页');
       } else {
@@ -112,10 +112,13 @@ export default ({ route }) => {
       passcodeFallback: false, // iOS - allows the device to fall back to using the passcode, if faceid/touch is not available. this does not mean that if touchid/faceid fails the first few times it will revert to passcode, rather that if the former are not enrolled, then it will use the passcode.
     };
     TouchID.authenticate('Login with your fingerprint', optionalConfigObject)
-      .then((success) => {
+      .then(async (success) => {
         console.log('ta', success);
-
-        login(loginMessage);
+        modal.showLoading();
+        dispatch(commitSessionId(loginMessage));
+        await getHomeData();
+        navigation.navigate('首页');
+        modal.close();
       })
       .catch((error) => {
         Alert.alert('指纹识别出错，请重试');

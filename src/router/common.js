@@ -7,7 +7,7 @@ const CommonRoute = {
   webview: {
     screen: Webview,
     name: 'webview',
-    options: { headerShown: false, title: '文件浏览' },
+    options: { headerShown: true, title: '文件浏览' },
   },
   livechat: {
     screen: LiveChat,

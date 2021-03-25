@@ -46,7 +46,7 @@ export default (props) => {
             {data.title}
           </Text>
           <View style={style.labelWrap}>
-            <Text style={[style.label, { color: colors.text_P }]}>{data.creation && data.creation.split('.')[0]}</Text>
+            <Text style={[style.label, { color: colors.text_p }]}>{data.creation && data.creation.split('.')[0]}</Text>
           </View>
         </View>
       </Touchable>

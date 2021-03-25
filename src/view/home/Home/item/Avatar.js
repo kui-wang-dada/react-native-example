@@ -80,15 +80,35 @@ export default () => {
           <Text style={style.noLoginLabel}>您好！「厚仁学生中心」APP仅对厚仁教育用户开放，请您进行微信授权并绑定厚仁学生账号。</Text>
         </View>
         {userInfo.name ? (
-          <Button style={style.noLoginBtnWrap} textStyle={style.noLoginText} icon="right" iconSize={16} iconColor="#E6A53D" title="绑定厚仁账号" />
+          <Button
+            style={style.noLoginBtnWrap}
+            textStyle={style.noLoginText}
+            icon="right"
+            iconSize={16}
+            iconColor="#E6A53D"
+            title="绑定厚仁账号"
+            isIconRight
+          />
         ) : (
-          <Button style={style.noLoginBtnWrap} textStyle={style.noLoginText} icon="right" iconSize={16} iconColor="#E6A53D" title="点击登录" />
+          <Button
+            style={style.noLoginBtnWrap}
+            textStyle={style.noLoginText}
+            icon="right"
+            iconSize={16}
+            iconColor="#E6A53D"
+            title="点击登录"
+            isIconRight
+          />
         )}
       </Touchable>
     );
   };
   return (
-    <LinearGradient start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }} colors={colors.gradient} style={[style.linearGradient, { paddingTop: barHeight }]}>
+    <LinearGradient
+      start={{ x: 0, y: 0 }}
+      end={{ x: 1, y: 0 }}
+      colors={colors.gradient}
+      style={[style.linearGradient, { paddingTop: barHeight }]}>
       <View style={style.avatarWrap}>{userInfo.students_id ? renderLogin() : renderNoLogin()}</View>
     </LinearGradient>
   );

@@ -19,6 +19,7 @@ export default (props) => {
         if (biometryType === 'FaceID') {
           setIsTouchId(false);
         } else {
+          console.log(biometryType, 'biometryType');
           setIsTouchId(true);
         }
       })

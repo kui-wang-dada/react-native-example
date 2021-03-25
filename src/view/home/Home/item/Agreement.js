@@ -28,16 +28,16 @@ export default () => {
   const showTerms = () => {
     let Components = (
       <View style={[style.modalConWrap, { backgroundColor: colors.background }]}>
-        <Text style={style.title}>{terms.title}</Text>
+        <Text style={[style.title, { color: colors.text }]}>{terms.title}</Text>
         <ScrollView style={style.desWrap}>
           <View>
             {terms.content.map((item, index) => {
               return (
                 <View key={index}>
-                  {item.title ? <Text style={style.titleCon}>{item.title}</Text> : null}
+                  {item.title ? <Text style={[style.titleCon, { color: colors.text }]}>{item.title}</Text> : null}
                   {item.label.map((labelItem, labelIndex) => {
                     return (
-                      <Text key={labelIndex} style={style.des}>
+                      <Text key={labelIndex} style={[style.des, { color: colors.text_p }]}>
                         {labelItem}
                       </Text>
                     );
@@ -57,16 +57,16 @@ export default () => {
   const showPrivacy = () => {
     let Components = (
       <View style={[style.modalConWrap, { backgroundColor: colors.background }]}>
-        <Text style={style.title}>{privacy.title}</Text>
+        <Text style={[style.title, { color: colors.text }]}>{privacy.title}</Text>
         <ScrollView style={style.desWrap}>
           <View>
             {privacy.content.map((item, index) => {
               return (
                 <View key={index}>
-                  {item.title ? <Text style={style.titleCon}>{item.title}</Text> : null}
+                  {item.title ? <Text style={[style.titleCon, { color: colors.text }]}>{item.title}</Text> : null}
                   {item.label.map((labelItem, labelIndex) => {
                     return (
-                      <Text key={labelIndex} style={style.des}>
+                      <Text key={labelIndex} style={[style.des, { color: colors.text_p }]}>
                         {labelItem}
                       </Text>
                     );
@@ -94,13 +94,14 @@ export default () => {
     let des1 = '感谢您对厚仁教育的信任！为了更好的保护您的个人隐私信息，我方根据最新的国家相关法律规定更新了';
     let desTitle1 = '《用户隐私政策》';
     let desTitle2 = '《服务条款说明》';
-    let des2 = '在此，我们郑重地提醒您，请务必仔细阅读并理解用户隐私政策，当您同意并接受全部条款后，即可开始使用厚仁留学APP提供的相关服务。';
+    let des2 =
+      '在此，我们郑重地提醒您，请务必仔细阅读并理解用户隐私政策，当您同意并接受全部条款后，即可开始使用厚仁留学APP提供的相关服务。';
     return (
       <View style={[style.modalWrap, { backgroundColor: colors.background }]}>
-        <Text style={style.title}>温馨提示</Text>
+        <Text style={[style.title, { color: colors.text }]}>温馨提示</Text>
         <View style={style.desWrap}>
-          <Text style={style.des}>
-            <Text>{des1}</Text>
+          <Text style={[style.des]}>
+            <Text style={[style.des, { color: colors.text_p }]}>{des1}</Text>
             <Text style={[style.desActive, { color: colors.primary }]} onPress={showPrivacy}>
               {desTitle1}
             </Text>
@@ -109,10 +110,15 @@ export default () => {
               {desTitle2}
             </Text>
           </Text>
-          <Text style={style.des}>{des2}</Text>
+          <Text style={[style.des, { color: colors.text_p }]}>{des2}</Text>
         </View>
         <View style={style.btnWrap}>
-          <Button style={[style.btn2Wrap, { backgroundColor: colors.primary }]} textStyle={style.btn2} title="同意并继续使用App" onPress={handleAgree} />
+          <Button
+            style={[style.btn2Wrap, { backgroundColor: colors.primary }]}
+            textStyle={style.btn2}
+            title="同意并继续使用App"
+            onPress={handleAgree}
+          />
         </View>
       </View>
     );

@@ -40,9 +40,9 @@ export default ({ route }) => {
   };
   const changeBox = (value) => {
     if (value === 1) {
-      setRole('Parent');
-    } else {
       setRole('Students');
+    } else {
+      setRole('Parent');
     }
   };
 

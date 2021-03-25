@@ -92,8 +92,8 @@ export default ({ route }) => {
                 <Touchable key={post.name} style={style.expertItem} onPress={() => goToExpertDetail(post)}>
                   <Image style={style.bgImage} source={{ uri: post.attach_image }} />
 
-                  <View style={[style.title, { color: colors.card }]}>
-                    <Text style={[style.titleText, { color: colors.background }]}>{post.title}</Text>
+                  <View style={[style.title, { backgroundColor: 'rgba(0,0,0,0.5)' }]}>
+                    <Text style={[style.titleText, { color: colors.text }]}>{post.title}</Text>
                   </View>
                 </Touchable>
               );
@@ -190,6 +190,7 @@ const style = StyleSheet.create({
     bottom: 0,
     width: '100%',
     height: '100%',
+    borderRadius: size(12),
   },
   title: {
     padding: size(20),

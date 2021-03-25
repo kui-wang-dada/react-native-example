@@ -33,7 +33,16 @@ export default forwardRef((props, ref) => {
       replyData = {};
       inputPlaceholder = '添加留言';
     }
-    ymodal.show(<CommentInput from={props.type} inputPlaceholder={inputPlaceholder} replyData={replyData} type={type} afterSubmit={afterSubmit} data={props.data} />);
+    ymodal.show(
+      <CommentInput
+        from={props.type}
+        inputPlaceholder={inputPlaceholder}
+        replyData={replyData}
+        type={type}
+        afterSubmit={afterSubmit}
+        data={props.data}
+      />,
+    );
   };
 
   const afterSubmit = async () => {
@@ -51,11 +60,11 @@ export default forwardRef((props, ref) => {
       <View style={style.commentAllWrap}>
         <View style={style.commentTitleWrap}>
           <Text style={[style.title, { color: colors.text }]}>留言板</Text>
-          {data.feedbacks && data.feedbacks.length ? (
+          {/* {data.feedbacks && data.feedbacks.length ? (
             <View style={style.titleIcon}>
               <Icon name="feedback" size={14} color={'#fff'} style={[style.iconfont]} />
             </View>
-          ) : null}
+          ) : null} */}
         </View>
 
         {data.feedbacks && data.feedbacks.length ? (

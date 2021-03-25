@@ -9,9 +9,13 @@ export default (props) => {
   const { colors } = useTheme();
   const navigation = useNavigation();
 
-  const [activeRole, setActiveRole] = useState(0);
+  const [activeRole, setActiveRole] = useState(1);
 
-  let roles = ['student', 'parent'];
+  let roles = ['parent', 'student'];
+  const handleChange = (index) => {
+    setActiveRole(index);
+    props.handleChange && props.handleChange(index);
+  };
   return (
     <View style={style.roleWrap}>
       {roles.map((item, index) => {
@@ -20,18 +24,18 @@ export default (props) => {
             <Button
               key={index}
               style={style.roleItem}
-              onPress={() => setActiveRole(index + 1)}
+              onPress={() => handleChange(index)}
               icon={item}
               iconSize={25}
-              iconColor={activeRole === index + 1 ? colors.primary : colors.text_p}
+              iconColor={activeRole === index ? colors.primary : '#666'}
               textStyle={[
                 style.roleText,
-                { color: colors.text_p },
-                activeRole === index + 1 && {
+                { color: '#666' },
+                activeRole === index && {
                   color: colors.primary,
                 },
               ]}
-              title={index ? '家长' : '学生'}
+              title={index ? '学生' : '家长'}
             />
           </View>
         );
