@@ -6,6 +6,8 @@ export const SESSION_ID = 'SESSION_ID';
 
 export const AGREEMENT_FLAG = 'AGREEMENT_FLAG';
 export const DEVICE_ID = 'DEVICE_ID';
+export const FINGER = 'FINGER';
+export const LOGIN_MESSAGE = 'LOGIN_MESSAGE';
 
 export const commitLanguage = (params) => {
   return (dispatch) => {
@@ -38,6 +40,23 @@ export const commitDeviceId = (params) => {
     return dispatch({
       type: DEVICE_ID,
       payload: { deviceId: params },
+    });
+  };
+};
+
+export const commitFinger = (params) => {
+  return (dispatch) => {
+    return dispatch({
+      type: FINGER,
+      payload: { finger: params },
+    });
+  };
+};
+export const commitLoginMessage = (params) => {
+  return (dispatch) => {
+    return dispatch({
+      type: LOGIN_MESSAGE,
+      payload: { loginMessage: params },
     });
   };
 };

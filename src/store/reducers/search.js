@@ -6,6 +6,11 @@ const DEFAULT_STATE = {
 
   agreementFlag: false,
   deviceId: '',
+  finger: false,
+  loginMessage: {
+    usr: '',
+    pwd: '',
+  },
 };
 
 export default function (state = DEFAULT_STATE, action = {}) {
@@ -19,6 +24,10 @@ export default function (state = DEFAULT_STATE, action = {}) {
     case search.AGREEMENT_FLAG:
       return { ...state, ...action.payload };
     case search.DEVICE_ID:
+      return { ...state, ...action.payload };
+    case search.FINGER:
+      return { ...state, ...action.payload };
+    case search.LOGIN_MESSAGE:
       return { ...state, ...action.payload };
 
     default:

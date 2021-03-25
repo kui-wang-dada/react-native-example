@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, Image, ImageBackground, ScrollView, Keyboard } from 'react-native';
+import { View, Text, StyleSheet, Image, ImageBackground, ScrollView, Keyboard, Alert } from 'react-native';
 import { useTheme, useNavigation } from '@react-navigation/native';
 import { useWechatLogin } from 'hook/wechat';
 import { useDispatch, useSelector } from 'react-redux';
-import { commitSessionId, getHomeSp, getHomeTp, getHomeCount, getUserInfo } from '@/store/actions';
+import { commitSessionId, getHomeSp, getHomeTp, getHomeCount, getUserInfo, commitLoginMessage } from '@/store/actions';
 import { useGetHomeData } from 'hook/useGetData';
 import CheckBox from '@react-native-community/checkbox';
+import TouchID from 'react-native-touch-id';
 import { size, checkStaticImg, $api, modal, SCREEN_HEIGHT } from '@/utils';
 import { Touchable, Icon, Button } from 'ui';
 import { SecurityInput } from 'common';
@@ -20,6 +21,8 @@ export default ({ route }) => {
   const barHeight = useSelector((state) => state.common.barHeight);
   const hasWechat = useSelector((state) => state.common.hasWechat);
   const deviceId = useSelector((state) => state.search.deviceId);
+  const finger = useSelector((state) => state.search.finger);
+  const loginMessage = useSelector((state) => state.search.loginMessage);
 
   const [tab, setTab] = useState(0);
   const [invitation, setInvitation] = useState('');
@@ -86,6 +89,7 @@ export default ({ route }) => {
       if (res.data && res.data.display) {
         let sessionId = res.data.display.uid;
         dispatch(commitSessionId(sessionId));
+        dispatch(commitLoginMessage(newParams));
         await getHomeData();
         navigation.navigate('首页');
       } else {
@@ -94,6 +98,28 @@ export default ({ route }) => {
     } catch (error) {
       modal.showToast('绑定失败');
     }
+  };
+  const handleFinger = () => {
+    const optionalConfigObject = {
+      title: '指纹登录', // Android
+      imageColor: '#e00606', // Android
+      imageErrorColor: '#ff0000', // Android
+      sensorDescription: '请输入指纹', // Android
+      sensorErrorDescription: 'Failed', // Android
+      cancelText: 'Cancel', // Android
+      fallbackLabel: '', // iOS (if empty, then label is hidden)
+      unifiedErrors: false, // use unified error messages (default false)
+      passcodeFallback: false, // iOS - allows the device to fall back to using the passcode, if faceid/touch is not available. this does not mean that if touchid/faceid fails the first few times it will revert to passcode, rather that if the former are not enrolled, then it will use the passcode.
+    };
+    TouchID.authenticate('Login with your fingerprint', optionalConfigObject)
+      .then((success) => {
+        console.log('ta', success);
+
+        login(loginMessage);
+      })
+      .catch((error) => {
+        Alert.alert('指纹识别出错，请重试');
+      });
   };
 
   return (
@@ -173,17 +199,24 @@ export default ({ route }) => {
             </View>
           </View>
 
-          {hasWechat ? (
+          {hasWechat || finger ? (
             <View style={style.otherLoginWrap}>
               <View style={style.loginTipsWrap}>
                 <View style={style.line} />
-                <Text style={style.loginTips}>推荐使用微信登录</Text>
+                <Text style={style.loginTips}>其他登录方式</Text>
                 <View style={style.line} />
               </View>
-              <View>
-                <Touchable style={style.wechatWrap} onPress={getWechat}>
-                  <Image style={style.wechat} source={require('@/assets/images/wechat.png')} />
-                </Touchable>
+              <View style={style.otherLoginList}>
+                {hasWechat ? (
+                  <Touchable style={style.wechatWrap} onPress={getWechat}>
+                    <Image style={style.wechat} source={require('@/assets/images/wechat.png')} />
+                  </Touchable>
+                ) : null}
+                {finger ? (
+                  <Touchable style={style.fingerWrap} onPress={handleFinger}>
+                    <Icon name={'finger'} size={30} color={colors.primary} />
+                  </Touchable>
+                ) : null}
               </View>
             </View>
           ) : null}
@@ -358,10 +391,16 @@ const style = StyleSheet.create({
     position: 'absolute',
     bottom: 0,
   },
+  otherLoginList: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   wechatWrap: {
     marginVertical: size(30),
     textAlign: 'center',
     alignItems: 'center',
+    marginRight: size(40),
   },
   wechat: {
     width: size(80),

@@ -54,6 +54,11 @@ export default ({ route, navigation }) => {
     },
 
     {
+      title: '生物识别',
+      icon: 'finger',
+      route: 'finger',
+    },
+    {
       title: '系统设置',
       icon: 'setting',
       route: 'systemSet',

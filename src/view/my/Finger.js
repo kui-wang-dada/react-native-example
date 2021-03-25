@@ -4,18 +4,35 @@ import { useTheme } from '@react-navigation/native';
 import { useDispatch, useSelector } from 'react-redux';
 import { size, commonStyle, modal } from '@/utils';
 import TouchID from 'react-native-touch-id';
+import { commitFinger } from '@/store/actions';
 import { Touchable, Icon, Button, Switch } from 'ui';
 export default (props) => {
   const { colors } = useTheme();
   const dispatch = useDispatch();
+  const [isTouchId, setIsTouchId] = useState(true);
   const finger = useSelector((state) => state.search.finger);
 
+  useEffect(() => {
+    TouchID.isSupported()
+      .then((biometryType) => {
+        // Success code
+        if (biometryType === 'FaceID') {
+          setIsTouchId(false);
+        } else {
+          setIsTouchId(true);
+        }
+      })
+      .catch((error) => {
+        // Failure code
+        console.log(error);
+      });
+  }, []);
   const handleSwitch = (callback) => {
     const optionalConfigObject = {
-      title: '指纹登录', // Android
+      title: isTouchId ? '指纹登录' : '人脸识别', // Android
       imageColor: '#e00606', // Android
       imageErrorColor: '#ff0000', // Android
-      sensorDescription: '请输入指纹', // Android
+      sensorDescription: isTouchId ? '请输入指纹' : '请提供面部识别', // Android
       sensorErrorDescription: 'Failed', // Android
       cancelText: 'Cancel', // Android
       fallbackLabel: 'Show Passcode', // iOS (if empty, then label is hidden)
@@ -27,17 +44,17 @@ export default (props) => {
         if (!finger) {
           // track.logEvent('openFinger');
           callback(true);
-          this.props.commitFinger(true);
-          modal.showToast('成功开启指纹登录');
+          dispatch(commitFinger(true));
+          modal.showToast(`成功开启${isTouchId ? '指纹登录' : '人脸识别'}`);
         } else {
           // track.logEvent('closeFinger');
           callback(false);
-          this.props.commitFinger(false);
-          modal.showToast('成功关闭指纹登录');
+          dispatch(commitFinger(false));
+          modal.showToast(`成功关闭${isTouchId ? '指纹登录' : '人脸识别'}`);
         }
       })
       .catch((error) => {
-        modal.showToast('指纹设置失败，请重试');
+        modal.showToast('生物识别设置失败，请重试');
       });
   };
   return (
@@ -51,14 +68,16 @@ export default (props) => {
       <Text style={style.topText}>指纹密码仅对本机有效</Text>
     </View> */}
       <View style={[style.centerWrap, { backgroundColor: colors.background }]}>
-        <Text style={{ color: colors.text }}> 指纹识别</Text>
+        <Text style={{ color: colors.text }}> 生物识别</Text>
         <Switch value={finger} onAsyncPress={handleSwitch} width={size(100)} height={size(50)} backgroundActive={colors.primary} />
       </View>
       <View style={style.tipsWrap}>
         <Text style={[style.tips, { color: colors.text_p }]}>温馨提示：</Text>
 
         <Text style={[style.tips, { color: colors.text_p }]}>1、生物识别登录仅适用于具备标准生物识别功能的手机。</Text>
-        <Text style={[style.tips, { color: colors.text_p }]}>2、打开生物识别登录开关时，会记录当前登录信息，下次登录时，可通过该生物识别登录当前账户。</Text>
+        <Text style={[style.tips, { color: colors.text_p }]}>
+          2、打开生物识别登录开关时，会记录当前登录信息，下次登录时，可通过该生物识别登录当前账户。
+        </Text>
         <Text style={[style.tips, { color: colors.text_p }]}>3、若有多个APP账户来回切换，生物识别登录只能记录最近一次的登录信息。</Text>
       </View>
     </View>
