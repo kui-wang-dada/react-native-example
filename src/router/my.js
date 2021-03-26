@@ -55,7 +55,7 @@ export default {
   finger: {
     screen: Finger,
     name: 'finger',
-    options: { headerShown: true, title: '指纹登录' },
+    options: { headerShown: true, title: '生物识别登录' },
   },
   systemSet: {
     screen: SystemSet,

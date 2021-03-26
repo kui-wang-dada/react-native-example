@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { useTheme } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 import { useDispatch, useSelector } from 'react-redux';
 import { size, commonStyle, modal } from '@/utils';
 import TouchID from 'react-native-touch-id';
@@ -8,6 +9,7 @@ import { commitFinger } from '@/store/actions';
 import { Touchable, Icon, Button, Switch } from 'ui';
 export default (props) => {
   const { colors } = useTheme();
+  const navigation = useNavigation();
   const dispatch = useDispatch();
   const [isTouchId, setIsTouchId] = useState(true);
   const finger = useSelector((state) => state.search.finger);
@@ -18,9 +20,11 @@ export default (props) => {
         // Success code
         if (biometryType === 'FaceID') {
           setIsTouchId(false);
+          navigation.setOptions({ title: '人脸识别登录' });
         } else {
           console.log(biometryType, 'biometryType');
           setIsTouchId(true);
+          navigation.setOptions({ title: '指纹登录1' });
         }
       })
       .catch((error) => {
@@ -69,7 +73,7 @@ export default (props) => {
       <Text style={style.topText}>指纹密码仅对本机有效</Text>
     </View> */}
       <View style={[style.centerWrap, { backgroundColor: colors.background }]}>
-        <Text style={{ color: colors.text }}> 生物识别</Text>
+        <Text style={{ color: colors.text }}> {isTouchId ? '指纹登录' : '人脸识别登录'}</Text>
         <Switch value={finger} onAsyncPress={handleSwitch} width={size(100)} height={size(50)} backgroundActive={colors.primary} />
       </View>
       <View style={style.tipsWrap}>

@@ -2,8 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key> NSFaceIDUsageDescription </key>
-	<string>Enabling Face ID allows you to quickly and securely access your account</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
@@ -58,6 +56,8 @@
 			</dict>
 		</dict>
 	</dict>
+	<key>NSFaceIDUsageDescription</key>
+	<string>Enabling Face ID allows you to quickly and securely access your account</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>'Wholeren' would like to use your current location to help you find hosts. It is secure and private</string>
 	<key>NSPhotoLibraryUsageDescription</key>
