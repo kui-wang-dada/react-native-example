@@ -24,7 +24,7 @@ export default (props) => {
         } else {
           console.log(biometryType, 'biometryType');
           setIsTouchId(true);
-          navigation.setOptions({ title: '指纹登录1' });
+          navigation.setOptions({ title: '指纹登录' });
         }
       })
       .catch((error) => {
