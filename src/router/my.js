@@ -13,6 +13,7 @@ import Password from '@/view/my/login/Password';
 import Contract from '@/view/my/Contract';
 import Order from '@/view/my/order';
 import OrderDetail from '@/view/my/order/OrderDetail';
+import Fits from '@/view/my/Fits';
 
 export default {
   my: {
@@ -91,5 +92,10 @@ export default {
     screen: OrderDetail,
     name: 'orderDetail',
     options: { headerShown: true, title: '订单详情' },
+  },
+  fits: {
+    screen: Fits,
+    name: 'fits',
+    options: { headerShown: true, title: '厚仁方法论' },
   },
 };

@@ -60,6 +60,11 @@ export default ({ route, navigation }) => {
       beLogin: true,
     },
     {
+      title: '厚仁方法论',
+      icon: 'setting',
+      route: 'fits',
+    },
+    {
       title: '系统设置',
       icon: 'setting',
       route: 'systemSet',
