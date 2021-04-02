@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, StyleSheet, Image, ScrollView } from 'react-native';
 import { transformSize, commonStyle, openReport, size } from '@/utils';
 import { Touchable, Icon } from 'ui';
-import { SCREEN_WIDTH } from '@/utils';
+import { SCREEN_WIDTH, checkStaticImg } from '@/utils';
 export default class Main extends Component {
   constructor(props) {
     super(props);
@@ -13,8 +13,8 @@ export default class Main extends Component {
   render() {
     return (
       <ScrollView style={{ flex: 1 }}>
-        <Touchable onPress={() => openReport('https://staticapp.hourenlx.com/mini/student/fits.jpeg')} style={style.wrap}>
-          <Image source={{ uri: 'https://staticapp.hourenlx.com/mini/student/fits.jpeg' }} style={style.img} />
+        <Touchable onPress={() => openReport(checkStaticImg('fits.jpeg'))} style={style.wrap}>
+          <Image source={{ uri: checkStaticImg('fits.jpeg') }} style={style.img} />
         </Touchable>
       </ScrollView>
     );

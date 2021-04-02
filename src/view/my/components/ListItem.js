@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, Image } from 'react-native';
 import { useTheme, useNavigation } from '@react-navigation/native';
 import { useDispatch, useSelector } from 'react-redux';
 import { useOpenMini } from 'hook/wechat';
 import { commitShowErp } from '@/store/actions';
-import { size, commonStyle } from '@/utils';
+import { size, commonStyle, checkStaticImg } from '@/utils';
 import { Touchable, Icon, Button } from 'ui';
 
 export default (props) => {
@@ -33,13 +33,17 @@ export default (props) => {
     navigation.navigate(route, params);
   };
 
-  let { title, icon, label } = props.data;
+  let { title, icon, label, image } = props.data;
   console.log(123456);
   return (
     <Touchable style={style.listItem} onPress={() => goToPages()}>
       <View style={[style.listWrap, { borderBottomColor: colors.border }]}>
         <View style={style.left}>
-          <Icon name={icon} size={30} color={colors.primary} />
+          {image ? (
+            <Image style={style.img} source={{ uri: checkStaticImg(image) }} />
+          ) : (
+            <Icon name={icon} size={30} color={colors.primary} />
+          )}
           <Text style={[style.title, { color: colors.text }]}>{title || '--'}</Text>
         </View>
         <View style={[style.right]}>
@@ -67,6 +71,10 @@ const style = StyleSheet.create({
   left: {
     flexDirection: 'row',
     alignItems: 'center',
+  },
+  img: {
+    width: size(60),
+    height: size(60),
   },
   title: {
     marginLeft: size(20),

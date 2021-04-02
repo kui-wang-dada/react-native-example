@@ -61,7 +61,8 @@ export default ({ route, navigation }) => {
     },
     {
       title: '厚仁方法论',
-      icon: 'setting',
+      icon: 'fits',
+      image: 'icon-fits.png',
       route: 'fits',
     },
     {
