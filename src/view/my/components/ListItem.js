@@ -42,13 +42,13 @@ export default (props) => {
           {image ? (
             <Image style={style.img} source={{ uri: checkStaticImg(image) }} />
           ) : (
-            <Icon name={icon} size={30} color={colors.primary} />
+            <Icon name={icon} size={size(60)} color={colors.primary} />
           )}
           <Text style={[style.title, { color: colors.text }]}>{title || '--'}</Text>
         </View>
         <View style={[style.right]}>
           {label ? <Text style={[style.label, { color: colors.text_tag }]}>{label}</Text> : null}
-          <Icon name="right" size={18} color={colors.text_tag} />
+          <Icon name="right" size={size(18)} color={colors.text_tag} />
         </View>
       </View>
     </Touchable>

@@ -305,6 +305,7 @@ const style = StyleSheet.create({
   },
   tabText: {
     color: 'rgba(32,48,70,.5)',
+    fontSize: size(30),
   },
   tabTextActive: {
     color: '#4bc694',
@@ -335,8 +336,8 @@ const style = StyleSheet.create({
     marginBottom: size(10),
   },
   loginBtnWrap: {
-    position: 'absolute',
-    bottom: size(240),
+    // position: 'absolute',
+    // bottom: size(240),
     height: size(200),
   },
   linear: {
@@ -426,8 +427,10 @@ const style = StyleSheet.create({
   agree: {
     color: '#fff',
     marginLeft: size(10),
+    fontSize: size(24),
   },
   proto: {
     marginLeft: size(10),
+    fontSize: size(24),
   },
 });

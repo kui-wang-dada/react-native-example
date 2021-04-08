@@ -22,7 +22,7 @@ export default (props) => {
       {hasRight ? (
         <View style={style.right} click="handleRight">
           <Text style={[style.rightAll, { color: colors.text }]}>全部</Text>
-          <Icon name="right" size={20} color={colors.text_p} />
+          <Icon name="right" size={size(30)} color={colors.text_p} />
         </View>
       ) : null}
     </Touchable>
@@ -60,6 +60,7 @@ const style = StyleSheet.create({
   },
   rightAll: {
     margin: 0,
+    fontSize: size(24),
   },
   pad: {
     paddingHorizontal: size(32),

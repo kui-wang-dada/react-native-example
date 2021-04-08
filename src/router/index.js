@@ -70,7 +70,7 @@ function NavigationLifeCycle() {
 
     return (
       <Tab.Navigator
-        tabBarOptions={{ style: { backgroundColor: colorTheme.colors.background } }}
+        tabBarOptions={{ style: { backgroundColor: colorTheme.colors.background }, labelStyle: { fontSize: size(26) } }}
         screenOptions={({ route }) => ({
           tabBarIcon: ({ focused, color, size }) => {
             let iconName;
@@ -105,7 +105,9 @@ function NavigationLifeCycle() {
         <Stack.Navigator
           screenOptions={{
             headerStyle: { backgroundColor: theme === 'dark' ? colorTheme.colors.card : colorTheme.colors.primary },
-
+            headerTitleStyle: {
+              fontSize: size(34),
+            },
             headerTintColor: '#fff',
           }}>
           <Stack.Screen name="Home" component={HomeTabs} />
