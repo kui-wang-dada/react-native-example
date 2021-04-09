@@ -75,7 +75,7 @@ export default () => {
           {
             text: '确定',
             onPress: () => {
-              Linking.openURL(checkImg(downloadUrl));
+              Linking.openURL(downloadUrl);
               dispatch(commitVersion(remote.version_number));
             },
           },
