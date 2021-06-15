@@ -3,7 +3,7 @@ import * as common from '../actions/common';
 const INITIAL_STATE = {
   barHeight: 0,
   theme: 'light',
-  version: '3.2.1',
+  version: '3.2.3',
   hasWechat: false,
   showErp: 'out',
 };

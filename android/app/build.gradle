@@ -133,7 +133,7 @@ android {
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 300002
-        versionName "3.2.1"
+        versionName "3.2.3"
         // react-native-image-crop-picker
         multiDexEnabled true
         vectorDrawables.useSupportLibrary = true
