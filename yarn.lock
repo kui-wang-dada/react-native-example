@@ -6322,6 +6322,11 @@ react-native-pdf@^6.2.2:
     crypto-js "^3.2.0"
     prop-types "^15.7.2"
 
+react-native-pell-rich-editor@^1.8.5:
+  version "1.8.5"
+  resolved "https://registry.yarnpkg.com/react-native-pell-rich-editor/-/react-native-pell-rich-editor-1.8.5.tgz#41a01127f39184007d5f6cddccc1bdaaecc74097"
+  integrity sha512-8sks6ah/ffafC0m5PVJ4ZHPg8hT3EwTNkL6qaKELOPKWbnrR9tu72yLZiFqO5n3u8lkHhY79FQ4g7wdXt6F7iw==
+
 react-native-progress@^4.1.2:
   version "4.1.2"
   resolved "https://registry.yarnpkg.com/react-native-progress/-/react-native-progress-4.1.2.tgz#ffb2264ddfeba409c730e36a9791bb7bbe07a00d"

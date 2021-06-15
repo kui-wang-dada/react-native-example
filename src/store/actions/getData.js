@@ -11,12 +11,14 @@ export function doAction(params, url, dispatchType, stateData, other = {}) {
             return;
           }
           let resData = res.data.display;
-
+          if (!resData) {
+            resData = res.data;
+          }
           if (other.key) {
-            resData = res.data.display[other.key];
+            resData = resData[other.key];
           }
           if (other.arrayOne) {
-            resData = res.data.display[0];
+            resData = resData[0];
           }
           let newRes;
           if (other.model) {

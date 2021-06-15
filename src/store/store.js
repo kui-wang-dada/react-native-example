@@ -8,11 +8,7 @@ import { createLogger } from 'redux-logger';
 
 import AsyncStorage from '@react-native-community/async-storage';
 
-import home from './reducers/home';
-
-import my from './reducers/my';
-import common from './reducers/common';
-import search from './reducers/search';
+import reducers from './reducers';
 
 const logger = createLogger();
 
@@ -21,8 +17,6 @@ const persistConfig = {
   storage: AsyncStorage,
   whitelist: ['search'],
 };
-
-const reducers = combineReducers({ home, my, common, search });
 
 const persistedReducer = persistReducer(persistConfig, reducers);
 

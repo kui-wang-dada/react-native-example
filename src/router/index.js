@@ -18,6 +18,7 @@ import home from './home';
 
 import my from './my';
 import common from './common';
+import blog from './blog';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -115,6 +116,7 @@ function NavigationLifeCycle() {
           {renderStackItem(home)}
           {renderStackItem(my)}
           {renderStackItem(common)}
+          {renderStackItem(blog)}
         </Stack.Navigator>
       </NavigationContainer>
     </AppearanceProvider>

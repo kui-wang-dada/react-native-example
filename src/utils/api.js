@@ -52,10 +52,10 @@ class Api {
    */
   _apiSingleBuilder({ namespace, sep = '/', config = {}, mock = false, debug = false, mockBaseURL = '' }) {
     config.forEach((api) => {
-      const { name, desc, params, method, path, cache = true, headers } = api;
+      const { name, desc, params, method, path, cache = true, headers, baseUrl } = api;
       let apiname = `${namespace}${sep}${name}`; // 接口调用名称 this.$api['apiname']()
       let url = path; // 接口地址
-      const baseURL = mock ? mockBaseURL : ApiConfig.baseURL; // 接口base地址
+      const baseURL = baseUrl ? baseUrl : ApiConfig.baseURL; // 接口base地址
 
       debug && assert(name, `${url} :接口name属性不能为空`);
       debug && assert(url.indexOf('/') === 0, `${url} :接口路径path，首字符应为/`);
@@ -66,7 +66,10 @@ class Api {
           let _data = _isArray(outerParams) || outerParams instanceof FormData ? outerParams : _merge({}, params, outerParams);
 
           // /*特殊页面，需要对数据做处理*/
-          if ((method.toUpperCase() === 'POST' || method.toUpperCase() === 'PUT') && (!headers || !headers.hasOwnProperty('Content-Type'))) {
+          if (
+            (method.toUpperCase() === 'POST' || method.toUpperCase() === 'PUT') &&
+            (!headers || !headers.hasOwnProperty('Content-Type'))
+          ) {
             _data = Qs.stringify(_data);
           }
           // _data = Qs.stringify(_data);

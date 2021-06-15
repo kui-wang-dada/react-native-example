@@ -2,14 +2,16 @@ import React, { useState, useEffect, useRef } from 'react';
 import { View, Text, StyleSheet, Image, ScrollView } from 'react-native';
 import { useTheme } from '@react-navigation/native';
 import { useDispatch, useSelector } from 'react-redux';
-import { getMessageDetail } from '@/store/actions';
-import { size, commonStyle, checkImg, messageTime, checkStaticImg } from '@/utils';
+import { getMessageDetail, getOppBlogList, commitOppBlogList } from '@/store/actions';
+import { size, commonStyle, checkImg, messageTime, checkStaticImg, modal } from '@/utils';
 import { Touchable, Icon, Button } from 'ui';
 import { Comment } from 'common';
+import RecommendRead from './item/RecommendRead';
 export default ({ route, navigation }) => {
   const { colors } = useTheme();
   const dispatch = useDispatch();
   const messageDetail = useSelector((state) => state.home.messageDetail);
+  const oppBlogList = useSelector((state) => state.blog.oppBlogList);
   const commentRef = useRef();
   console.log(messageDetail, 'params');
 
@@ -20,9 +22,22 @@ export default ({ route, navigation }) => {
   useEffect(() => {
     // Update the document title using the browser API
 
-    dispatch(getMessageDetail(params));
+    (async () => {
+      modal.showLoading();
+      await dispatch(getMessageDetail(params));
+      let content = messageDetail.to_discuss;
+      let paramsRecommendRead = {
+        content,
+      };
+      await dispatch(getOppBlogList(paramsRecommendRead));
+      modal.close();
+    })();
     console.log(commentRef, 'commentRef');
+    return componentWillUnmount;
   }, []);
+  const componentWillUnmount = () => {
+    dispatch(commitOppBlogList());
+  };
 
   const afterSubmit = async () => {
     await dispatch(getMessageDetail(params));
@@ -104,6 +119,12 @@ export default ({ route, navigation }) => {
             </View>
           </View>
           <View style={[style.sep, { backgroundColor: colors.sep }]} />
+          {oppBlogList.length ? (
+            <View>
+              <RecommendRead content={data.to_discuss} />
+              <View style={[style.sep, { backgroundColor: colors.sep }]} />
+            </View>
+          ) : null}
           <Comment data={messageDetail} ref={commentRef} type="Opportunity" afterSubmit={afterSubmit} />
         </View>
       </ScrollView>
