@@ -11,7 +11,7 @@ export function doAction(params, url, dispatchType, stateData, other = {}) {
             return;
           }
           let resData = res.data.display;
-          if (!resData) {
+          if (other.wordpress) {
             resData = res.data;
           }
           if (other.key) {

@@ -14,15 +14,21 @@ export default ({ route }) => {
   const dispatch = useDispatch();
   const blogDetail = useSelector((state) => state.blog.blogDetail);
   const richText = useRef();
-  useEffect(() => {
-    let name = route.params.name;
 
+  let name = route.params.name;
+  useEffect(() => {
     let params = {
       post_id: name,
     };
     modal.showLoading();
     dispatch(getBlogDetail(params));
   }, []);
+
+  const goToWeb = () => {
+    let url = `https://www.wholeren.com/?p=${name}`;
+
+    navigation.navigate('webview', { url: url });
+  };
 
   let htmlCon = blogDetail.post_content;
   // console.log(htmlCon, "htmlCon");
@@ -50,6 +56,12 @@ export default ({ route }) => {
         <View style={style.itemTitleWrap}>
           <Text style={style.itemTitle}>{blogDetail.post_title}</Text>
         </View>
+        <Button
+          style={[style.link, { backgroundColor: colors.assist }]}
+          textStyle={[style.linkText, { color: colors.bg }]}
+          onPress={goToWeb}
+          title="原文链接"
+        />
         {/* <HTMLView value={htmlCon} stylesheet={styleHtml} paragraphBreak="" addLineBreaks={true} /> */}
         <RichEditor containerStyle={style.rich} ref={richText} initialContentHTML={htmlCon} />
       </View>
@@ -78,6 +90,15 @@ const style = StyleSheet.create({
     fontSize: size(44),
     fontWeight: 'bold',
     color: '#333',
+  },
+  link: {
+    width: size(200),
+    height: size(60),
+    borderRadius: size(8),
+    alignSelf: 'flex-end',
+  },
+  linkText: {
+    fontWeight: 'bold',
   },
   rich: {
     lineHeight: size(60),

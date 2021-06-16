@@ -10,13 +10,6 @@ export default (props) => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const oppBlogList = useSelector((state) => state.blog.oppBlogList);
-  useEffect(() => {
-    let { content } = props;
-    let params = {
-      content,
-    };
-    dispatch(getOppBlogList(params));
-  }, []);
 
   const goToDetail = (item) => {
     navigation.navigate('blogDetail', { name: item.post_id });

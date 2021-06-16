@@ -21,20 +21,24 @@ export default ({ route, navigation }) => {
   };
   useEffect(() => {
     // Update the document title using the browser API
+    modal.showLoading();
+    dispatch(getMessageDetail(params));
 
-    (async () => {
-      modal.showLoading();
-      await dispatch(getMessageDetail(params));
-      let content = messageDetail.to_discuss;
-      let paramsRecommendRead = {
-        content,
-      };
-      await dispatch(getOppBlogList(paramsRecommendRead));
-      modal.close();
-    })();
     console.log(commentRef, 'commentRef');
     return componentWillUnmount;
   }, []);
+  useEffect(() => {
+    let content = messageDetail.to_discuss;
+    console.log(content, 'content');
+    if (messageDetail.name === name) {
+      let paramsRecommendRead = {
+        content,
+      };
+
+      dispatch(getOppBlogList(paramsRecommendRead));
+      modal.close();
+    }
+  }, [messageDetail]);
   const componentWillUnmount = () => {
     dispatch(commitOppBlogList());
   };
