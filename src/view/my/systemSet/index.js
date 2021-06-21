@@ -58,6 +58,13 @@ export default () => {
       route: 'privacy',
     },
     {
+      label: '中美厚仁关系说明',
+      key: '',
+      type: 'to',
+      border: false,
+      route: 'relation',
+    },
+    {
       label: '关于',
       key: '',
       type: 'to',
@@ -83,7 +90,12 @@ export default () => {
         })}
       </View>
 
-      <Button style={[style.logout, { backgroundColor: colors.primary }]} textStyle={[style.logoutText, { color: colors.background }]} onPress={logout} title="退出" />
+      <Button
+        style={[style.logout, { backgroundColor: colors.primary }]}
+        textStyle={[style.logoutText, { color: colors.background }]}
+        onPress={logout}
+        title="退出"
+      />
     </View>
   );
 };

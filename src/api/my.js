@@ -95,4 +95,10 @@ export default [
     desc: '我的合同',
     path: '/apis/method/frappe.apis.apps.my.contracts',
   },
+  {
+    name: 'relation',
+    method: 'GET',
+    desc: '中美厚仁关系说明',
+    path: '/apis/method/soa.www.cms_adp.get_details?slug=wholeren-company-about',
+  },
 ];

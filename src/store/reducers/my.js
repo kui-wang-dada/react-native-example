@@ -10,6 +10,7 @@ const INITIAL_STATE = {
   contract: [],
   order: [],
   orderDetail: {},
+  relation: {},
 };
 
 export default function (state = INITIAL_STATE, action) {
@@ -25,6 +26,8 @@ export default function (state = INITIAL_STATE, action) {
     case my.ORDER:
       return { ...state, ...action.payload };
     case my.ORDER_DETAIL:
+      return { ...state, ...action.payload };
+    case my.RELATION:
       return { ...state, ...action.payload };
 
     default:
