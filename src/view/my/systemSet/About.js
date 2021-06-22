@@ -20,7 +20,7 @@ export default () => {
       </View>
       <View style={style.bottomWrap}>
         <Text style={[style.label, { color: colors.text_p }]}>{'官方网站'}：www.wholeren.com</Text>
-        <Text style={[style.label, { color: colors.text_p }]}>Copyright ©2020 {'厚仁集团'} All Rights Reserved</Text>
+        <Text style={[style.label, { color: colors.text_p }]}>Copyright ©2021 {'厚仁集团'} All Rights Reserved</Text>
       </View>
     </View>
   );

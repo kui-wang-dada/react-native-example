@@ -7,6 +7,7 @@ import SystemSet from '@/view/my/systemSet';
 import About from '@/view/my/systemSet/About';
 import Privacy from '@/view/my/systemSet/Privacy';
 import Terms from '@/view/my/systemSet/Terms';
+import Relation from '@/view/my/systemSet/Relation';
 import Finger from '@/view/my/Finger';
 import Register from '@/view/my/login/Register';
 import Password from '@/view/my/login/Password';
@@ -77,6 +78,11 @@ export default {
     screen: Terms,
     name: 'terms',
     options: { headerShown: true, title: '服务条款说明' },
+  },
+  relation: {
+    screen: Relation,
+    name: 'relation',
+    options: { headerShown: true, title: '中美厚仁关系说明' },
   },
   contract: {
     screen: Contract,
