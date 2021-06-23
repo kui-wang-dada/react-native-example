@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, ScrollView } from 'react-native';
 import { useTheme, useNavigation } from '@react-navigation/native';
 import { useDispatch, useSelector } from 'react-redux';
 import { size } from '@/utils';
@@ -17,9 +17,9 @@ export default () => {
   }, []);
   let str = relation.page_header + relation.page_body + relation.page_footer;
   return (
-    <View style={style.wrap}>
+    <ScrollView style={style.wrap}>
       <HTMLView value={`<p>${str || '--'}</p>`} stylesheet={styleHtml} paragraphBreak="" addLineBreaks={true} />
-    </View>
+    </ScrollView>
   );
 };
 const styleHtml = StyleSheet.create({
@@ -31,6 +31,7 @@ const styleHtml = StyleSheet.create({
 });
 const style = StyleSheet.create({
   wrap: {
+    flex: 1,
     paddingHorizontal: size(30),
     paddingVertical: size(40),
   },
